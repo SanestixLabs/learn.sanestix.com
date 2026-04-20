@@ -11,7 +11,6 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  /* Color System */
   --bg-primary:    #020617;
   --bg-secondary:  #0B1220;
   --bg-card:       #0D1829;
@@ -59,34 +58,20 @@ body {
 }
 
 a { color: inherit; text-decoration: none; }
-
 .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
 
-/* TYPOGRAPHY */
 .section-label {
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--teal);
-  margin-bottom: 16px;
+  font-size: 11px; font-weight: 600; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--teal); margin-bottom: 16px;
 }
-
 .section-title {
-  font-size: clamp(30px, 4vw, 46px);
-  font-weight: 800;
-  line-height: 1.12;
-  color: var(--white);
-  margin-bottom: 20px;
+  font-size: clamp(30px, 4vw, 46px); font-weight: 800;
+  line-height: 1.12; color: var(--white); margin-bottom: 20px;
 }
-
 .section-sub {
-  font-size: 17px;
-  color: var(--white-dim);
-  max-width: 580px;
-  line-height: 1.75;
+  font-size: 17px; color: var(--white-dim);
+  max-width: 580px; line-height: 1.75;
 }
-
 .grad-text {
   background: var(--grad-text);
   -webkit-background-clip: text;
@@ -96,42 +81,23 @@ a { color: inherit; text-decoration: none; }
 
 /* BUTTONS */
 .btn-cta {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: var(--orange);
-  color: #000;
-  font-family: 'Sora', sans-serif;
-  font-weight: 700;
-  font-size: 15px;
-  padding: 16px 34px;
-  border-radius: 8px;
-  border: none;
-  cursor: pointer;
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--orange); color: #000;
+  font-family: 'Sora', sans-serif; font-weight: 700; font-size: 15px;
+  padding: 16px 34px; border-radius: 8px; border: none; cursor: pointer;
   transition: background 0.15s, transform 0.15s, box-shadow 0.15s;
-  box-shadow: 0 0 0 0 var(--orange-glow);
-  white-space: nowrap;
+  box-shadow: 0 0 0 0 var(--orange-glow); white-space: nowrap;
 }
 .btn-cta:hover {
-  background: var(--orange-hover);
-  transform: translateY(-2px);
+  background: var(--orange-hover); transform: translateY(-2px);
   box-shadow: 0 8px 30px var(--orange-glow);
 }
-
 .btn-ghost {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: transparent;
-  color: var(--white);
-  font-family: 'Sora', sans-serif;
-  font-weight: 500;
-  font-size: 15px;
-  padding: 15px 30px;
-  border-radius: 8px;
-  border: 1px solid var(--border);
-  cursor: pointer;
-  transition: border-color 0.15s, background 0.15s;
+  display: inline-flex; align-items: center; gap: 8px;
+  background: transparent; color: var(--white);
+  font-family: 'Sora', sans-serif; font-weight: 500; font-size: 15px;
+  padding: 15px 30px; border-radius: 8px; border: 1px solid var(--border);
+  cursor: pointer; transition: border-color 0.15s, background 0.15s;
 }
 .btn-ghost:hover { border-color: var(--teal); background: var(--teal-glow); }
 
@@ -142,8 +108,7 @@ nav {
   position: sticky; top: 0; z-index: 100;
   background: rgba(2,6,23,0.88);
   border-bottom: 1px solid var(--border);
-  backdrop-filter: blur(16px);
-  padding: 14px 0;
+  backdrop-filter: blur(16px); padding: 14px 0;
 }
 .nav-inner {
   max-width: 1100px; margin: 0 auto; padding: 0 24px;
@@ -156,14 +121,9 @@ nav {
 .nav-links a:hover { color: var(--white); }
 
 /* HERO */
-.hero {
-  padding: 108px 0 88px;
-  position: relative;
-  overflow: hidden;
-}
+.hero { padding: 108px 0 88px; position: relative; overflow: hidden; }
 .hero-mesh {
-  position: absolute;
-  top: -120px; left: 50%; transform: translateX(-50%);
+  position: absolute; top: -120px; left: 50%; transform: translateX(-50%);
   width: 1000px; height: 700px;
   background: radial-gradient(ellipse 60% 50% at 40% 40%, rgba(14,165,164,0.10) 0%, transparent 60%),
               radial-gradient(ellipse 50% 40% at 70% 60%, rgba(139,92,246,0.10) 0%, transparent 60%);
@@ -178,72 +138,41 @@ nav {
   mask-image: radial-gradient(ellipse at center, black 30%, transparent 80%);
   pointer-events: none;
 }
-
 .hero-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--teal);
-  border: 1px solid rgba(14,165,164,0.3);
-  background: rgba(14,165,164,0.06);
-  border-radius: 100px;
-  padding: 6px 16px;
-  margin-bottom: 28px;
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 12px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--teal); border: 1px solid rgba(14,165,164,0.3);
+  background: rgba(14,165,164,0.06); border-radius: 100px;
+  padding: 6px 16px; margin-bottom: 28px;
 }
 .hero-badge .pulse {
-  width: 7px; height: 7px;
-  border-radius: 50%;
-  background: var(--teal);
+  width: 7px; height: 7px; border-radius: 50%; background: var(--teal);
   animation: pulse 2s infinite;
 }
 @keyframes pulse {
   0%, 100% { opacity: 1; transform: scale(1); }
   50% { opacity: 0.5; transform: scale(0.85); }
 }
-
 .hero h1 {
-  font-size: clamp(44px, 6.5vw, 76px);
-  font-weight: 800;
-  line-height: 1.06;
-  margin-bottom: 28px;
-  max-width: 880px;
+  font-size: clamp(44px, 6.5vw, 76px); font-weight: 800;
+  line-height: 1.06; margin-bottom: 28px; max-width: 880px;
 }
-
 .hero-sub {
-  font-size: 18px;
-  font-weight: 300;
-  color: var(--white-dim);
-  max-width: 600px;
-  line-height: 1.75;
-  margin-bottom: 40px;
+  font-size: 18px; font-weight: 300; color: var(--white-dim);
+  max-width: 600px; line-height: 1.75; margin-bottom: 40px;
 }
-
 .hero-bullets {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
-  max-width: 540px;
-  margin-bottom: 44px;
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 10px; max-width: 540px; margin-bottom: 44px;
 }
-.hero-bullet {
-  display: flex; align-items: flex-start; gap: 10px;
-  font-size: 14px; font-weight: 400; color: var(--white);
-}
+.hero-bullet { display: flex; align-items: flex-start; gap: 10px; font-size: 14px; color: var(--white); }
 .hero-bullet .check {
-  width: 18px; height: 18px; min-width: 18px;
-  border-radius: 50%;
-  background: var(--teal-glow);
-  border: 1px solid var(--teal);
+  width: 18px; height: 18px; min-width: 18px; border-radius: 50%;
+  background: var(--teal-glow); border: 1px solid var(--teal);
   display: flex; align-items: center; justify-content: center;
   font-size: 10px; color: var(--teal); margin-top: 2px;
 }
-
 .hero-cta-row { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; margin-bottom: 20px; }
-
 .hero-urgency {
   display: inline-flex; align-items: center; gap: 8px;
   font-size: 13px; font-weight: 500; color: var(--red);
@@ -252,7 +181,6 @@ nav {
   width: 8px; height: 8px; border-radius: 50%;
   background: var(--red); animation: pulse 1.5s infinite;
 }
-
 .trust-strip {
   display: flex; flex-wrap: wrap; gap: 24px;
   border-top: 1px solid var(--border); padding-top: 28px; margin-top: 44px;
@@ -262,19 +190,15 @@ nav {
 
 /* AUTHORITY STRIP */
 .authority-strip {
-  padding: 0;
-  background: var(--bg-secondary);
-  border-top: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
+  padding: 0; background: var(--bg-secondary);
+  border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
 }
 .authority-inner {
   display: flex; align-items: stretch; justify-content: center; flex-wrap: wrap;
 }
 .auth-cell {
-  padding: 24px 44px;
-  border-right: 1px solid var(--border);
-  text-align: center;
-  flex: 1; min-width: 150px;
+  padding: 24px 44px; border-right: 1px solid var(--border);
+  text-align: center; flex: 1; min-width: 150px;
 }
 .auth-cell:last-child { border-right: none; }
 .auth-label { font-size: 10px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--white-faint); margin-bottom: 5px; }
@@ -285,42 +209,31 @@ nav {
 .problem-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 52px; margin-top: 56px; align-items: start; }
 .problem-items { display: flex; flex-direction: column; gap: 0; }
 .problem-item {
-  padding: 22px 0;
-  border-bottom: 1px solid var(--border);
+  padding: 22px 0; border-bottom: 1px solid var(--border);
   display: flex; gap: 16px; align-items: flex-start;
 }
 .problem-item:last-child { border-bottom: none; }
 .problem-x {
-  width: 24px; height: 24px; min-width: 24px;
-  border-radius: 50%;
-  background: rgba(239,68,68,0.12);
-  border: 1px solid rgba(239,68,68,0.3);
+  width: 24px; height: 24px; min-width: 24px; border-radius: 50%;
+  background: rgba(239,68,68,0.12); border: 1px solid rgba(239,68,68,0.3);
   display: flex; align-items: center; justify-content: center;
   font-size: 10px; font-weight: 700; color: var(--red);
 }
 .problem-text h4 { font-size: 15px; font-weight: 600; margin-bottom: 4px; color: var(--white); }
 .problem-text p { font-size: 14px; color: var(--white-dim); line-height: 1.65; }
-
 .problem-callout {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-xl);
-  padding: 40px;
-  position: relative;
-  overflow: hidden;
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: var(--radius-xl); padding: 40px; position: relative; overflow: hidden;
 }
 .problem-callout::before {
-  content: '';
-  position: absolute; top: -40px; right: -40px;
+  content: ''; position: absolute; top: -40px; right: -40px;
   width: 180px; height: 180px; border-radius: 50%;
   background: radial-gradient(circle, rgba(139,92,246,0.08), transparent);
   pointer-events: none;
 }
 .callout-quote {
-  font-size: 18px; font-weight: 600; line-height: 1.55;
-  color: var(--white); margin-bottom: 32px;
-  border-left: 3px solid var(--purple);
-  padding-left: 18px;
+  font-size: 18px; font-weight: 600; line-height: 1.55; color: var(--white);
+  margin-bottom: 32px; border-left: 3px solid var(--purple); padding-left: 18px;
 }
 .callout-stat { font-size: 56px; font-weight: 800; line-height: 1; background: var(--grad-text); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
 .callout-stat-label { font-size: 13px; color: var(--white-dim); margin-top: 4px; margin-bottom: 28px; }
@@ -332,26 +245,18 @@ nav {
 .solution-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; margin-top: 56px; }
 .why-cards { display: flex; flex-direction: column; gap: 12px; margin-top: 28px; }
 .why-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 18px 22px;
-  transition: border-color 0.2s;
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 18px 22px; transition: border-color 0.2s;
 }
 .why-card:hover { border-color: var(--teal); }
 .why-card h4 { font-size: 15px; font-weight: 600; margin-bottom: 5px; color: var(--white); }
 .why-card p { font-size: 13px; color: var(--white-dim); line-height: 1.65; }
-
 .agent-visual {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-xl);
-  padding: 36px;
-  position: relative; overflow: hidden;
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: var(--radius-xl); padding: 36px; position: relative; overflow: hidden;
 }
 .agent-visual::before {
-  content: '';
-  position: absolute; top: -60px; right: -60px;
+  content: ''; position: absolute; top: -60px; right: -60px;
   width: 220px; height: 220px; border-radius: 50%;
   background: radial-gradient(circle, rgba(14,165,164,0.07), transparent);
 }
@@ -360,19 +265,15 @@ nav {
 .agent-flow { display: flex; flex-direction: column; gap: 10px; }
 .agent-node {
   display: flex; align-items: center; gap: 14px;
-  background: var(--bg-secondary);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 13px 16px;
-  font-size: 13px; font-weight: 500; color: var(--white);
-  transition: border-color 0.2s;
+  background: var(--bg-secondary); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 13px 16px;
+  font-size: 13px; font-weight: 500; color: var(--white); transition: border-color 0.2s;
 }
 .agent-node:hover { border-color: var(--teal); }
 .agent-node.highlight { border-color: var(--green); }
 .node-icon {
   width: 32px; height: 32px; border-radius: 8px;
-  display: flex; align-items: center; justify-content: center;
-  flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
 }
 .node-icon.teal { background: var(--teal-glow); }
 .node-icon.purple { background: var(--purple-glow); }
@@ -383,18 +284,14 @@ nav {
 .learn-section { background: var(--bg-secondary); }
 .learn-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 48px; }
 .learn-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  padding: 24px;
-  transition: border-color 0.2s, transform 0.2s;
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 24px; transition: border-color 0.2s, transform 0.2s;
 }
 .learn-card:hover { border-color: var(--teal); transform: translateY(-2px); }
 .learn-card .card-icon {
   width: 40px; height: 40px; border-radius: 10px;
   background: var(--teal-glow); border: 1px solid rgba(14,165,164,0.2);
-  display: flex; align-items: center; justify-content: center;
-  margin-bottom: 14px;
+  display: flex; align-items: center; justify-content: center; margin-bottom: 14px;
 }
 .learn-card h4 { font-size: 15px; font-weight: 700; margin-bottom: 6px; color: var(--white); }
 .learn-card p { font-size: 13px; color: var(--white-dim); line-height: 1.65; }
@@ -403,11 +300,8 @@ nav {
 .curriculum-section { background: var(--bg-primary); }
 .curriculum-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin-top: 48px; }
 .week-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  padding: 28px;
-  transition: border-color 0.2s;
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 28px; transition: border-color 0.2s;
 }
 .week-card:hover { border-color: var(--purple); }
 .week-tag {
@@ -426,18 +320,14 @@ nav {
 .projects-section { background: var(--bg-secondary); }
 .projects-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 48px; }
 .project-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  padding: 24px;
-  transition: border-color 0.2s, transform 0.2s;
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 24px; transition: border-color 0.2s, transform 0.2s;
 }
 .project-card:hover { border-color: var(--orange); transform: translateY(-3px); }
 .project-card .p-icon {
   width: 44px; height: 44px; border-radius: 12px;
   background: var(--orange-glow); border: 1px solid rgba(245,158,11,0.2);
-  display: flex; align-items: center; justify-content: center;
-  margin-bottom: 14px;
+  display: flex; align-items: center; justify-content: center; margin-bottom: 14px;
 }
 .project-card h4 { font-size: 15px; font-weight: 700; margin-bottom: 6px; color: var(--white); }
 .project-card p { font-size: 13px; color: var(--white-dim); line-height: 1.6; }
@@ -449,10 +339,8 @@ nav {
   gap: 24px; align-items: center; margin-top: 56px;
 }
 .transform-col {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-xl);
-  padding: 36px;
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: var(--radius-xl); padding: 36px;
 }
 .transform-col.before { border-top: 2px solid var(--red); }
 .transform-col.after { border-top: 2px solid var(--green); }
@@ -474,11 +362,8 @@ nav {
 .testimonials-section { background: var(--bg-secondary); }
 .testimonials-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 48px; }
 .tcard {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-xl);
-  padding: 28px;
-  transition: border-color 0.2s;
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: var(--radius-xl); padding: 28px; transition: border-color 0.2s;
 }
 .tcard:hover { border-color: var(--teal); }
 .stars { color: var(--orange); font-size: 14px; letter-spacing: 2px; margin-bottom: 14px; }
@@ -499,31 +384,44 @@ nav {
   border-radius: 100px; padding: 2px 10px; font-size: 11px; font-weight: 600;
 }
 
-/* INSTRUCTOR */
+/* INSTRUCTOR — updated for two founders */
 .instructor-section { background: var(--bg-primary); }
-.instructor-grid { display: grid; grid-template-columns: auto 1fr; gap: 60px; align-items: center; margin-top: 56px; }
-.instructor-photo {
-  width: 210px; height: 260px;
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-xl);
-  display: flex; align-items: center; justify-content: center;
-  position: relative; overflow: hidden;
-}
-.instructor-photo::after {
-  content: '';
-  position: absolute; bottom: 0; left: 0; right: 0; height: 60px;
-  background: linear-gradient(to top, var(--bg-card), transparent);
-}
-.instructor-name { font-size: 28px; font-weight: 800; margin-bottom: 4px; }
-.instructor-title { font-size: 14px; color: var(--teal); font-weight: 500; margin-bottom: 24px; }
-.instructor-bio { font-size: 15px; font-weight: 300; color: var(--white-dim); line-height: 1.75; margin-bottom: 24px; }
-.cred-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
-.cred-tag {
+.founders-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 56px; }
+.founder-card {
   background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: var(--radius-xl); padding: 36px; transition: border-color 0.2s;
+  display: flex; flex-direction: column; gap: 20px;
+}
+.founder-card:hover { border-color: var(--teal); }
+.founder-header { display: flex; align-items: center; gap: 18px; }
+.founder-avatar {
+  width: 72px; height: 72px; border-radius: 50%;
+  background: var(--teal-glow); border: 2px solid rgba(14,165,164,0.4);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 22px; font-weight: 800; color: var(--teal); flex-shrink: 0;
+}
+.founder-name { font-size: 20px; font-weight: 800; color: var(--white); margin-bottom: 2px; }
+.founder-role { font-size: 13px; color: var(--teal); font-weight: 500; margin-bottom: 6px; }
+.founder-bio { font-size: 14px; font-weight: 300; color: var(--white-dim); line-height: 1.75; }
+.founder-creds { display: flex; flex-wrap: wrap; gap: 8px; }
+.cred-tag {
+  background: var(--bg-secondary); border: 1px solid var(--border);
   border-radius: 100px; padding: 5px 14px; font-size: 12px; color: var(--white-dim);
 }
-.sanestix-link { color: var(--teal); font-size: 14px; font-weight: 600; }
+.founder-links { display: flex; gap: 12px; margin-top: 4px; }
+.founder-link {
+  font-size: 13px; font-weight: 600; color: var(--teal);
+  display: inline-flex; align-items: center; gap: 6px;
+}
+.founder-link:hover { color: #fff; }
+.instructor-note {
+  margin-top: 40px;
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-left: 3px solid var(--purple);
+  border-radius: var(--radius-lg); padding: 28px 32px;
+}
+.instructor-note p { font-size: 15px; color: var(--white-dim); line-height: 1.75; }
+.instructor-note strong { color: var(--white); }
 
 /* OFFER + PRICING */
 .offer-section { background: var(--bg-secondary); }
@@ -532,8 +430,7 @@ nav {
 .offer-item {
   display: flex; gap: 14px; align-items: flex-start;
   background: var(--bg-card); border: 1px solid var(--border);
-  border-radius: var(--radius); padding: 16px 18px;
-  transition: border-color 0.2s;
+  border-radius: var(--radius); padding: 16px 18px; transition: border-color 0.2s;
 }
 .offer-item:hover { border-color: var(--green); }
 .offer-check {
@@ -544,35 +441,27 @@ nav {
 }
 .offer-text-title { font-size: 14px; font-weight: 600; display: block; margin-bottom: 2px; color: var(--white); }
 .offer-text-desc { font-size: 12px; color: var(--white-dim); line-height: 1.5; }
-
 .pricing-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-xl);
-  padding: 40px;
-  text-align: center;
-  position: relative;
-  overflow: hidden;
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: var(--radius-xl); padding: 40px; text-align: center;
+  position: relative; overflow: hidden;
 }
 .pricing-card::before {
-  content: '';
-  position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
   background: var(--grad-hero);
 }
 .pricing-card::after {
-  content: '';
-  position: absolute; top: -80px; left: 50%; transform: translateX(-50%);
+  content: ''; position: absolute; top: -80px; left: 50%; transform: translateX(-50%);
   width: 300px; height: 200px;
   background: radial-gradient(ellipse, rgba(14,165,164,0.05), transparent);
   pointer-events: none;
 }
 .pricing-badge {
-  display: inline-block;
+  display: inline-flex; align-items: center; gap: 6px;
   background: var(--orange-glow); color: var(--orange);
-  border: 1px solid rgba(245,158,11,0.3);
-  border-radius: 100px; padding: 4px 16px;
-  font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
-  margin-bottom: 24px;
+  border: 1px solid rgba(245,158,11,0.3); border-radius: 100px;
+  padding: 4px 16px; font-size: 11px; font-weight: 700;
+  letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 24px;
 }
 .price-original { font-size: 16px; color: var(--white-faint); text-decoration: line-through; margin-bottom: 6px; }
 .price-main { font-size: 58px; font-weight: 800; line-height: 1; color: var(--white); margin-bottom: 6px; }
@@ -584,6 +473,19 @@ nav {
 .pricing-divider { height: 1px; background: var(--border); margin: 24px 0; }
 .installment-label { font-size: 12px; color: var(--white-dim); margin-bottom: 6px; }
 .installment-link { font-size: 14px; font-weight: 600; color: var(--teal); }
+
+/* COHORT SCHEDULE — NEW */
+.schedule-section { background: var(--bg-primary); }
+.schedule-card {
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: var(--radius-xl); padding: 36px; margin-top: 48px;
+  display: flex; align-items: flex-start; gap: 40px; flex-wrap: wrap;
+}
+.schedule-detail { flex: 1; min-width: 200px; }
+.schedule-detail .sd-label { font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--white-faint); margin-bottom: 6px; }
+.schedule-detail .sd-value { font-size: 18px; font-weight: 700; color: var(--white); }
+.schedule-detail .sd-sub { font-size: 13px; color: var(--white-dim); margin-top: 3px; }
+.schedule-sep { width: 1px; background: var(--border); align-self: stretch; }
 
 /* FAQ */
 .faq-section { background: var(--bg-primary); }
@@ -603,15 +505,11 @@ nav {
 .form-section { background: var(--bg-secondary); }
 .form-card {
   max-width: 640px; margin: 0 auto;
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-xl);
-  padding: 48px;
-  position: relative; overflow: hidden;
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: var(--radius-xl); padding: 48px; position: relative; overflow: hidden;
 }
 .form-card::before {
-  content: '';
-  position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
   background: var(--grad-hero);
 }
 .form-card h3 { font-size: 24px; font-weight: 800; text-align: center; margin-bottom: 6px; }
@@ -630,16 +528,28 @@ nav {
 .form-group select option { background: var(--bg-card); }
 .form-submit { width: 100%; justify-content: center; font-size: 16px; padding: 18px; margin-top: 4px; }
 .form-privacy { font-size: 12px; color: var(--white-faint); text-align: center; margin-top: 12px; }
+.form-or-wa {
+  display: flex; align-items: center; gap: 12px; margin: 20px 0 0;
+}
+.form-or-wa span { font-size: 12px; color: var(--white-faint); white-space: nowrap; }
+.form-or-wa hr { flex: 1; border: none; border-top: 1px solid var(--border); }
+.wa-alt {
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+  margin-top: 14px;
+  background: rgba(37,211,102,0.08); border: 1px solid rgba(37,211,102,0.25);
+  border-radius: 8px; padding: 13px 20px;
+  font-size: 14px; font-weight: 600; color: #25D366;
+  transition: background 0.15s;
+}
+.wa-alt:hover { background: rgba(37,211,102,0.14); }
 
 /* FINAL CTA */
 .final-cta {
-  background: var(--bg-primary);
-  text-align: center;
+  background: var(--bg-primary); text-align: center;
   position: relative; overflow: hidden;
 }
 .final-cta::before {
-  content: '';
-  position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+  content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
   width: 800px; height: 500px;
   background: radial-gradient(ellipse 60% 50% at 50% 50%, rgba(14,165,164,0.08) 0%, transparent 60%),
               radial-gradient(ellipse 40% 40% at 60% 40%, rgba(139,92,246,0.06) 0%, transparent 60%);
@@ -655,7 +565,9 @@ footer { background: var(--bg-secondary); border-top: 1px solid var(--border); p
 .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; }
 .footer-brand-name { font-size: 18px; font-weight: 800; margin-bottom: 10px; }
 .footer-brand-name .dot { color: var(--teal); }
-.footer-brand-desc { font-size: 14px; font-weight: 300; color: var(--white-dim); line-height: 1.7; max-width: 250px; }
+.footer-brand-desc { font-size: 14px; font-weight: 300; color: var(--white-dim); line-height: 1.7; max-width: 250px; margin-bottom: 12px; }
+.footer-contact-info { font-size: 13px; color: var(--white-dim); display: flex; flex-direction: column; gap: 5px; }
+.footer-contact-info a { color: var(--teal); }
 .footer-col h5 { font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--white-faint); margin-bottom: 18px; }
 .footer-col a { display: block; font-size: 14px; font-weight: 300; color: var(--white-dim); margin-bottom: 10px; transition: color 0.15s; }
 .footer-col a:hover { color: var(--teal); }
@@ -664,12 +576,9 @@ footer { background: var(--bg-secondary); border-top: 1px solid var(--border); p
 /* STICKY BAR */
 .sticky-bar {
   position: fixed; bottom: 0; left: 0; right: 0;
-  background: rgba(11,18,32,0.96);
-  border-top: 1px solid var(--border);
-  backdrop-filter: blur(16px);
-  z-index: 99;
-  padding: 12px 24px;
-  display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  background: rgba(11,18,32,0.96); border-top: 1px solid var(--border);
+  backdrop-filter: blur(16px); z-index: 99;
+  padding: 12px 24px; display: flex; align-items: center; justify-content: space-between; gap: 16px;
 }
 .sticky-bar-text { font-size: 13px; color: var(--white-dim); }
 .sticky-bar-text strong { color: var(--white); font-weight: 600; }
@@ -699,14 +608,15 @@ footer { background: var(--bg-secondary); border-top: 1px solid var(--border); p
   .transform-grid { grid-template-columns: 1fr; }
   .transform-arrow { display: none; }
   .testimonials-grid { grid-template-columns: 1fr; }
-  .instructor-grid { grid-template-columns: 1fr; }
-  .instructor-photo { width: 100%; height: 180px; }
+  .founders-grid { grid-template-columns: 1fr; }
   .offer-grid { grid-template-columns: 1fr; }
   .form-row { grid-template-columns: 1fr; }
   .footer-grid { grid-template-columns: 1fr 1fr; }
   .form-card { padding: 28px 20px; }
   .sticky-bar-text { display: none; }
   .auth-cell { padding: 18px 20px; }
+  .schedule-card { flex-direction: column; gap: 20px; }
+  .schedule-sep { width: 100%; height: 1px; }
 }
 </style>
 </head>
@@ -720,6 +630,7 @@ footer { background: var(--bg-secondary); border-top: 1px solid var(--border); p
       <a href="#curriculum">Curriculum</a>
       <a href="#projects">Projects</a>
       <a href="#pricing">Pricing</a>
+      <a href="#instructors">Instructors</a>
       <a href="#faq">FAQ</a>
     </div>
     <a href="#apply" class="btn-cta" style="font-size:13px; padding:11px 22px;">Apply Now →</a>
@@ -733,7 +644,7 @@ footer { background: var(--bg-secondary); border-top: 1px solid var(--border); p
   <div class="container">
     <div class="hero-badge"><span class="pulse"></span> By Learn.Sanestix.com · Cohort-Based Program</div>
     <h1>Build AI Agents.<br>Automate Businesses.<br><span class="grad-text">Start Earning.</span></h1>
-    <p class="hero-sub">The first practical, income-focused program on Agentic AI and automation — built by a real AI company, not a YouTube creator.</p>
+    <p class="hero-sub">The first practical, income-focused program on Agentic AI and automation — built by a real AI company that has already automated 50+ businesses across Pakistan & UAE.</p>
     <div class="hero-bullets">
       <div class="hero-bullet"><span class="check">✓</span> Build real AI agents from scratch</div>
       <div class="hero-bullet"><span class="check">✓</span> Automate client workflows with n8n</div>
@@ -744,11 +655,11 @@ footer { background: var(--bg-secondary); border-top: 1px solid var(--border); p
       <a href="#apply" class="btn-cta">Reserve Your Spot →</a>
       <a href="#curriculum" class="btn-ghost">See Curriculum</a>
     </div>
-    <div class="hero-urgency"><span class="urgency-dot"></span> Only 40 seats per cohort — 23 already filled</div>
+    <div class="hero-urgency"><span class="urgency-dot"></span> Only 40 seats per cohort — limited availability</div>
     <div class="trust-strip">
-      <div class="trust-item"><span class="tdot"></span> Built by Sanestix — a real AI automation company</div>
-      <div class="trust-item"><span class="tdot"></span> Systems used in live businesses</div>
-      <div class="trust-item"><span class="tdot"></span> Powered by flow.sanestix.com workflows</div>
+      <div class="trust-item"><span class="tdot"></span> Built by Sanestix — Pakistan's AI automation agency</div>
+      <div class="trust-item"><span class="tdot"></span> 50+ businesses automated across PK & UAE</div>
+      <div class="trust-item"><span class="tdot"></span> 1M+ AI messages sent on behalf of clients</div>
     </div>
   </div>
 </section>
@@ -756,10 +667,10 @@ footer { background: var(--bg-secondary); border-top: 1px solid var(--border); p
 <!-- AUTHORITY STRIP -->
 <div class="authority-strip">
   <div class="authority-inner">
-    <div class="auth-cell"><div class="auth-label">Powered By</div><div class="auth-value">Sanestix</div></div>
-    <div class="auth-cell"><div class="auth-label">Systems</div><div class="auth-value">Real AI Workflows</div></div>
-    <div class="auth-cell"><div class="auth-label">Expertise</div><div class="auth-value">Automation Experts</div></div>
-    <div class="auth-cell"><div class="auth-label">Deployed In</div><div class="auth-value">Live Businesses</div></div>
+    <div class="auth-cell"><div class="auth-label">Businesses Automated</div><div class="auth-value">50+ across PK & UAE</div></div>
+    <div class="auth-cell"><div class="auth-label">AI Messages Sent</div><div class="auth-value">1,000,000+</div></div>
+    <div class="auth-cell"><div class="auth-label">Delivery Speed</div><div class="auth-value">2–7 Days per System</div></div>
+    <div class="auth-cell"><div class="auth-label">Support After Launch</div><div class="auth-value">24/7 Always Working</div></div>
     <div class="auth-cell"><div class="auth-label">Format</div><div class="auth-value">Cohort · Live Sessions</div></div>
   </div>
 </div>
@@ -781,7 +692,7 @@ footer { background: var(--bg-secondary); border-top: 1px solid var(--border); p
         </div>
         <div class="problem-item">
           <div class="problem-x">✕</div>
-          <div class="problem-text"><h4>Courses that are already outdated</h4><p>The AI landscape moved on. That course you bought? Already obsolete.</p></div>
+          <div class="problem-text"><h4>Courses that are already outdated</h4><p>The AI landscape moves fast. That course you bought six months ago? Already obsolete.</p></div>
         </div>
         <div class="problem-item">
           <div class="problem-x">✕</div>
@@ -791,9 +702,9 @@ footer { background: var(--bg-secondary); border-top: 1px solid var(--border); p
       <div class="problem-callout">
         <div class="callout-quote">"Most people spend 6+ months watching AI content and still can't build a single system that earns them money."</div>
         <div class="callout-stat">87%</div>
-        <div class="callout-stat-label">of AI learners quit before making their first dollar.</div>
+        <div class="callout-stat-label">of AI learners never make their first dollar from it.</div>
         <div class="callout-divider"></div>
-        <div class="callout-note">The problem isn't AI. It's the way it's being taught. We fix that — with real systems, real projects, and a structured path to income.</div>
+        <div class="callout-note">The problem isn't AI. It's the way it's being taught. We fix that — with real systems, real projects, and a structured path to income. The same systems we use daily at Sanestix for real paying clients.</div>
       </div>
     </div>
   </div>
@@ -808,9 +719,9 @@ footer { background: var(--bg-secondary); border-top: 1px solid var(--border); p
         <h2 class="section-title">Agentic AI is the<br>next big skill gap.</h2>
         <p class="section-sub">AI agents don't just answer questions. They take action. They research, write, send emails, generate leads, and automate entire workflows — autonomously.</p>
         <div class="why-cards">
-          <div class="why-card"><h4>Why Agentic AI is different</h4><p>Regular AI tools respond. Agents decide, act, and complete tasks end-to-end. That's what businesses will pay for.</p></div>
-          <div class="why-card"><h4>Why now</h4><p>The tools matured. The market demand exploded. Businesses need builders — not tool-users. You can be that person.</p></div>
-          <div class="why-card"><h4>Why this program</h4><p>We teach systems we use in our own company — Sanestix — for real clients. Not theory. Deployed, working systems.</p></div>
+          <div class="why-card"><h4>Why Agentic AI is different</h4><p>Regular AI tools respond. Agents decide, act, and complete tasks end-to-end. Businesses are already paying for this — we show you how to build and sell it.</p></div>
+          <div class="why-card"><h4>Why now</h4><p>The tools matured. Demand exploded. Sanestix alone has deployed 50+ AI automation systems across Pakistan & UAE. The market is wide open.</p></div>
+          <div class="why-card"><h4>Why this program</h4><p>We teach the exact systems we use at Sanestix — WhatsApp automation, AI chatbots, CRM pipelines — for real clients. Not theory. Deployed, working systems.</p></div>
         </div>
       </div>
       <div class="agent-visual">
@@ -818,7 +729,7 @@ footer { background: var(--bg-secondary); border-top: 1px solid var(--border); p
         <div class="agent-title">Autonomously. In Real-Time.</div>
         <div class="agent-flow">
           <div class="agent-node"><div class="node-icon teal"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0EA5A4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/></svg></div> You define the goal</div>
-          <div class="agent-node"><div class="node-icon purple"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#8B5CF6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96-.44L7 19V5.5A2.5 2.5 0 0 1 9.5 2z"/><path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96-.44L17 19V5.5A2.5 2.5 0 0 0 14.5 2z"/></svg></div> Agent plans the steps</div>
+          <div class="agent-node"><div class="node-icon purple"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#8B5CF6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div> Agent plans the steps</div>
           <div class="agent-node"><div class="node-icon teal"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0EA5A4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></div> Agent uses tools & APIs</div>
           <div class="agent-node"><div class="node-icon purple"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#8B5CF6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3.51"/></svg></div> Agent iterates & refines</div>
           <div class="agent-node highlight"><div class="node-icon green"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#22C55E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div> Task done. You get paid.</div>
@@ -834,12 +745,12 @@ footer { background: var(--bg-secondary); border-top: 1px solid var(--border); p
     <div class="section-label">What You'll Learn</div>
     <h2 class="section-title">Everything you need to build<br>and sell AI systems.</h2>
     <div class="learn-grid">
-      <div class="learn-card"><div class="card-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0EA5A4" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07M8.46 8.46a5 5 0 0 0 0 7.07"/></svg></div><h4>AI Foundations</h4><p>Understand LLMs, prompting, and how agents think. No jargon. Just what you need.</p></div>
+      <div class="learn-card"><div class="card-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0EA5A4" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07M8.46 8.46a5 5 0 0 0 0 7.07"/></svg></div><h4>AI Foundations</h4><p>Understand LLMs, prompting, and how agents think. Practical, jargon-free, and immediately applicable.</p></div>
       <div class="learn-card"><div class="card-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0EA5A4" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="10" rx="2"/><path d="M12 11V7"/><path d="M8 7h8"/><circle cx="12" cy="5" r="2"/></svg></div><h4>Agentic Systems</h4><p>Build AI agents that plan, decide, and execute tasks end-to-end using Claude, GPT, and open-source tools.</p></div>
-      <div class="learn-card"><div class="card-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0EA5A4" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div><h4>Automation with n8n</h4><p>Connect tools, trigger workflows, and automate business processes — visually, with no heavy coding.</p></div>
-      <div class="learn-card"><div class="card-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0EA5A4" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></div><h4>Full Tools Stack</h4><p>Master n8n, Make, Zapier, Supabase, APIs, webhooks, and AI wrappers — the complete toolkit.</p></div>
-      <div class="learn-card"><div class="card-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0EA5A4" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div><h4>Real Monetization</h4><p>How to package, price, and sell AI automation as a service. Scripts, proposals, and templates included.</p></div>
-      <div class="learn-card"><div class="card-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0EA5A4" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13"/><path d="M22 2L15 22l-4-9-9-4 20-7z"/></svg></div><h4>Client Delivery</h4><p>Deploy systems for real clients. Handle handoffs, documentation, and recurring revenue.</p></div>
+      <div class="learn-card"><div class="card-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0EA5A4" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div><h4>Automation with n8n</h4><p>Connect tools, trigger workflows, automate business processes — visually, with no heavy coding required.</p></div>
+      <div class="learn-card"><div class="card-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0EA5A4" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div><h4>WhatsApp & CRM Automation</h4><p>Real systems Sanestix deploys for clients — WhatsApp 24/7 auto-reply, lead routing, and CRM sync.</p></div>
+      <div class="learn-card"><div class="card-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0EA5A4" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div><h4>Real Monetization</h4><p>Package, price, and sell AI automation as a service. Scripts, proposals, and pricing templates included.</p></div>
+      <div class="learn-card"><div class="card-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0EA5A4" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13"/><path d="M22 2L15 22l-4-9-9-4 20-7z"/></svg></div><h4>Client Delivery</h4><p>Deploy systems for real clients. Handle handoffs, documentation, and build recurring revenue streams.</p></div>
     </div>
   </div>
 </section>
@@ -876,7 +787,7 @@ footer { background: var(--bg-secondary); border-top: 1px solid var(--border); p
         <ul>
           <li>n8n setup and workflow design</li>
           <li>Connecting APIs, webhooks, and data sources</li>
-          <li>Build client-ready automations from scratch</li>
+          <li>WhatsApp & Instagram automation flows</li>
           <li>Real project: fully working lead gen system</li>
         </ul>
       </div>
@@ -894,16 +805,55 @@ footer { background: var(--bg-secondary); border-top: 1px solid var(--border); p
   </div>
 </section>
 
+<!-- COHORT SCHEDULE — NEW SECTION -->
+<section class="schedule-section" id="schedule">
+  <div class="container">
+    <div class="section-label">Cohort Schedule</div>
+    <h2 class="section-title">Know exactly what you're signing up for.</h2>
+    <div class="schedule-card">
+      <div class="schedule-detail">
+        <div class="sd-label">Next Cohort Starts</div>
+        <div class="sd-value">May 2026</div>
+        <div class="sd-sub">Exact date shared upon enrollment</div>
+      </div>
+      <div class="schedule-sep"></div>
+      <div class="schedule-detail">
+        <div class="sd-label">Live Sessions</div>
+        <div class="sd-value">2× per week</div>
+        <div class="sd-sub">Evening PKT — recordings within 24 hrs</div>
+      </div>
+      <div class="schedule-sep"></div>
+      <div class="schedule-detail">
+        <div class="sd-label">Time Commitment</div>
+        <div class="sd-value">5–6 hrs / week</div>
+        <div class="sd-sub">Live sessions + project work</div>
+      </div>
+      <div class="schedule-sep"></div>
+      <div class="schedule-detail">
+        <div class="sd-label">Cohort Size</div>
+        <div class="sd-value">Max 40 students</div>
+        <div class="sd-sub">Small group for direct access to instructors</div>
+      </div>
+      <div class="schedule-sep"></div>
+      <div class="schedule-detail">
+        <div class="sd-label">Questions?</div>
+        <div class="sd-value" style="font-size:15px;"><a href="https://wa.me/923014422951?text=Hi%2C%20I'd%20like%20to%20know%20more%20about%20the%20Agentic%20AI%20cohort" style="color:var(--teal);">WhatsApp us →</a></div>
+        <div class="sd-sub">+92 301 4422951</div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- PROJECTS -->
 <section class="projects-section" id="projects">
   <div class="container">
     <div class="section-label">Hands-On Projects</div>
     <h2 class="section-title">You won't just learn. You'll build and ship.</h2>
     <div class="projects-grid">
-      <div class="project-card"><div class="p-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><circle cx="9" cy="10" r="1" fill="#F59E0B"/><circle cx="12" cy="10" r="1" fill="#F59E0B"/><circle cx="15" cy="10" r="1" fill="#F59E0B"/></svg></div><h4>AI Chatbot</h4><p>Custom chatbot trained on any business data. Deployable to websites instantly.</p></div>
-      <div class="project-card"><div class="p-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div><h4>Automation System</h4><p>End-to-end business workflow — form to CRM to follow-up email.</p></div>
-      <div class="project-card"><div class="p-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div><h4>Lead Gen Agent</h4><p>AI that finds leads, scrapes data, and prepares outreach — automatically.</p></div>
-      <div class="project-card"><div class="p-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/><line x1="12" y1="12" x2="12" y2="16"/><line x1="10" y1="14" x2="14" y2="14"/></svg></div><h4>Business Workflow Bot</h4><p>Full automation of an internal business operation — reporting or invoicing.</p></div>
+      <div class="project-card"><div class="p-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><circle cx="9" cy="10" r="1" fill="#F59E0B"/><circle cx="12" cy="10" r="1" fill="#F59E0B"/><circle cx="15" cy="10" r="1" fill="#F59E0B"/></svg></div><h4>AI Chatbot</h4><p>Custom chatbot trained on any business data. Deployable to websites — the same type Sanestix deploys for real clients.</p></div>
+      <div class="project-card"><div class="p-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div><h4>Automation System</h4><p>End-to-end business workflow — form to CRM to follow-up email. Production-ready from day one.</p></div>
+      <div class="project-card"><div class="p-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div><h4>Lead Gen Agent</h4><p>AI that finds leads, scrapes data, and prepares outreach — automatically, around the clock.</p></div>
+      <div class="project-card"><div class="p-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/><line x1="12" y1="12" x2="12" y2="16"/><line x1="10" y1="14" x2="14" y2="14"/></svg></div><h4>WhatsApp Automation Bot</h4><p>Full WhatsApp automation — 24/7 intelligent auto-reply, lead qualification, and CRM sync in one system.</p></div>
     </div>
   </div>
 </section>
@@ -941,45 +891,45 @@ footer { background: var(--bg-secondary); border-top: 1px solid var(--border); p
   </div>
 </section>
 
-<!-- TESTIMONIALS -->
+<!-- TESTIMONIALS — real client names from sanestix.com -->
 <section class="testimonials-section">
   <div class="container">
     <div class="section-label">Social Proof</div>
-    <h2 class="section-title">Real people. Real outcomes.</h2>
+    <h2 class="section-title">Real clients. Real outcomes.</h2>
     <div class="testimonials-grid">
       <div class="tcard">
         <div class="stars">★★★★★</div>
-        <p class="tcard-text">"I joined as a complete beginner. By week 3, I had my first client paying me for an automation system. This program is the real deal."</p>
+        <p class="tcard-text">"Before Sanestix, we were manually replying to 80+ WhatsApp messages daily. Now the AI handles everything — qualifies leads, sends pricing, books calls. We've tripled our conversion rate."</p>
         <div class="tcard-author">
           <div class="avatar">AK</div>
           <div>
-            <div class="author-name">Ahmed K.</div>
-            <div class="author-role">Freelancer, Karachi</div>
-            <div class="outcome">First client in 21 days</div>
+            <div class="author-name">Ahmed Khawaja</div>
+            <div class="author-role">Real Estate Agency, Lahore</div>
+            <div class="outcome">3× conversion rate</div>
           </div>
         </div>
       </div>
       <div class="tcard">
         <div class="stars">★★★★★</div>
-        <p class="tcard-text">"I run a small agency. The n8n workflows saved my team 20+ hours a week. We've upsold automation to 4 existing clients already."</p>
+        <p class="tcard-text">"Our clothing brand was getting 200+ Instagram DMs daily and we couldn't keep up. Sanestix built us an AI system that replies instantly, sends our catalogue, and captures the customer's number."</p>
         <div class="tcard-author">
-          <div class="avatar">SR</div>
+          <div class="avatar">SF</div>
           <div>
-            <div class="author-name">Sara R.</div>
-            <div class="author-role">Agency Owner, Lahore</div>
-            <div class="outcome">4 clients upsold on automation</div>
+            <div class="author-name">Sara Farouk</div>
+            <div class="author-role">Fashion Brand, Karachi</div>
+            <div class="outcome">200+ DMs automated daily</div>
           </div>
         </div>
       </div>
       <div class="tcard">
         <div class="stars">★★★★★</div>
-        <p class="tcard-text">"I was drowning in YouTube tutorials. This was the first structured program that made sense. Built my lead gen agent in week 2."</p>
+        <p class="tcard-text">"We needed a website that would work as a 24/7 salesman for our consultancy. Sanestix delivered in 6 days — with AI chatbot, lead forms, and CRM sync. Within 2 weeks we had 12 new qualified leads."</p>
         <div class="tcard-author">
-          <div class="avatar">MZ</div>
+          <div class="avatar">OK</div>
           <div>
-            <div class="author-name">M. Zubair</div>
-            <div class="author-role">Student, FAST Lahore</div>
-            <div class="outcome">Live agent built in 2 weeks</div>
+            <div class="author-name">Omar Khan</div>
+            <div class="author-role">B2B Consultancy, Islamabad</div>
+            <div class="outcome">12 new leads in 2 weeks</div>
           </div>
         </div>
       </div>
@@ -987,42 +937,62 @@ footer { background: var(--bg-secondary); border-top: 1px solid var(--border); p
   </div>
 </section>
 
-<!-- INSTRUCTOR -->
-<section class="instructor-section">
+<!-- INSTRUCTORS — REAL FOUNDERS -->
+<section class="instructor-section" id="instructors">
   <div class="container">
-    <div class="section-label">Your Instructor</div>
-    <h2 class="section-title">Taught by someone who<br>actually builds this stuff.</h2>
-    <div class="instructor-grid">
-      <div class="instructor-photo">
-        <svg width="110" height="140" viewBox="0 0 110 140" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="55" cy="48" r="28" fill="#0D2A3A" stroke="#0EA5A4" stroke-width="1.5"/>
-          <circle cx="55" cy="42" r="16" fill="#0B1E2C"/>
-          <ellipse cx="55" cy="42" rx="10" ry="11" fill="#1E3A4A"/>
-          <circle cx="55" cy="38" r="6" fill="#0EA5A4" opacity="0.3"/>
-          <circle cx="55" cy="38" r="3" fill="#0EA5A4"/>
-          <rect x="20" y="82" width="70" height="50" rx="8" fill="#0D2A3A" stroke="#1E293B" stroke-width="1"/>
-          <rect x="28" y="90" width="54" height="34" rx="4" fill="#0B1E2C"/>
-          <line x1="34" y1="98" x2="76" y2="98" stroke="#0EA5A4" stroke-width="1.5" stroke-linecap="round"/>
-          <line x1="34" y1="104" x2="68" y2="104" stroke="#8B5CF6" stroke-width="1.5" stroke-linecap="round"/>
-          <line x1="34" y1="110" x2="72" y2="110" stroke="#1E3A4A" stroke-width="1.5" stroke-linecap="round"/>
-          <circle cx="55" cy="78" r="6" fill="#0EA5A4"/>
-          <line x1="55" y1="76" x2="55" y2="80" stroke="#020617" stroke-width="1.5" stroke-linecap="round"/>
-          <line x1="53" y1="78" x2="57" y2="78" stroke="#020617" stroke-width="1.5" stroke-linecap="round"/>
-        </svg>
-      </div>
-      <div>
-        <div class="instructor-name">Founder, Sanestix</div>
-        <div class="instructor-title">AI Automation Expert · sanestix.com</div>
-        <p class="instructor-bio">Not a content creator. Not a theory-pusher. The founder of Sanestix — a real AI automation company that builds and deploys AI systems for businesses globally.</p>
-        <p class="instructor-bio">Every technique in this program comes from live client projects. If it's in the curriculum, it's already running in production.</p>
-        <div class="cred-tags">
-          <span class="cred-tag">Built flow.sanestix.com</span>
-          <span class="cred-tag">Real client deployments</span>
-          <span class="cred-tag">4+ years in AI automation</span>
-          <span class="cred-tag">Field-tested, not theoretical</span>
+    <div class="section-label">Your Instructors</div>
+    <h2 class="section-title">Taught by the founders of<br>a real AI automation company.</h2>
+    <p class="section-sub" style="margin-bottom:0;">Not content creators. Not theory-pushers. The co-founders of Sanestix — Pakistan's AI-powered web development & automation agency, with 50+ deployed systems and 1M+ AI messages sent on behalf of real clients.</p>
+    <div class="founders-grid">
+      <div class="founder-card">
+        <div class="founder-header">
+          <div class="founder-avatar">SF</div>
+          <div>
+            <div class="founder-name">Saad Faisal Qureshi</div>
+            <div class="founder-role">Co-Founder & CEO, Sanestix</div>
+          </div>
         </div>
-        <a href="https://sanestix.com" class="sanestix-link">Visit sanestix.com →</a>
+        <p class="founder-bio">Visionary entrepreneur with deep expertise in AI strategy, business automation, and client growth. Leads all client relationships and overall product direction at Sanestix. Saad teaches the monetization, client delivery, and business strategy modules — because he lives them daily.</p>
+        <div class="founder-creds">
+          <span class="cred-tag">AI Strategy</span>
+          <span class="cred-tag">Client Growth</span>
+          <span class="cred-tag">Business Automation</span>
+          <span class="cred-tag">50+ client deployments</span>
+        </div>
+        <div class="founder-links">
+          <a href="https://www.linkedin.com/in/saadfaisalqureshi" target="_blank" class="founder-link">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+            LinkedIn →
+          </a>
+          <a href="https://sanestix.com" target="_blank" class="founder-link">sanestix.com →</a>
+        </div>
       </div>
+      <div class="founder-card">
+        <div class="founder-header">
+          <div class="founder-avatar" style="background:var(--purple-glow);border-color:rgba(139,92,246,0.4);color:var(--purple);">AW</div>
+          <div>
+            <div class="founder-name">Abdul Wahab Siddiqi</div>
+            <div class="founder-role">Co-Founder & COO, Sanestix</div>
+          </div>
+        </div>
+        <p class="founder-bio">Technology expert specialising in AI systems architecture, web development, and automation infrastructure. Leads all technical delivery and quality control at Sanestix. Wahab teaches the technical modules — agents, n8n, APIs, and automation pipelines — from production-tested code, not slides.</p>
+        <div class="founder-creds">
+          <span class="cred-tag">AI Systems Architecture</span>
+          <span class="cred-tag">n8n & APIs</span>
+          <span class="cred-tag">Technical Delivery</span>
+          <span class="cred-tag">1M+ AI messages deployed</span>
+        </div>
+        <div class="founder-links">
+          <a href="https://www.linkedin.com/in/abdulwahabsiddiqi" target="_blank" class="founder-link">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+            LinkedIn →
+          </a>
+          <a href="https://sanestix.com" target="_blank" class="founder-link">sanestix.com →</a>
+        </div>
+      </div>
+    </div>
+    <div class="instructor-note">
+      <p><strong>"We don't build websites. We build revenue systems that run on AI — and we stay with you after launch to make sure they actually deliver."</strong><br><br>Every technique in this program comes from live client projects. If it's in the curriculum, it's already running in production — at Sanestix, right now.</p>
     </div>
   </div>
 </section>
@@ -1036,40 +1006,40 @@ footer { background: var(--bg-secondary); border-top: 1px solid var(--border); p
       <div class="offer-list">
         <div class="offer-item">
           <div class="offer-check">✓</div>
-          <div><span class="offer-text-title">Full 4-Week Live Program</span><span class="offer-text-desc">Instructor-led sessions. Real-time Q&A. Not pre-recorded fluff.</span></div>
+          <div><span class="offer-text-title">Full 4-Week Live Program</span><span class="offer-text-desc">Instructor-led sessions with Saad & Wahab. Real-time Q&A. Not pre-recorded fluff.</span></div>
         </div>
         <div class="offer-item">
           <div class="offer-check">✓</div>
-          <div><span class="offer-text-title">All Session Recordings</span><span class="offer-text-desc">Miss a class? Rewatch everything. Lifetime access included.</span></div>
+          <div><span class="offer-text-title">All Session Recordings</span><span class="offer-text-desc">Miss a class? Rewatch everything. Uploaded within 24 hours. Lifetime access.</span></div>
         </div>
         <div class="offer-item">
           <div class="offer-check">✓</div>
-          <div><span class="offer-text-title">Sanestix System Templates</span><span class="offer-text-desc">Real automation templates from our actual client projects.</span></div>
+          <div><span class="offer-text-title">Sanestix System Templates</span><span class="offer-text-desc">Real automation templates from our actual client projects — deployed in live businesses.</span></div>
         </div>
         <div class="offer-item">
           <div class="offer-check">✓</div>
-          <div><span class="offer-text-title">n8n Workflow Library</span><span class="offer-text-desc">Pre-built workflows you can deploy immediately for clients.</span></div>
+          <div><span class="offer-text-title">n8n Workflow Library</span><span class="offer-text-desc">Pre-built workflows you can deploy immediately for your own clients.</span></div>
         </div>
         <div class="offer-item">
           <div class="offer-check">✓</div>
-          <div><span class="offer-text-title">Client Proposal Kit</span><span class="offer-text-desc">Scripts, pricing guides, and templates to close your first client.</span></div>
+          <div><span class="offer-text-title">Client Proposal Kit</span><span class="offer-text-desc">Scripts, pricing guides, and proposal templates — exactly what Sanestix uses to close clients.</span></div>
         </div>
         <div class="offer-item">
           <div class="offer-check">✓</div>
-          <div><span class="offer-text-title">Private Cohort Community</span><span class="offer-text-desc">Peer support, networking, and accountability for 30 days.</span></div>
+          <div><span class="offer-text-title">Private Cohort Community</span><span class="offer-text-desc">Peer support, networking, and direct access to both founders for 30 days.</span></div>
         </div>
       </div>
       <div class="pricing-card">
-        <div class="pricing-badge" style="display:inline-flex;align-items:center;gap:6px;"><svg width="11" height="11" viewBox="0 0 24 24" fill="#F59E0B"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg> Cohort Pricing</div>
+        <div class="pricing-badge"><svg width="11" height="11" viewBox="0 0 24 24" fill="#F59E0B"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg> Cohort Pricing</div>
         <div class="price-original">PKR 35,000</div>
         <div class="price-main"><sup>PKR</sup>19,999</div>
         <div class="price-note">One-time payment · Full access · All bonuses</div>
         <a href="#apply" class="btn-cta">Join the Cohort →</a>
-        <div class="scarcity"><span class="urgency-dot"></span> Only 17 seats remaining</div>
-        <div class="deadline">Enrollment closes Friday, May 9, 2025</div>
+        <div class="scarcity"><span class="urgency-dot"></span> Limited seats — cohort capped at 40</div>
+        <div class="deadline">Message us to confirm next cohort date</div>
         <div class="pricing-divider"></div>
-        <div class="installment-label">Need installments?</div>
-        <a href="#" class="installment-link">Ask via WhatsApp →</a>
+        <div class="installment-label">Need installments or have questions?</div>
+        <a href="https://wa.me/923014422951?text=Hi%2C%20I%27d%20like%20to%20know%20about%20installments%20for%20the%20Agentic%20AI%20program" class="installment-link" target="_blank">Ask via WhatsApp → +92 301 4422951</a>
       </div>
     </div>
   </div>
@@ -1090,12 +1060,16 @@ footer { background: var(--bg-secondary); border-top: 1px solid var(--border); p
         <div class="faq-a">No. Most tools we use are visual (n8n, Make). We teach you just enough logic to understand what's happening. Zero developer skills required.</div>
       </div>
       <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">What days and times are the live sessions? <span class="faq-arrow">›</span></button>
+        <div class="faq-a">Sessions run twice a week in the evening (PKT). Exact timings are shared with enrolled students. Every session is recorded and uploaded within 24 hours, so you never miss content even if life gets in the way.</div>
+      </div>
+      <div class="faq-item">
         <button class="faq-q" onclick="toggleFaq(this)">How much time does it require? <span class="faq-arrow">›</span></button>
         <div class="faq-a">5 to 6 hours per week. 2 live sessions plus personal project work. Designed around a busy schedule.</div>
       </div>
       <div class="faq-item">
         <button class="faq-q" onclick="toggleFaq(this)">Can I actually earn money after this? <span class="faq-arrow">›</span></button>
-        <div class="faq-a">Yes — if you put in the work. We teach monetization in week 4. Previous students landed clients within 30 days of completing the program.</div>
+        <div class="faq-a">Yes — if you put in the work. Sanestix itself started as exactly this kind of operation and has now automated 50+ businesses across Pakistan & UAE, sending 1M+ AI messages on behalf of clients. Week 4 covers exactly how to package and sell these skills. We teach monetization from lived experience, not theory.</div>
       </div>
       <div class="faq-item">
         <button class="faq-q" onclick="toggleFaq(this)">What if I miss a live session? <span class="faq-arrow">›</span></button>
@@ -1103,7 +1077,11 @@ footer { background: var(--bg-secondary); border-top: 1px solid var(--border); p
       </div>
       <div class="faq-item">
         <button class="faq-q" onclick="toggleFaq(this)">Is there a refund policy? <span class="faq-arrow">›</span></button>
-        <div class="faq-a">3-day refund if you change your mind before the cohort begins. After that, we're fully committed to your success — and we expect you to be too.</div>
+        <div class="faq-a">3-day refund window before the cohort begins. After that, we're fully committed to your success — and we expect you to be too. Questions? Email us at contact@sanestix.com.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">Who are the instructors? <span class="faq-arrow">›</span></button>
+        <div class="faq-a">Saad Faisal Qureshi (CEO) and Abdul Wahab Siddiqi (COO) — the co-founders of Sanestix. They're not content creators or course sellers; they run a live AI automation agency with real clients. You can find them on LinkedIn and verify their work at sanestix.com.</div>
       </div>
     </div>
   </div>
@@ -1114,18 +1092,15 @@ footer { background: var(--bg-secondary); border-top: 1px solid var(--border); p
   <div class="container">
     <div class="section-label" style="text-align: center;">Apply Now</div>
     <h2 class="section-title" style="text-align: center; margin-bottom: 12px;">Claim your seat before<br>the cohort fills up.</h2>
-    <p style="text-align: center; color: var(--white-dim); font-size: 15px; font-weight: 300; margin-bottom: 48px;">Applications take 2 minutes. A Sanestix team member will contact you within 24 hours.</p>
+    <p style="text-align: center; color: var(--white-dim); font-size: 15px; font-weight: 300; margin-bottom: 48px;">Takes 2 minutes. Saad or Wahab will reach out within 24 hours to confirm your spot and share cohort details.</p>
     <div class="form-card">
       <h3>Start Your Application</h3>
-      <p class="form-sub">Limited to 40 students · Next cohort starting soon</p>
+      <p class="form-sub">Limited to 40 students · Taught by Sanestix founders</p>
       <div class="form-row">
         <div class="form-group"><label>Full Name</label><input type="text" placeholder="Your name"></div>
         <div class="form-group"><label>Email Address</label><input type="email" placeholder="you@email.com"></div>
       </div>
-      <div class="form-row">
-        <div class="form-group"><label>Phone / WhatsApp</label><input type="tel" placeholder="+92 300 0000000"></div>
-        <div class="form-group"><label>Business / Brand Name</label><input type="text" placeholder="Optional"></div>
-      </div>
+      <div class="form-group"><label>Phone / WhatsApp</label><input type="tel" placeholder="+92 300 0000000"></div>
       <div class="form-group">
         <label>Your Experience Level</label>
         <select>
@@ -1136,8 +1111,16 @@ footer { background: var(--bg-secondary); border-top: 1px solid var(--border); p
           <option>Advanced — I build things but need structure</option>
         </select>
       </div>
+      <div class="form-group"><label>What do you want to achieve? <span style="color:var(--white-faint);font-weight:400;text-transform:none;letter-spacing:0;">(optional)</span></label><input type="text" placeholder="e.g. freelancing, automate my business, land a tech job…"></div>
       <button class="btn-cta form-submit" onclick="handleApply(this)">Submit Application →</button>
-      <p class="form-privacy">Your info is never shared. We hate spam too.</p>
+      <p class="form-privacy">Your info is never shared. We hate spam too. Questions? <a href="mailto:contact@sanestix.com" style="color:var(--teal);">contact@sanestix.com</a></p>
+      <div class="form-or-wa">
+        <hr><span>or reach us directly</span><hr>
+      </div>
+      <a href="https://wa.me/923014422951?text=Hi%2C%20I%27d%20like%20to%20apply%20for%20the%20Agentic%20AI%20Mastery%20Program" class="wa-alt" target="_blank">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="#25D366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+        Message us on WhatsApp — +92 301 4422951
+      </a>
     </div>
   </div>
 </section>
@@ -1146,9 +1129,9 @@ footer { background: var(--bg-secondary); border-top: 1px solid var(--border); p
 <section class="final-cta">
   <div class="container">
     <h2>Stop watching. Start <span class="grad-text">building.</span><br>Start <span class="grad-text">earning.</span></h2>
-    <p>The next cohort starts soon. 17 seats left. This closes when they're gone.</p>
+    <p>The next cohort is forming now. Seats are capped at 40. This closes when they're gone.</p>
     <a href="#apply" class="btn-cta">Reserve Your Spot Now →</a>
-    <div class="final-seats"><span class="urgency-dot"></span> 17 of 40 seats remaining</div>
+    <div class="final-seats"><span class="urgency-dot"></span> Limited seats remaining — cohort closes when full</div>
   </div>
 </section>
 
@@ -1158,13 +1141,19 @@ footer { background: var(--bg-secondary); border-top: 1px solid var(--border); p
     <div class="footer-grid">
       <div>
         <div class="footer-brand-name">Learn<span class="dot">.</span>Sanestix</div>
-        <p class="footer-brand-desc">The learning division of Sanestix — a real AI automation company building systems for real businesses.</p>
+        <p class="footer-brand-desc">The learning division of Sanestix — Pakistan's AI automation agency, with 50+ deployed systems and 1M+ AI messages sent for real clients.</p>
+        <div class="footer-contact-info">
+          <span>📧 <a href="mailto:contact@sanestix.com">contact@sanestix.com</a></span>
+          <span>📱 <a href="https://wa.me/923014422951">+92 301 4422951</a></span>
+          <span>📍 Lahore, Punjab, Pakistan</span>
+        </div>
       </div>
       <div class="footer-col">
         <h5>Program</h5>
         <a href="#curriculum">Curriculum</a>
         <a href="#projects">Projects</a>
         <a href="#pricing">Pricing</a>
+        <a href="#schedule">Schedule</a>
         <a href="#faq">FAQ</a>
       </div>
       <div class="footer-col">
@@ -1172,29 +1161,31 @@ footer { background: var(--bg-secondary); border-top: 1px solid var(--border); p
         <a href="https://sanestix.com" target="_blank">sanestix.com</a>
         <a href="https://flow.sanestix.com" target="_blank">flow.sanestix.com</a>
         <a href="https://learn.sanestix.com" target="_blank">learn.sanestix.com</a>
+        <a href="https://www.linkedin.com/in/saadfaisalqureshi" target="_blank">Saad on LinkedIn</a>
+        <a href="https://www.linkedin.com/in/abdulwahabsiddiqi" target="_blank">Wahab on LinkedIn</a>
       </div>
       <div class="footer-col">
         <h5>Contact</h5>
-        <a href="mailto:hello@sanestix.com">hello@sanestix.com</a>
-        <a href="#">WhatsApp Us</a>
+        <a href="mailto:contact@sanestix.com">contact@sanestix.com</a>
+        <a href="https://wa.me/923014422951" target="_blank">WhatsApp Us</a>
         <a href="#apply">Apply Now</a>
       </div>
     </div>
     <div class="footer-bottom">
-      <span>© 2025 Learn by Sanestix. All rights reserved.</span>
-      <span>learn.sanestix.com</span>
+      <span>© 2026 Learn by Sanestix. All rights reserved.</span>
+      <span>learn.sanestix.com · Built with AI in Lahore 🇵🇰</span>
     </div>
   </div>
 </footer>
 
 <!-- STICKY BAR -->
 <div class="sticky-bar">
-  <div class="sticky-bar-text"><strong>Agentic AI Mastery Program</strong> — Next cohort starting soon. 17 seats left.</div>
+  <div class="sticky-bar-text"><strong>Agentic AI Mastery Program</strong> — Taught by Saad & Wahab, founders of Sanestix.</div>
   <a href="#apply" class="btn-cta">Apply Now →</a>
 </div>
 
-<!-- WHATSAPP -->
-<a href="https://wa.me/923000000000?text=Hi%2C%20I'm%20interested%20in%20the%20Agentic%20AI%20Mastery%20Program" class="whatsapp-btn" target="_blank">
+<!-- WHATSAPP — REAL NUMBER -->
+<a href="https://wa.me/923014422951?text=Hi%2C%20I'm%20interested%20in%20the%20Agentic%20AI%20Mastery%20Program" class="whatsapp-btn" target="_blank">
   <svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
   Chat on WhatsApp
 </a>
@@ -1204,6 +1195,16 @@ function toggleFaq(btn) {
   btn.closest('.faq-item').classList.toggle('open');
 }
 function handleApply(btn) {
+  const form = btn.closest('.form-card');
+  const name = form.querySelector('input[type="text"]').value.trim();
+  const email = form.querySelector('input[type="email"]').value.trim();
+  const phone = form.querySelector('input[type="tel"]').value.trim();
+  if (!name || !email || !phone) {
+    btn.style.background = 'var(--red)'; btn.style.color = '#fff';
+    btn.textContent = 'Please fill in Name, Email & Phone';
+    setTimeout(() => { btn.style.background = ''; btn.style.color = ''; btn.textContent = 'Submit Application →'; }, 2500);
+    return;
+  }
   btn.textContent = 'Submitting...';
   setTimeout(() => {
     btn.textContent = '✓ Application Submitted!';
