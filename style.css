@@ -1328,6 +1328,27 @@ footer {
   color: var(--text2);
 }
 .footer-contact a { color: var(--g1); }
+.footer-contact-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.footer-contact-item svg {
+  flex-shrink: 0;
+  color: var(--g1);
+  opacity: 0.8;
+}
+.footer-link-icon {
+  display: flex !important;
+  align-items: center;
+  gap: 7px;
+}
+.footer-link-icon svg {
+  flex-shrink: 0;
+  opacity: 0.5;
+  transition: opacity 0.15s;
+}
+.footer-link-icon:hover svg { opacity: 1; }
 .footer-col h5 {
   font-size: 10px;
   font-weight: 700;
