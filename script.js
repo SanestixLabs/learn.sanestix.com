@@ -98,15 +98,20 @@ document.addEventListener('DOMContentLoaded', function() {
 // For testimonial videos
 function loadTestiVideo(containerId, videoId) {
   // Replace VIDEO_ID_1/2/3/4 with actual IDs when available
-  var placeholderIds = { 'VIDEO_ID_1': 'dQw4w9WgXcQ', 'VIDEO_ID_2': 'dQw4w9WgXcQ', 'VIDEO_ID_3': 'dQw4w9WgXcQ', 'VIDEO_ID_4': 'dQw4w9WgXcQ' };
+  var placeholderIds = { 'VIDEO_ID_1': 'qBRPqkjVTck', 'VIDEO_ID_2': 'qBRPqkjVTck', 'VIDEO_ID_3': 'qBRPqkjVTck', 'VIDEO_ID_4': 'qBRPqkjVTck' };
   var actualId = placeholderIds[videoId] || videoId;
   var container = document.getElementById(containerId);
   if (!container) return;
   // Full video for feature testimonial
   if (containerId === 'testiVid1') {
-    container.innerHTML = '<iframe src="https://www.youtube.com/embed/' + actualId + '?autoplay=1&rel=0" title="Testimonial" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;border-radius:24px;"></iframe>';
+    container.innerHTML = '<iframe src="https://www.youtube.com/embed/' + actualId + '?autoplay=1&rel=0" title="Testimonial" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;border-radius:20px;"></iframe>';
   } else {
-    container.innerHTML = '<iframe src="https://www.youtube.com/embed/' + actualId + '?autoplay=1&rel=0" title="Testimonial" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="width:100%;height:200px;border-radius:12px;border:none;"></iframe>';
+    // Vertical short — expand card to portrait ratio
+    container.style.display = 'block';
+    container.style.padding = '0';
+    container.style.paddingTop = '177.78%';
+    container.style.position = 'relative';
+    container.innerHTML = '<iframe src="https://www.youtube.com/embed/' + actualId + '?autoplay=1&rel=0" title="Testimonial" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;border-radius:12px;border:none;"></iframe>';
   }
 }
 
