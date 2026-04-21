@@ -835,8 +835,8 @@ nav {
 /* ── TESTIMONIALS ── */
 .testi-video-feature {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 32px;
+  grid-template-columns: 340px 1fr;
+  gap: 40px;
   align-items: center;
   margin-bottom: 32px;
 }
@@ -844,9 +844,10 @@ nav {
   border-radius: var(--radius-xl);
   overflow: hidden;
   position: relative;
-  padding-top: 56.25%;
+  padding-top: 177.78%; /* 9:16 vertical ratio for Shorts */
   background: var(--bg4);
   cursor: pointer;
+  max-width: 340px;
 }
 .testi-vid-placeholder {
   position: absolute; top: 0; left: 0;
@@ -966,8 +967,14 @@ nav {
   cursor: pointer;
   transition: border-color 0.2s;
   position: relative;
+  overflow: hidden;
 }
 .testi-vid-sm:hover { border-color: var(--g1); }
+.testi-vid-sm iframe-wrap {
+  position: relative;
+  width: 100%;
+  padding-top: 177.78%;
+}
 .testi-play-sm {
   width: 42px; height: 42px;
   border-radius: 50%;
@@ -986,7 +993,6 @@ nav {
   padding: 2px 7px;
   border-radius: 99px;
 }
-
 /* ── INSTRUCTORS ── */
 .founders-grid {
   display: grid;
@@ -1414,6 +1420,7 @@ footer {
   .learn-grid { grid-template-columns: 1fr 1fr; }
   .projects-grid { grid-template-columns: 1fr 1fr; }
   .testi-video-feature { grid-template-columns: 1fr; }
+  .testi-vid-wrap { max-width: 280px; margin: 0 auto; }
   .founders-grid { grid-template-columns: 1fr; }
   .offer-grid { grid-template-columns: 1fr; }
   .footer-inner { grid-template-columns: 1fr 1fr; }
