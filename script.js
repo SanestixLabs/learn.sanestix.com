@@ -86,7 +86,7 @@ document.addEventListener('DOMContentLoaded', function() {
   if (heroPlaceholder) {
     heroPlaceholder.addEventListener('click', function() {
       // Replace VIDEO_ID with your actual YouTube video ID
-      var videoId = 'dQw4w9WgXcQ'; // placeholder
+      var videoId = 'FwOTs4UxQS4';
       var wrap = document.getElementById('heroVideoWrap');
       if (wrap) {
         wrap.innerHTML = '<iframe src="https://www.youtube.com/embed/' + videoId + '?autoplay=1&rel=0&modestbranding=1" title="AI Launchpad Course Intro" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;"></iframe>';
