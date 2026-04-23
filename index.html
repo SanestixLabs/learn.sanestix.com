@@ -195,58 +195,193 @@ a { color: inherit; text-decoration: none; }
 .testi-cta { text-align: center; }
 
 /* ════════════════════════════════
-   CURRICULUM SECTION
+   CURRICULUM SECTION — EDU REDESIGN
 ════════════════════════════════ */
-.curriculum-section { padding: 88px 0; background: var(--bg); }
-.week-tabs { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 32px; }
-.week-tab {
-  font-family: var(--font-head); font-size: 12px; font-weight: 600;
-  padding: 8px 16px; border-radius: 8px; border: 1px solid var(--border2);
-  cursor: pointer; background: transparent; color: var(--text2);
-  transition: all .15s; letter-spacing: 0.04em; white-space: nowrap;
+.curriculum-section {
+  padding: 96px 0 104px;
+  background: var(--bg);
+  position: relative;
+  overflow: hidden;
 }
-.week-tab:hover { border-color: var(--g1); color: var(--text); }
-.week-tab.active { background: var(--g1); border-color: var(--g1); color: #000; }
-.week-panel { display: none; }
+
+/* Circuit-board SVG background */
+.curriculum-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(34,197,94,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(34,197,94,0.04) 1px, transparent 1px);
+  background-size: 40px 40px;
+  mask-image: radial-gradient(ellipse 80% 70% at 50% 50%, black 30%, transparent 100%);
+  pointer-events: none;
+}
+.curriculum-section::after {
+  content: '';
+  position: absolute;
+  top: -120px; left: 50%; transform: translateX(-50%);
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(34,197,94,0.06) 0%, transparent 65%);
+  pointer-events: none;
+}
+
+/* Progress bar strip at top */
+.curr-progress-strip {
+  display: flex; align-items: center; gap: 0;
+  margin-bottom: 40px; border-radius: 12px; overflow: hidden;
+  border: 1px solid var(--border); background: var(--bg2);
+}
+.curr-progress-step {
+  flex: 1; padding: 10px 8px; text-align: center; cursor: pointer;
+  border-right: 1px solid var(--border);
+  transition: background .2s;
+  position: relative;
+}
+.curr-progress-step:last-child { border-right: none; }
+.curr-progress-step .ps-num {
+  display: block; font-size: 9px; font-weight: 700; color: var(--text3);
+  letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 3px;
+}
+.curr-progress-step .ps-label {
+  display: block; font-size: 10px; font-weight: 600; color: var(--text3);
+  font-family: var(--font-head); line-height: 1.2; white-space: nowrap;
+  overflow: hidden; text-overflow: ellipsis;
+}
+.curr-progress-step.active {
+  background: rgba(34,197,94,0.08);
+}
+.curr-progress-step.active .ps-num,
+.curr-progress-step.active .ps-label { color: var(--g1); }
+.curr-progress-step:hover { background: rgba(255,255,255,0.03); }
+.curr-progress-step.active::after {
+  content: '';
+  position: absolute; bottom: 0; left: 0; right: 0; height: 2px;
+  background: var(--g1);
+}
+
+/* Week tabs (kept but hidden behind strip on desktop) */
+.week-tabs { display: none; }
+
+/* Panel */
+.week-panel { display: none; animation: panelIn .25s ease; }
 .week-panel.active { display: block; }
+@keyframes panelIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Week header */
 .week-header {
-  background: var(--bg3); border: 1px solid var(--border2); border-radius: var(--radius-lg);
-  padding: 24px 28px; margin-bottom: 16px;
+  background: linear-gradient(135deg, var(--bg3) 0%, var(--bg2) 100%);
+  border: 1px solid var(--border2);
+  border-radius: 16px;
+  padding: 28px 32px;
+  margin-bottom: 20px;
   display: flex; align-items: flex-start; justify-content: space-between; gap: 20px;
+  position: relative; overflow: hidden;
 }
-.week-header-left h3 { font-family: var(--font-head); font-size: 20px; font-weight: 700; color: var(--text); margin-bottom: 6px; }
+.week-header::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, var(--g1), var(--g2), transparent);
+}
+.week-header-icon {
+  width: 48px; height: 48px; border-radius: 12px; flex-shrink: 0;
+  background: rgba(34,197,94,0.1); border: 1px solid rgba(34,197,94,0.2);
+  display: flex; align-items: center; justify-content: center; font-size: 22px;
+  margin-right: 4px;
+}
+.week-header-body { flex: 1; }
+.week-num-label {
+  font-size: 10px; font-weight: 700; color: var(--g1); letter-spacing: 0.14em;
+  text-transform: uppercase; margin-bottom: 5px; font-family: var(--font-head);
+}
+.week-header-left h3 {
+  font-family: var(--font-head); font-size: 22px; font-weight: 700;
+  color: var(--text); margin-bottom: 6px; line-height: 1.25;
+}
 .week-header-left p { font-size: 14px; color: var(--text2); font-weight: 300; }
-.week-meta { display: flex; gap: 8px; flex-wrap: wrap; flex-shrink: 0; }
+.week-meta { display: flex; gap: 8px; flex-wrap: wrap; flex-shrink: 0; align-items: flex-start; padding-top: 4px; }
 .wmeta-pill {
-  font-size: 11px; font-weight: 600; padding: 4px 12px; border-radius: 100px;
-  background: rgba(167,139,250,0.1); border: 1px solid rgba(167,139,250,0.2); color: var(--purple);
+  font-size: 11px; font-weight: 600; padding: 5px 13px; border-radius: 100px;
+  background: rgba(34,197,94,0.08); border: 1px solid rgba(34,197,94,0.2); color: var(--g1);
 }
-.classes-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin-bottom: 16px; }
+
+/* Classes grid */
+.classes-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-bottom: 16px;
+}
 .class-card {
-  background: var(--bg3); border: 1px solid var(--border); border-radius: var(--radius-lg);
-  padding: 20px; display: flex; flex-direction: column; gap: 10px;
-  transition: border-color .2s;
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 22px;
+  display: flex; flex-direction: column; gap: 12px;
+  transition: border-color .2s, transform .2s, box-shadow .2s;
+  position: relative; overflow: hidden;
 }
-.class-card:hover { border-color: var(--g1); }
-.class-num { font-size: 10px; font-weight: 700; color: var(--text3); letter-spacing: 0.1em; text-transform: uppercase; }
-.class-title { font-family: var(--font-head); font-size: 14px; font-weight: 600; color: var(--text); line-height: 1.3; }
+.class-card::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(34,197,94,0.15), transparent);
+}
+.class-card:hover {
+  border-color: rgba(34,197,94,0.4);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(34,197,94,0.06);
+}
+.class-card-top { display: flex; align-items: center; justify-content: space-between; }
+.class-num {
+  font-size: 9px; font-weight: 700; color: var(--text3);
+  letter-spacing: 0.14em; text-transform: uppercase;
+  background: var(--bg4); border: 1px solid var(--border);
+  padding: 2px 8px; border-radius: 100px;
+}
+.class-duration {
+  font-size: 10px; color: var(--text3);
+  display: flex; align-items: center; gap: 3px;
+}
+.class-title {
+  font-family: var(--font-head); font-size: 14px; font-weight: 600;
+  color: var(--text); line-height: 1.35;
+}
 .class-project {
-  background: rgba(34,197,94,0.05); border: 1px solid rgba(34,197,94,0.12);
-  border-radius: 8px; padding: 10px 12px;
+  background: rgba(34,197,94,0.04);
+  border: 1px solid rgba(34,197,94,0.12);
+  border-radius: 9px; padding: 10px 13px;
+  flex: 1;
 }
-.class-project-label { font-size: 10px; font-weight: 600; color: var(--g1); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 3px; }
-.class-project-title { font-size: 12px; color: #aaa; line-height: 1.5; }
+.class-project-label {
+  font-size: 9px; font-weight: 700; color: var(--g1);
+  text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 4px;
+  display: flex; align-items: center; gap: 5px;
+}
+.class-project-title { font-size: 12px; color: var(--text2); line-height: 1.55; }
 .class-tools { display: flex; flex-wrap: wrap; gap: 5px; }
 .tool-tag {
   font-size: 10px; background: var(--bg4); border: 1px solid var(--border);
-  color: var(--text3); padding: 2px 8px; border-radius: 100px;
+  color: var(--text3); padding: 2px 9px; border-radius: 100px;
+  transition: border-color .15s, color .15s;
 }
+.class-card:hover .tool-tag { border-color: rgba(34,197,94,0.2); color: var(--text2); }
+
+/* Outcome bar */
 .week-outcome {
-  background: rgba(34,197,94,0.04); border: 1px solid rgba(34,197,94,0.15);
-  border-radius: var(--radius); padding: 16px 20px;
-  display: flex; align-items: center; gap: 10px; font-size: 14px; color: var(--text2);
+  background: rgba(34,197,94,0.04);
+  border: 1px solid rgba(34,197,94,0.18);
+  border-radius: 12px; padding: 16px 22px;
+  display: flex; align-items: center; gap: 12px;
+  font-size: 14px; color: var(--text2);
+  position: relative; overflow: hidden;
 }
-.week-outcome-star { font-size: 16px; }
+.week-outcome::before {
+  content: '';
+  position: absolute; left: 0; top: 0; bottom: 0; width: 3px;
+  background: linear-gradient(180deg, var(--g1), var(--g2));
+  border-radius: 0 2px 2px 0;
+}
+.week-outcome-star { font-size: 18px; flex-shrink: 0; }
+.week-outcome strong { color: var(--text); }
 
 /* ════════════════════════════════
    REAL PROJECTS LIBRARY (bonus)
@@ -374,6 +509,7 @@ footer { background: var(--bg2); border-top: 1px solid var(--border); padding: 6
   .testi-grid { grid-template-columns: 1fr 1fr; }
   .auth-strip { grid-template-columns: repeat(3,1fr); }
   .classes-grid { grid-template-columns: 1fr 1fr; }
+  .curr-progress-step .ps-label { font-size: 9px; }
   .founders-grid { grid-template-columns: 1fr; }
   .projects-grid { grid-template-columns: 1fr 1fr; }
   .faq-grid { grid-template-columns: 1fr; }
@@ -384,10 +520,10 @@ footer { background: var(--bg2); border-top: 1px solid var(--border); padding: 6
   .proof-strip { grid-template-columns: 1fr 1fr; }
   .auth-strip { grid-template-columns: 1fr 1fr; }
   .classes-grid { grid-template-columns: 1fr; }
-  .projects-grid { grid-template-columns: 1fr; }
-  .footer-inner { grid-template-columns: 1fr; }
-  .week-tabs { gap: 6px; }
-  .week-tab { font-size: 11px; padding: 7px 12px; }
+  .curr-progress-strip { overflow-x: auto; }
+  .curr-progress-step { min-width: 64px; }
+  .week-header { flex-direction: column; gap: 14px; }
+  .week-header-icon { display: none; }
 }
 
 /* ════════════════════════════════
@@ -438,7 +574,7 @@ footer { background: var(--bg2); border-top: 1px solid var(--border); padding: 6
 .nav-signin {
   font-family: var(--font-head); font-size: 13px; font-weight: 500;
   background: transparent; color: var(--text2); padding: 8px 16px;
-  border-radius: 8px; border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 8px; border: 1px solid var(--text4);
   text-decoration: none; white-space: nowrap;
   transition: color .15s, border-color .15s, background .15s;
 }
@@ -456,7 +592,7 @@ footer { background: var(--bg2); border-top: 1px solid var(--border); padding: 6
   display: none; align-items: center; justify-content: center;
   width: 34px; height: 34px; border-radius: 8px; cursor: pointer;
   border: none; background: none; flex-shrink: 0;
-  border: 1px solid rgba(255,255,255,0.1);
+  border: 1px solid var(--text4);
   transition: background .15s;
 }
 .nav-hamburger:hover { background: rgba(255,255,255,0.05); }
@@ -634,7 +770,7 @@ body { padding-top: 64px; }
   position: absolute; top: calc(100% + 10px); left: 50%;
   transform: translateX(-50%);
   background: #0e0e0e;
-  border: 1px solid rgba(255,255,255,0.1);
+  border: 1px solid var(--text4);
   border-radius: 12px;
   padding: 8px;
   min-width: 220px;
@@ -820,7 +956,7 @@ body { padding-top: 64px; }
           </a>
           <div class="nav-dropdown-divider"></div>
           <div class="nav-dropdown-label">Bonus</div>
-          <a href="#" onclick="document.querySelector('.projects-bonus-section').scrollIntoView({behavior:'smooth'});return false;">
+          <a href="#register" onclick="document.querySelector('#register').scrollIntoView({behavior:'smooth'});return false;">
             <span class="nav-dropdown-icon amber">
               <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2" stroke-linecap="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
             </span>
@@ -884,7 +1020,7 @@ body { padding-top: 64px; }
         40 seats / cohort
       </div>
       <a href="https://wa.me/923014422951" target="_blank" rel="noopener" class="nav-signin">Sign In</a>
-      <a href="#apply" class="nav-cta">Enroll Now →</a>
+      <a href="#register" class="nav-cta">Register Free →</a>
     </div>
 
     <!-- Animated hamburger button (shadcn-style) -->
@@ -930,7 +1066,7 @@ body { padding-top: 64px; }
     <a href="#testimonials" onclick="closeMobileNav()">Student Stories</a>
     <a href="#instructors" onclick="closeMobileNav()">Instructors</a>
     <a href="#faq" onclick="closeMobileNav()">FAQ</a>
-    <a href="#apply" onclick="closeMobileNav()" class="nav-mobile-cta">Enroll Now →</a>
+    <a href="#register" onclick="closeMobileNav()" class="nav-mobile-cta">Register Free →</a>
   </div>
 </nav>
 
@@ -965,7 +1101,7 @@ body { padding-top: 64px; }
         </div>
       </div>
       <div class="cta-row">
-        <a href="#apply" class="btn-green btn-green-lg">Reserve Your Spot →</a>
+        <a href="#register" class="btn-green btn-green-lg">Claim My Free Seat →</a>
         <a href="#curriculum" class="btn-white" style="font-size:15px; padding:15px 28px;">See Curriculum</a>
       </div>
       <div class="urgency">
@@ -1084,7 +1220,7 @@ body { padding-top: 64px; }
       <div class="proof-cell"><div class="proof-num">27+</div><div class="proof-lbl">Live projects shipped</div></div>
       <div class="proof-cell"><div class="proof-num">PKR 45K</div><div class="proof-lbl">First client billing</div></div>
     </div>
-    <div class="testi-cta"><a href="#apply" class="btn-green btn-green-lg">Join the Next Cohort →</a></div>
+    <div class="testi-cta"><a href="#register" class="btn-green btn-green-lg">Join the Free Seminar →</a></div>
   </div>
 </section>
 
@@ -1098,22 +1234,52 @@ body { padding-top: 64px; }
     <h2 class="section-title">9 Weeks. 27 Classes. Zero Fluff.</h2>
     <p class="section-sub">Every class has a live build, 3 quiz questions, and a real assignment. Click any week to explore.</p>
 
-    <div class="week-tabs">
-      <button class="week-tab active" onclick="switchWeek(1)">Week 1</button>
-      <button class="week-tab" onclick="switchWeek(2)">Week 2</button>
-      <button class="week-tab" onclick="switchWeek(3)">Week 3</button>
-      <button class="week-tab" onclick="switchWeek(4)">Week 4</button>
-      <button class="week-tab" onclick="switchWeek(5)">Week 5</button>
-      <button class="week-tab" onclick="switchWeek(6)">Week 6</button>
-      <button class="week-tab" onclick="switchWeek(7)">Week 7</button>
-      <button class="week-tab" onclick="switchWeek(8)">Week 8 ✦</button>
-      <button class="week-tab" onclick="switchWeek(9)">Week 9</button>
+    <!-- Progress navigation strip -->
+    <div class="curr-progress-strip">
+      <div class="curr-progress-step active" onclick="switchWeek(1)">
+        <span class="ps-num">Week 1</span>
+        <span class="ps-label">AI Foundations</span>
+      </div>
+      <div class="curr-progress-step" onclick="switchWeek(2)">
+        <span class="ps-num">Week 2</span>
+        <span class="ps-label">n8n Intermediate</span>
+      </div>
+      <div class="curr-progress-step" onclick="switchWeek(3)">
+        <span class="ps-num">Week 3</span>
+        <span class="ps-label">n8n Advanced</span>
+      </div>
+      <div class="curr-progress-step" onclick="switchWeek(4)">
+        <span class="ps-num">Week 4</span>
+        <span class="ps-label">Voice Agents</span>
+      </div>
+      <div class="curr-progress-step" onclick="switchWeek(5)">
+        <span class="ps-num">Week 5</span>
+        <span class="ps-label">Vibe Coding</span>
+      </div>
+      <div class="curr-progress-step" onclick="switchWeek(6)">
+        <span class="ps-num">Week 6</span>
+        <span class="ps-label">Ecommerce AI</span>
+      </div>
+      <div class="curr-progress-step" onclick="switchWeek(7)">
+        <span class="ps-num">Week 7</span>
+        <span class="ps-label">Client Acquisition</span>
+      </div>
+      <div class="curr-progress-step" onclick="switchWeek(8)">
+        <span class="ps-num">Week 8 ✦</span>
+        <span class="ps-label">Personal Brand</span>
+      </div>
+      <div class="curr-progress-step" onclick="switchWeek(9)">
+        <span class="ps-num">Week 9</span>
+        <span class="ps-label">Agency &amp; Capstone</span>
+      </div>
     </div>
 
     <!-- WEEK 1 -->
     <div class="week-panel active" id="week-1">
       <div class="week-header">
-        <div class="week-header-left">
+        <div class="week-header-icon">🤖</div>
+        <div class="week-header-body week-header-left">
+          <div class="week-num-label">Week 1 · Classes 01–03</div>
           <h3>AI Foundations &amp; n8n Automation</h3>
           <p>Agentic AI concepts, the modern LLM stack, and your first live workflows</p>
         </div>
@@ -1124,31 +1290,51 @@ body { padding-top: 64px; }
       </div>
       <div class="classes-grid">
         <div class="class-card">
-          <div class="class-num">Class 01</div>
+          <div class="class-card-top">
+            <div class="class-num">Class 01</div>
+            <div class="class-duration">⏱ 2 hrs</div>
+          </div>
           <div class="class-title">What is Agentic AI? LLMs, MCPs &amp; the Modern Stack</div>
-          <div class="class-project"><div class="class-project-label">🔨 Live Project</div><div class="class-project-title">Multi-Model Research Agent — Compare Claude vs GPT-4o on real tasks</div></div>
+          <div class="class-project">
+            <div class="class-project-label">🔨 Live Project</div>
+            <div class="class-project-title">Multi-Model Research Agent — Compare Claude vs GPT-4o on real tasks</div>
+          </div>
           <div class="class-tools"><span class="tool-tag">Claude API</span><span class="tool-tag">OpenAI API</span><span class="tool-tag">n8n</span><span class="tool-tag">MCP</span></div>
         </div>
         <div class="class-card">
-          <div class="class-num">Class 02</div>
+          <div class="class-card-top">
+            <div class="class-num">Class 02</div>
+            <div class="class-duration">⏱ 2 hrs</div>
+          </div>
           <div class="class-title">n8n Deep Dive — Building Your First AI Workflow</div>
-          <div class="class-project"><div class="class-project-label">🔨 Live Project</div><div class="class-project-title">AI Email Auto-Responder with Claude + Knowledge Base</div></div>
+          <div class="class-project">
+            <div class="class-project-label">🔨 Live Project</div>
+            <div class="class-project-title">AI Email Auto-Responder with Claude + Knowledge Base</div>
+          </div>
           <div class="class-tools"><span class="tool-tag">n8n</span><span class="tool-tag">Claude API</span><span class="tool-tag">Gmail API</span><span class="tool-tag">Google Sheets</span></div>
         </div>
         <div class="class-card">
-          <div class="class-num">Class 03</div>
+          <div class="class-card-top">
+            <div class="class-num">Class 03</div>
+            <div class="class-duration">⏱ 2 hrs</div>
+          </div>
           <div class="class-title">Zapier + Multi-Agent Orchestration Patterns</div>
-          <div class="class-project"><div class="class-project-label">🔨 Live Project</div><div class="class-project-title">2-Agent Content Pipeline: Generator → Claude Critic with quality gate</div></div>
+          <div class="class-project">
+            <div class="class-project-label">🔨 Live Project</div>
+            <div class="class-project-title">2-Agent Content Pipeline: Generator → Claude Critic with quality gate</div>
+          </div>
           <div class="class-tools"><span class="tool-tag">Zapier</span><span class="tool-tag">n8n</span><span class="tool-tag">Claude API</span><span class="tool-tag">Notion</span></div>
         </div>
       </div>
-      <div class="week-outcome"><span class="week-outcome-star">⭐</span> Week 1 Outcome: Practical, deployable skills using the latest AI tools and multi-agent orchestration.</div>
+      <div class="week-outcome"><span class="week-outcome-star">⭐</span> <span><strong>Week 1 Outcome:</strong> Practical, deployable skills using the latest AI tools and multi-agent orchestration.</span></div>
     </div>
 
     <!-- WEEK 2 -->
     <div class="week-panel" id="week-2">
       <div class="week-header">
-        <div class="week-header-left">
+        <div class="week-header-icon">⚙️</div>
+        <div class="week-header-body week-header-left">
+          <div class="week-num-label">Week 2 · Classes 04–06</div>
           <h3>n8n Intermediate — Data, APIs &amp; Sub-Workflows</h3>
           <p>Advanced data handling, REST APIs, OAuth, and agentic loops</p>
         </div>
@@ -1156,31 +1342,33 @@ body { padding-top: 64px; }
       </div>
       <div class="classes-grid">
         <div class="class-card">
-          <div class="class-num">Class 04</div>
+          <div class="class-card-top"><div class="class-num">Class 04</div><div class="class-duration">⏱ 2 hrs</div></div>
           <div class="class-title">Advanced Data Manipulation &amp; AI Transformation</div>
           <div class="class-project"><div class="class-project-label">🔨 Live Project</div><div class="class-project-title">Universal AI Data Cleaning Pipeline — Claude normalises any input format</div></div>
           <div class="class-tools"><span class="tool-tag">n8n</span><span class="tool-tag">Claude API</span><span class="tool-tag">Airtable</span><span class="tool-tag">JMESPath</span></div>
         </div>
         <div class="class-card">
-          <div class="class-num">Class 05</div>
+          <div class="class-card-top"><div class="class-num">Class 05</div><div class="class-duration">⏱ 2 hrs</div></div>
           <div class="class-title">REST APIs, OAuth, Webhooks &amp; AI-Augmented Integrations</div>
           <div class="class-project"><div class="class-project-label">🔨 Live Project</div><div class="class-project-title">GitHub → Notion Project Tracker with AI-generated summaries</div></div>
           <div class="class-tools"><span class="tool-tag">GitHub API</span><span class="tool-tag">Notion API</span><span class="tool-tag">OAuth2</span><span class="tool-tag">Claude API</span></div>
         </div>
         <div class="class-card">
-          <div class="class-num">Class 06</div>
+          <div class="class-card-top"><div class="class-num">Class 06</div><div class="class-duration">⏱ 2 hrs</div></div>
           <div class="class-title">Sub-Workflows, AI Chains &amp; Agentic Loops</div>
           <div class="class-project"><div class="class-project-label">🔨 Live Project</div><div class="class-project-title">Autonomous Research Agent — Claude decides which tools to call next</div></div>
           <div class="class-tools"><span class="tool-tag">Claude tool_use API</span><span class="tool-tag">Supabase</span><span class="tool-tag">n8n</span></div>
         </div>
       </div>
-      <div class="week-outcome"><span class="week-outcome-star">⭐</span> Week 2 Outcome: Build autonomous agents with persistent memory and complex API integrations.</div>
+      <div class="week-outcome"><span class="week-outcome-star">⭐</span> <span><strong>Week 2 Outcome:</strong> Build autonomous agents with persistent memory and complex API integrations.</span></div>
     </div>
 
     <!-- WEEK 3 -->
     <div class="week-panel" id="week-3">
       <div class="week-header">
-        <div class="week-header-left">
+        <div class="week-header-icon">🏗️</div>
+        <div class="week-header-body week-header-left">
+          <div class="week-num-label">Week 3 · Classes 07–09</div>
           <h3>n8n Advanced — Production, Agents &amp; RAG</h3>
           <p>Self-hosting, vector search, MCP servers, and a full client system capstone</p>
         </div>
@@ -1188,31 +1376,33 @@ body { padding-top: 64px; }
       </div>
       <div class="classes-grid">
         <div class="class-card">
-          <div class="class-num">Class 07</div>
+          <div class="class-card-top"><div class="class-num">Class 07</div><div class="class-duration">⏱ 2 hrs</div></div>
           <div class="class-title">Production n8n — Self-Hosting, Security &amp; Reliability</div>
           <div class="class-project"><div class="class-project-label">🔨 Live Project</div><div class="class-project-title">Production-Grade Self-Hosted n8n with Slack Monitoring Dashboard</div></div>
           <div class="class-tools"><span class="tool-tag">Docker</span><span class="tool-tag">Railway</span><span class="tool-tag">Nginx</span><span class="tool-tag">Postgres</span></div>
         </div>
         <div class="class-card">
-          <div class="class-num">Class 08</div>
+          <div class="class-card-top"><div class="class-num">Class 08</div><div class="class-duration">⏱ 2 hrs</div></div>
           <div class="class-title">Building Real AI Agents — Memory, Tools, RAG &amp; MCP</div>
           <div class="class-project"><div class="class-project-label">🔨 Live Project</div><div class="class-project-title">Company Knowledge Base Agent with MCP Tools + Persistent Memory</div></div>
           <div class="class-tools"><span class="tool-tag">n8n AI Agent</span><span class="tool-tag">Supabase Vector</span><span class="tool-tag">Claude API</span></div>
         </div>
         <div class="class-card">
-          <div class="class-num">Class 09</div>
+          <div class="class-card-top"><div class="class-num">Class 09</div><div class="class-duration">⏱ 2 hrs</div></div>
           <div class="class-title">n8n Capstone — Full Client Automation System</div>
           <div class="class-project"><div class="class-project-label">🔨 Live Project</div><div class="class-project-title">The $2,000 Retainer Build — Full Agency Automation System</div></div>
           <div class="class-tools"><span class="tool-tag">Self-hosted n8n</span><span class="tool-tag">Vapi</span><span class="tool-tag">RAG Agent</span><span class="tool-tag">Notion CRM</span></div>
         </div>
       </div>
-      <div class="week-outcome"><span class="week-outcome-star">⭐</span> Week 3 Outcome: Production-ready n8n skills and a portfolio of 7 real-world client automation systems.</div>
+      <div class="week-outcome"><span class="week-outcome-star">⭐</span> <span><strong>Week 3 Outcome:</strong> Production-ready n8n skills and a portfolio of 7 real-world client automation systems.</span></div>
     </div>
 
     <!-- WEEK 4 -->
     <div class="week-panel" id="week-4">
       <div class="week-header">
-        <div class="week-header-left">
+        <div class="week-header-icon">🎙️</div>
+        <div class="week-header-body week-header-left">
+          <div class="week-num-label">Week 4 · Classes 10–12</div>
           <h3>Voice Agents — Vapi, Twilio &amp; ElevenLabs</h3>
           <p>Inbound &amp; outbound AI voice agents with booking, qualification, and SMS</p>
         </div>
@@ -1220,31 +1410,33 @@ body { padding-top: 64px; }
       </div>
       <div class="classes-grid">
         <div class="class-card">
-          <div class="class-num">Class 10</div>
+          <div class="class-card-top"><div class="class-num">Class 10</div><div class="class-duration">⏱ 2 hrs</div></div>
           <div class="class-title">Voice AI Fundamentals — ASR, LLM, TTS &amp; Latency</div>
           <div class="class-project"><div class="class-project-label">🔨 Live Project</div><div class="class-project-title">Restaurant Reservation Agent with real-time availability checking</div></div>
           <div class="class-tools"><span class="tool-tag">Vapi</span><span class="tool-tag">ElevenLabs</span><span class="tool-tag">n8n</span><span class="tool-tag">Claude API</span></div>
         </div>
         <div class="class-card">
-          <div class="class-num">Class 11</div>
+          <div class="class-card-top"><div class="class-num">Class 11</div><div class="class-duration">⏱ 2 hrs</div></div>
           <div class="class-title">Vapi Advanced — Booking, Qualification &amp; CRM Integration</div>
           <div class="class-project"><div class="class-project-label">🔨 Live Project</div><div class="class-project-title">AI Sales Qualifier — Inbound Lead Screener with Calendar Booking</div></div>
           <div class="class-tools"><span class="tool-tag">Vapi</span><span class="tool-tag">Cal.com</span><span class="tool-tag">Notion CRM</span><span class="tool-tag">n8n</span></div>
         </div>
         <div class="class-card">
-          <div class="class-num">Class 12</div>
+          <div class="class-card-top"><div class="class-num">Class 12</div><div class="class-duration">⏱ 2 hrs</div></div>
           <div class="class-title">Twilio — Outbound Campaigns, SMS &amp; Compliance</div>
           <div class="class-project"><div class="class-project-label">🔨 Live Project</div><div class="class-project-title">Outbound Cold-Call + SMS Follow-Up Sequence with outcome tracking</div></div>
           <div class="class-tools"><span class="tool-tag">Vapi</span><span class="tool-tag">Twilio</span><span class="tool-tag">n8n</span><span class="tool-tag">Google Sheets</span></div>
         </div>
       </div>
-      <div class="week-outcome"><span class="week-outcome-star">⭐</span> Week 4 Outcome: Build and deploy AI voice agents that handle calls, qualify leads, and send SMS follow-ups.</div>
+      <div class="week-outcome"><span class="week-outcome-star">⭐</span> <span><strong>Week 4 Outcome:</strong> Build and deploy AI voice agents that handle calls, qualify leads, and send SMS follow-ups.</span></div>
     </div>
 
     <!-- WEEK 5 -->
     <div class="week-panel" id="week-5">
       <div class="week-header">
-        <div class="week-header-left">
+        <div class="week-header-icon">💻</div>
+        <div class="week-header-body week-header-left">
+          <div class="week-num-label">Week 5 · Classes 13–15</div>
           <h3>Vibe Coding — Lovable, Cursor &amp; Claude Code</h3>
           <p>Build and deploy full apps with AI using natural language</p>
         </div>
@@ -1252,31 +1444,33 @@ body { padding-top: 64px; }
       </div>
       <div class="classes-grid">
         <div class="class-card">
-          <div class="class-num">Class 13</div>
+          <div class="class-card-top"><div class="class-num">Class 13</div><div class="class-duration">⏱ 2 hrs</div></div>
           <div class="class-title">Vibe Coding with Lovable — Full-Stack Apps Fast</div>
           <div class="class-project"><div class="class-project-label">🔨 Live Project</div><div class="class-project-title">Client-Facing AI Dashboard SaaS MVP — deployed in class</div></div>
           <div class="class-tools"><span class="tool-tag">Lovable</span><span class="tool-tag">Supabase</span><span class="tool-tag">Tailwind</span><span class="tool-tag">Vercel</span></div>
         </div>
         <div class="class-card">
-          <div class="class-num">Class 14</div>
+          <div class="class-card-top"><div class="class-num">Class 14</div><div class="class-duration">⏱ 2 hrs</div></div>
           <div class="class-title">Claude Code — Agentic Coding in the Terminal</div>
           <div class="class-project"><div class="class-project-label">🔨 Live Project</div><div class="class-project-title">AI Invoice Generator &amp; PDF Emailer built entirely via Claude Code CLI</div></div>
           <div class="class-tools"><span class="tool-tag">Claude Code</span><span class="tool-tag">Node.js</span><span class="tool-tag">PDFKit</span><span class="tool-tag">GitHub</span></div>
         </div>
         <div class="class-card">
-          <div class="class-num">Class 15</div>
+          <div class="class-card-top"><div class="class-num">Class 15</div><div class="class-duration">⏱ 2 hrs</div></div>
           <div class="class-title">Cursor + Full Client Delivery Workflow</div>
           <div class="class-project"><div class="class-project-label">🔨 Live Project</div><div class="class-project-title">Client-Ready AI Contract Reviewer SaaS — built and deployed live</div></div>
           <div class="class-tools"><span class="tool-tag">Cursor</span><span class="tool-tag">Next.js</span><span class="tool-tag">Claude API</span><span class="tool-tag">Vercel</span></div>
         </div>
       </div>
-      <div class="week-outcome"><span class="week-outcome-star">⭐</span> Week 5 Outcome: Ship real deployed apps using AI-driven coding tools — no traditional dev skills required.</div>
+      <div class="week-outcome"><span class="week-outcome-star">⭐</span> <span><strong>Week 5 Outcome:</strong> Ship real deployed apps using AI-driven coding tools — no traditional dev skills required.</span></div>
     </div>
 
     <!-- WEEK 6 -->
     <div class="week-panel" id="week-6">
       <div class="week-header">
-        <div class="week-header-left">
+        <div class="week-header-icon">🛒</div>
+        <div class="week-header-body week-header-left">
+          <div class="week-num-label">Week 6 · Classes 16–18</div>
           <h3>Ecommerce with Agentic AI — Shopify + Meta Ads</h3>
           <p>Automate your entire ecom growth stack with AI</p>
         </div>
@@ -1284,31 +1478,33 @@ body { padding-top: 64px; }
       </div>
       <div class="classes-grid">
         <div class="class-card">
-          <div class="class-num">Class 16</div>
+          <div class="class-card-top"><div class="class-num">Class 16</div><div class="class-duration">⏱ 2 hrs</div></div>
           <div class="class-title">Shopify AI Automation — Store Setup to Scale</div>
           <div class="class-project"><div class="class-project-label">🔨 Live Project</div><div class="class-project-title">Full Shopify AI Store — product copy, chatbot, and order automations</div></div>
           <div class="class-tools"><span class="tool-tag">Shopify</span><span class="tool-tag">n8n</span><span class="tool-tag">Claude API</span><span class="tool-tag">Klaviyo</span></div>
         </div>
         <div class="class-card">
-          <div class="class-num">Class 17</div>
+          <div class="class-card-top"><div class="class-num">Class 17</div><div class="class-duration">⏱ 2 hrs</div></div>
           <div class="class-title">Meta Ads Fundamentals for Ecommerce</div>
           <div class="class-project"><div class="class-project-label">🔨 Live Project</div><div class="class-project-title">Launch a real Meta Ad campaign with AI-generated creatives</div></div>
           <div class="class-tools"><span class="tool-tag">Meta Ads Manager</span><span class="tool-tag">Claude API</span><span class="tool-tag">Canva AI</span></div>
         </div>
         <div class="class-card">
-          <div class="class-num">Class 18</div>
+          <div class="class-card-top"><div class="class-num">Class 18</div><div class="class-duration">⏱ 2 hrs</div></div>
           <div class="class-title">AI-Powered Ad Creative &amp; Analytics Automation Loop</div>
           <div class="class-project"><div class="class-project-label">🔨 Live Project</div><div class="class-project-title">Automated Ad Performance Monitor + Auto-Pause Bot</div></div>
           <div class="class-tools"><span class="tool-tag">Meta Ads API</span><span class="tool-tag">n8n</span><span class="tool-tag">Claude API</span><span class="tool-tag">Slack</span></div>
         </div>
       </div>
-      <div class="week-outcome"><span class="week-outcome-star">⭐</span> Week 6 Outcome: A fully automated ecom growth stack from product copy to ad performance monitoring.</div>
+      <div class="week-outcome"><span class="week-outcome-star">⭐</span> <span><strong>Week 6 Outcome:</strong> A fully automated ecom growth stack from product copy to ad performance monitoring.</span></div>
     </div>
 
     <!-- WEEK 7 -->
     <div class="week-panel" id="week-7">
       <div class="week-header">
-        <div class="week-header-left">
+        <div class="week-header-icon">🤝</div>
+        <div class="week-header-body week-header-left">
+          <div class="week-num-label">Week 7 · Classes 19–21</div>
           <h3>Client Acquisition — Systems, Outreach &amp; Closing</h3>
           <p>Build a repeatable pipeline to land your first AI clients</p>
         </div>
@@ -1316,63 +1512,67 @@ body { padding-top: 64px; }
       </div>
       <div class="classes-grid">
         <div class="class-card">
-          <div class="class-num">Class 19</div>
+          <div class="class-card-top"><div class="class-num">Class 19</div><div class="class-duration">⏱ 2 hrs</div></div>
           <div class="class-title">Building Your Client Acquisition System</div>
           <div class="class-project"><div class="class-project-label">🔨 Live Project</div><div class="class-project-title">Automated Lead Research Machine — 50 qualified leads in 20 minutes</div></div>
           <div class="class-tools"><span class="tool-tag">n8n</span><span class="tool-tag">Apollo.io API</span><span class="tool-tag">Claude API</span><span class="tool-tag">Clay</span></div>
         </div>
         <div class="class-card">
-          <div class="class-num">Class 20</div>
+          <div class="class-card-top"><div class="class-num">Class 20</div><div class="class-duration">⏱ 2 hrs</div></div>
           <div class="class-title">AI-Powered Outreach — Cold Email, DMs &amp; Voice Sequences</div>
           <div class="class-project"><div class="class-project-label">🔨 Live Project</div><div class="class-project-title">Full 5-Touch Automated Outreach Sequence with Vapi warm call</div></div>
           <div class="class-tools"><span class="tool-tag">Instantly.ai</span><span class="tool-tag">Vapi</span><span class="tool-tag">Notion CRM</span><span class="tool-tag">Claude API</span></div>
         </div>
         <div class="class-card">
-          <div class="class-num">Class 21</div>
+          <div class="class-card-top"><div class="class-num">Class 21</div><div class="class-duration">⏱ 2 hrs</div></div>
           <div class="class-title">Discovery Calls, Proposals, Pricing &amp; Closing</div>
           <div class="class-project"><div class="class-project-label">🔨 Live Project</div><div class="class-project-title">AI-Generated Client Proposal — Role-Play + Live Build with Claude</div></div>
           <div class="class-tools"><span class="tool-tag">Claude API</span><span class="tool-tag">PandaDoc</span><span class="tool-tag">Google Docs</span></div>
         </div>
       </div>
-      <div class="week-outcome"><span class="week-outcome-star">⭐</span> Week 7 Outcome: A full client acquisition system — from lead research to a signed proposal in your inbox.</div>
+      <div class="week-outcome"><span class="week-outcome-star">⭐</span> <span><strong>Week 7 Outcome:</strong> A full client acquisition system — from lead research to a signed proposal in your inbox.</span></div>
     </div>
 
     <!-- WEEK 8 -->
     <div class="week-panel" id="week-8">
       <div class="week-header">
-        <div class="week-header-left">
-          <h3>Personal Branding &amp; Content Authority <span style="background:rgba(34,197,94,0.15);color:var(--g1);border:1px solid rgba(34,197,94,0.3);font-size:10px;padding:2px 8px;border-radius:100px;margin-left:8px;vertical-align:middle;">✦ NEW</span></h3>
+        <div class="week-header-icon">📣</div>
+        <div class="week-header-body week-header-left">
+          <div class="week-num-label">Week 8 · Classes 22–24 <span style="background:rgba(34,197,94,0.15);color:var(--g1);border:1px solid rgba(34,197,94,0.3);font-size:10px;padding:2px 8px;border-radius:100px;margin-left:6px;vertical-align:middle;">✦ NEW</span></div>
+          <h3>Personal Branding &amp; Content Authority</h3>
           <p>Build your audience, authority, and inbound pipeline — cold outreach gets you clients, content brings them to you</p>
         </div>
         <div class="week-meta"><span class="wmeta-pill">3 Classes</span><span class="wmeta-pill">6 Hours</span></div>
       </div>
       <div class="classes-grid">
         <div class="class-card">
-          <div class="class-num">Class 22</div>
+          <div class="class-card-top"><div class="class-num">Class 22</div><div class="class-duration">⏱ 2 hrs</div></div>
           <div class="class-title">Building Your Personal Brand as an AI Expert</div>
           <div class="class-project"><div class="class-project-label">🔨 Live Project</div><div class="class-project-title">Full Personal Brand System — LinkedIn profile + content calendar + newsletter</div></div>
           <div class="class-tools"><span class="tool-tag">LinkedIn</span><span class="tool-tag">Beehiiv</span><span class="tool-tag">Canva AI</span><span class="tool-tag">Claude API</span></div>
         </div>
         <div class="class-card">
-          <div class="class-num">Class 23</div>
+          <div class="class-card-top"><div class="class-num">Class 23</div><div class="class-duration">⏱ 2 hrs</div></div>
           <div class="class-title">AI-Powered Content Creation at Scale</div>
           <div class="class-project"><div class="class-project-label">🔨 Live Project</div><div class="class-project-title">Automated Content Engine — Claude writes + schedules 12 posts from 1 idea</div></div>
           <div class="class-tools"><span class="tool-tag">n8n</span><span class="tool-tag">Claude API</span><span class="tool-tag">Taplio</span><span class="tool-tag">LinkedIn API</span></div>
         </div>
         <div class="class-card">
-          <div class="class-num">Class 24</div>
+          <div class="class-card-top"><div class="class-num">Class 24</div><div class="class-duration">⏱ 2 hrs</div></div>
           <div class="class-title">Authority Building — Case Studies, Testimonials &amp; Inbound Systems</div>
           <div class="class-project"><div class="class-project-label">🔨 Live Project</div><div class="class-project-title">Automated Inbound Lead Funnel — Content → Newsletter → Nurture → Booked Call</div></div>
           <div class="class-tools"><span class="tool-tag">n8n</span><span class="tool-tag">Beehiiv</span><span class="tool-tag">Cal.com</span><span class="tool-tag">Notion</span></div>
         </div>
       </div>
-      <div class="week-outcome"><span class="week-outcome-star">⭐</span> Week 8 Outcome: A fully operational personal brand, content engine, and inbound funnel generating discovery calls on autopilot.</div>
+      <div class="week-outcome"><span class="week-outcome-star">⭐</span> <span><strong>Week 8 Outcome:</strong> A fully operational personal brand, content engine, and inbound funnel generating discovery calls on autopilot.</span></div>
     </div>
 
     <!-- WEEK 9 -->
     <div class="week-panel" id="week-9">
       <div class="week-header">
-        <div class="week-header-left">
+        <div class="week-header-icon">🚀</div>
+        <div class="week-header-body week-header-left">
+          <div class="week-num-label">Week 9 · Classes 25–27</div>
           <h3>Freelancing, Agency Building &amp; Capstone</h3>
           <p>Launch your business, scale to an agency, and present your final client-ready project</p>
         </div>
@@ -1380,30 +1580,36 @@ body { padding-top: 64px; }
       </div>
       <div class="classes-grid">
         <div class="class-card">
-          <div class="class-num">Class 25</div>
+          <div class="class-card-top"><div class="class-num">Class 25</div><div class="class-duration">⏱ 2 hrs</div></div>
           <div class="class-title">Freelance Business Setup — Systems for Solo Operators</div>
           <div class="class-project"><div class="class-project-label">🔨 Live Project</div><div class="class-project-title">Complete Freelance Business — portfolio, payments, and onboarding live</div></div>
           <div class="class-tools"><span class="tool-tag">Lovable</span><span class="tool-tag">Stripe</span><span class="tool-tag">Upwork</span><span class="tool-tag">n8n</span></div>
         </div>
         <div class="class-card">
-          <div class="class-num">Class 26</div>
+          <div class="class-card-top"><div class="class-num">Class 26</div><div class="class-duration">⏱ 2 hrs</div></div>
           <div class="class-title">Scaling to an Agency — Team, Tools &amp; Systems</div>
           <div class="class-project"><div class="class-project-label">🔨 Live Project</div><div class="class-project-title">Agency Operating System in Notion with MRR tracker and SOPs</div></div>
           <div class="class-tools"><span class="tool-tag">Notion</span><span class="tool-tag">Claude API</span><span class="tool-tag">Agency OS</span><span class="tool-tag">MRR Tracker</span></div>
         </div>
         <div class="class-card">
-          <div class="class-num">Class 27</div>
+          <div class="class-card-top">
+            <div class="class-num">Class 27</div>
+            <div class="class-duration" style="color:var(--g1);font-weight:600;">🏆 Capstone</div>
+          </div>
           <div class="class-title">Capstone Project + 90-Day Launch Roadmap</div>
-          <div class="class-project"><div class="class-project-label">🔨 Capstone</div><div class="class-project-title">Full Agentic AI Solution — live demo pitched as if to a real client</div></div>
+          <div class="class-project" style="background:rgba(34,197,94,0.07);border-color:rgba(34,197,94,0.2);">
+            <div class="class-project-label">🔨 Capstone</div>
+            <div class="class-project-title">Full Agentic AI Solution — live demo pitched as if to a real client</div>
+          </div>
           <div class="class-tools"><span class="tool-tag">All course tools</span><span class="tool-tag">Vapi + Twilio</span><span class="tool-tag">n8n</span><span class="tool-tag">Claude API</span></div>
         </div>
       </div>
-      <div class="week-outcome"><span class="week-outcome-star">⭐</span> Week 9 Outcome: Graduate as an operational freelancer or agency owner with a live portfolio, personal brand, and 90-day launch roadmap.</div>
+      <div class="week-outcome"><span class="week-outcome-star">⭐</span> <span><strong>Week 9 Outcome:</strong> Graduate as an operational freelancer or agency owner with a live portfolio, personal brand, and 90-day launch roadmap.</span></div>
     </div>
 
     <!-- CTA under curriculum -->
-    <div style="text-align:center; margin-top: 40px;">
-      <a href="#apply" class="btn-green btn-green-lg">Enroll Now — Reserve Your Seat →</a>
+    <div style="text-align:center; margin-top: 48px;">
+      <a href="#register" class="btn-green btn-green-lg">Claim My Free Seat →</a>
     </div>
   </div>
 </section>
@@ -1415,29 +1621,29 @@ body { padding-top: 64px; }
 <!-- ═══════════════════════════════════
      LEAD CAPTURE SECTION
 ═══════════════════════════════════ -->
-<section class="lead-capture-section" id="reserve-seat">
+<section class="lead-capture-section" id="register">
   <div class="lead-capture-bg-glow"></div>
   <div class="container">
     <div class="lead-capture-inner">
 
       <div class="lead-capture-left">
-        <div class="eyebrow" style="justify-content:flex-start;">Reserve Your Seat</div>
+        <div class="eyebrow" style="justify-content:flex-start;">— Free Seminar —</div>
         <h2 class="lead-capture-heading">
-          Claim Your <span class="lead-accent">Free Spot</span><br>Before It's Gone
+          Attend the Free<br><span class="lead-accent">Live Seminar</span>
         </h2>
-        <p class="lead-capture-sub">Only 40 seats per cohort. The last batch filled in under 72 hours. Enter your details and we'll notify you the moment enrollment opens.</p>
+        <p class="lead-capture-sub">See exactly how Sanestix builds AI automation systems for real clients — live, step by step. Seats are limited and fill fast. Register now to secure yours.</p>
         <ul class="lead-perks">
           <li>
-            <svg width="16" height="16" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" stroke="#a3e635" stroke-width="1.6"/><polyline points="6,10 9,13 14,7" stroke="#a3e635" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            Early-bird pricing locked for you
+            <svg width="16" height="16" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" stroke="var(--g1)" stroke-width="1.6"/><polyline points="6,10 9,13 14,7" stroke="var(--g1)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            100% free — no credit card needed
           </li>
           <li>
-            <svg width="16" height="16" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" stroke="#a3e635" stroke-width="1.6"/><polyline points="6,10 9,13 14,7" stroke="#a3e635" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            First to know when cohort opens
+            <svg width="16" height="16" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" stroke="var(--g1)" stroke-width="1.6"/><polyline points="6,10 9,13 14,7" stroke="var(--g1)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Live session with real client systems
           </li>
           <li>
-            <svg width="16" height="16" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" stroke="#a3e635" stroke-width="1.6"/><polyline points="6,10 9,13 14,7" stroke="#a3e635" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            No commitment, no spam
+            <svg width="16" height="16" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" stroke="var(--g1)" stroke-width="1.6"/><polyline points="6,10 9,13 14,7" stroke="var(--g1)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Limited seats — last batch filled in hours
           </li>
         </ul>
       </div>
@@ -1446,11 +1652,11 @@ body { padding-top: 64px; }
         <div class="lead-form-card">
           <div class="lead-form-header">
             <div class="lead-form-badge">
-              <svg width="14" height="14" viewBox="0 0 20 20" fill="none"><path d="M10 2l2.4 4.9 5.4.8-3.9 3.8.9 5.4L10 14.4l-4.8 2.5.9-5.4L2.2 7.7l5.4-.8L10 2z" fill="#a3e635"/></svg>
-              Free Registration
+              <svg width="14" height="14" viewBox="0 0 20 20" fill="none"><path d="M10 2l2.4 4.9 5.4.8-3.9 3.8.9 5.4L10 14.4l-4.8 2.5.9-5.4L2.2 7.7l5.4-.8L10 2z" fill="var(--g1)"/></svg>
+              Free Seminar
             </div>
-            <h3>Get Notified First</h3>
-            <p>Enter your details below — we'll reach out the moment seats open.</p>
+            <h3>Claim Your Free Seat</h3>
+            <p>Enter your details to join the free live seminar.</p>
           </div>
 
           <div class="lead-form-body" id="leadFormBody">
@@ -1483,14 +1689,14 @@ body { padding-top: 64px; }
 
           <div class="lead-success" id="leadSuccess" style="display:none;">
             <div class="lead-success-icon">
-              <svg width="32" height="32" viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="18" stroke="#a3e635" stroke-width="2"/><polyline points="12,20 17,26 28,14" stroke="#a3e635" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <svg width="32" height="32" viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="18" stroke="var(--g1)" stroke-width="2"/><polyline points="12,20 17,26 28,14" stroke="var(--g1)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </div>
-            <h4>You're on the list!</h4>
-            <p>We'll reach out on WhatsApp as soon as seats open. Keep an eye on your phone.</p>
+            <h4>You're registered!</h4>
+            <p>We'll send your seminar details on WhatsApp. Keep an eye on your phone.</p>
           </div>
 
         </div>
-        <p class="lead-slots-note">⚡ <strong>Limited to 40 seats</strong> per cohort — last batch sold out in 72 hrs.</p>
+        <p class="lead-slots-note">⚡ <strong>Limited seats per session</strong> — register now to secure your spot.</p>
       </div>
 
     </div>
@@ -1512,7 +1718,7 @@ body { padding-top: 64px; }
   transform: translate(-50%, -50%);
   width: 700px;
   height: 400px;
-  background: radial-gradient(ellipse at center, rgba(163,230,53,0.07) 0%, transparent 70%);
+  background: radial-gradient(ellipse at center, rgba(0,230,118,0.07) 0%, transparent 70%);
   pointer-events: none;
 }
 .lead-capture-inner {
@@ -1530,10 +1736,10 @@ body { padding-top: 64px; }
   letter-spacing: -0.02em;
 }
 .lead-accent {
-  color: #a3e635;
+  color: var(--g1);
 }
 .lead-capture-sub {
-  color: #9ca3af;
+  color: var(--text2);
   font-size: 15px;
   line-height: 1.7;
   max-width: 420px;
@@ -1551,14 +1757,14 @@ body { padding-top: 64px; }
   display: flex;
   align-items: center;
   gap: 10px;
-  color: #d1d5db;
+  color: var(--text);
   font-size: 14px;
 }
 
 /* Card */
 .lead-form-card {
-  background: #111;
-  border: 1px solid rgba(255,255,255,0.08);
+  background: var(--bg2);
+  border: 1px solid var(--text4);
   border-radius: 20px;
   padding: 40px 36px;
   position: relative;
@@ -1570,9 +1776,9 @@ body { padding-top: 64px; }
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  background: rgba(163,230,53,0.1);
-  border: 1px solid rgba(163,230,53,0.25);
-  color: #a3e635;
+  background: rgba(0,230,118,0.06);
+  border: 1px solid rgba(0,230,118,0.25);
+  color: var(--g1);
   font-size: 12px;
   font-weight: 600;
   padding: 5px 12px;
@@ -1588,7 +1794,7 @@ body { padding-top: 64px; }
   margin: 0 0 6px;
 }
 .lead-form-header p {
-  color: #6b7280;
+  color: var(--text3);
   font-size: 13.5px;
   line-height: 1.6;
   margin: 0;
@@ -1602,7 +1808,7 @@ body { padding-top: 64px; }
   display: block;
   font-size: 13px;
   font-weight: 500;
-  color: #9ca3af;
+  color: var(--text2);
   margin-bottom: 7px;
 }
 .lead-input-wrap {
@@ -1618,8 +1824,8 @@ body { padding-top: 64px; }
 .lead-input {
   width: 100%;
   box-sizing: border-box;
-  background: #1a1a1a;
-  border: 1px solid rgba(255,255,255,0.1);
+  background: var(--bg3);
+  border: 1px solid var(--text4);
   border-radius: 10px;
   padding: 13px 14px 13px 40px;
   color: #fff;
@@ -1628,10 +1834,10 @@ body { padding-top: 64px; }
   transition: border-color 0.2s;
   font-family: inherit;
 }
-.lead-input::placeholder { color: #4b5563; }
+.lead-input::placeholder { color: var(--text4); }
 .lead-input:focus {
-  border-color: #a3e635;
-  box-shadow: 0 0 0 3px rgba(163,230,53,0.08);
+  border-color: var(--g1);
+  box-shadow: 0 0 0 3px rgba(0,230,118,0.08);
 }
 
 /* Button */
@@ -1641,8 +1847,8 @@ body { padding-top: 64px; }
   align-items: center;
   justify-content: center;
   gap: 8px;
-  background: #a3e635;
-  color: #0a0a0a;
+  background: var(--g1);
+  color: var(--bg);
   border: none;
   border-radius: 10px;
   padding: 15px;
@@ -1654,7 +1860,7 @@ body { padding-top: 64px; }
   font-family: inherit;
 }
 .lead-submit-btn:hover {
-  background: #bef264;
+  background: var(--g2);
   transform: translateY(-1px);
 }
 .lead-submit-btn:active { transform: translateY(0); }
@@ -1663,7 +1869,7 @@ body { padding-top: 64px; }
   display: flex;
   align-items: center;
   gap: 6px;
-  color: #4b5563;
+  color: var(--text4);
   font-size: 12px;
   margin: 12px 0 0;
   text-align: center;
@@ -1673,11 +1879,11 @@ body { padding-top: 64px; }
 /* Slots note */
 .lead-slots-note {
   text-align: center;
-  color: #6b7280;
+  color: var(--text3);
   font-size: 13px;
   margin-top: 14px;
 }
-.lead-slots-note strong { color: #d1d5db; }
+.lead-slots-note strong { color: var(--text); }
 
 /* Success */
 .lead-success {
@@ -1694,7 +1900,7 @@ body { padding-top: 64px; }
   margin: 0 0 8px;
 }
 .lead-success p {
-  color: #9ca3af;
+  color: var(--text2);
   font-size: 14px;
   line-height: 1.6;
   margin: 0;
@@ -1957,7 +2163,7 @@ function handleLeadSubmit() {
         <a href="#instructors">Instructors</a>
         <a href="#testimonials">Student Stories</a>
         <a href="#faq">FAQ</a>
-        <a href="#apply">Enroll Now</a>
+        <a href="#register">Register Free</a>
       </div>
 
       <!-- Tools col -->
@@ -2061,8 +2267,12 @@ function loadTestiVideo(el, videoId) {
 function switchWeek(num) {
   document.querySelectorAll('.week-panel').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('.week-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.curr-progress-step').forEach(s => s.classList.remove('active'));
   document.getElementById('week-' + num).classList.add('active');
-  document.querySelectorAll('.week-tab')[num - 1].classList.add('active');
+  var tabs = document.querySelectorAll('.week-tab');
+  if (tabs.length) tabs[num - 1].classList.add('active');
+  var steps = document.querySelectorAll('.curr-progress-step');
+  if (steps.length) steps[num - 1].classList.add('active');
 }
 
 // FAQ accordion
