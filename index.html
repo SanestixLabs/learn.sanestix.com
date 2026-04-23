@@ -389,9 +389,200 @@ footer { background: var(--bg2); border-top: 1px solid var(--border); padding: 6
   .week-tabs { gap: 6px; }
   .week-tab { font-size: 11px; padding: 7px 12px; }
 }
+
+/* ════════════════════════════════
+   NAVBAR
+════════════════════════════════ */
+.navbar {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: rgba(0,0,0,0.72);
+  backdrop-filter: blur(18px) saturate(1.4);
+  -webkit-backdrop-filter: blur(18px) saturate(1.4);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  transition: background .25s, box-shadow .25s;
+}
+.navbar.scrolled {
+  background: rgba(0,0,0,0.92);
+  box-shadow: 0 1px 0 rgba(255,255,255,0.06);
+}
+.nav-inner {
+  max-width: 1100px; margin: 0 auto; padding: 0 28px;
+  height: 62px; display: flex; align-items: center; gap: 32px;
+}
+.nav-logo {
+  font-family: var(--font-head); font-size: 17px; font-weight: 700;
+  color: var(--text); white-space: nowrap; flex-shrink: 0;
+  text-decoration: none;
+}
+.nav-logo .dot { color: var(--g1); }
+.nav-links {
+  display: flex; align-items: center; gap: 2px;
+  flex: 1; justify-content: center;
+}
+.nav-links a {
+  font-size: 13px; font-weight: 400; color: var(--text2);
+  padding: 7px 14px; border-radius: 8px;
+  transition: color .15s, background .15s;
+  white-space: nowrap; text-decoration: none;
+}
+.nav-links a:hover { color: var(--text); background: rgba(255,255,255,0.05); }
+.nav-right { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+.nav-badge {
+  display: flex; align-items: center; gap: 6px;
+  font-size: 11px; color: var(--text3); white-space: nowrap;
+}
+.nav-cta {
+  font-family: var(--font-head); font-size: 13px; font-weight: 600;
+  background: var(--g1); color: #000; padding: 9px 20px;
+  border-radius: 8px; text-decoration: none; white-space: nowrap;
+  transition: opacity .15s, transform .15s;
+}
+.nav-cta:hover { opacity: .88; transform: translateY(-1px); }
+.nav-hamburger {
+  display: none; flex-direction: column; gap: 5px;
+  cursor: pointer; padding: 6px; border: none;
+  background: none; flex-shrink: 0;
+}
+.nav-hamburger span {
+  display: block; width: 22px; height: 2px;
+  background: var(--text2); border-radius: 2px;
+  transition: all .2s;
+}
+.nav-mobile-menu {
+  display: none; flex-direction: column;
+  background: rgba(0,0,0,0.97);
+  border-bottom: 1px solid var(--border);
+  padding: 12px 28px 20px;
+  gap: 4px;
+}
+.nav-mobile-menu.open { display: flex; }
+.nav-mobile-menu a {
+  font-size: 15px; color: var(--text2); padding: 12px 0;
+  border-bottom: 1px solid var(--border); text-decoration: none;
+  transition: color .15s;
+}
+.nav-mobile-menu a:last-child { border-bottom: none; }
+.nav-mobile-menu a:hover { color: var(--g1); }
+
+/* push hero down to account for fixed nav */
+body { padding-top: 62px; }
+
+@media (max-width: 800px) {
+  .nav-links { display: none; }
+  .nav-badge { display: none; }
+  .nav-hamburger { display: flex; }
+}
+@media (max-width: 480px) {
+  .nav-cta { font-size: 12px; padding: 8px 14px; }
+}
+
+
+/* ════════════════════════════════
+   INSTRUCTOR PHOTO FIX
+════════════════════════════════ */
+.founder-photo-wrap {
+  position: relative; flex-shrink: 0;
+  width: 84px; height: 84px;
+}
+.founder-photo {
+  width: 84px; height: 84px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center top;
+  border: 2px solid rgba(255,255,255,0.15);
+  display: block;
+  background: var(--bg3);
+}
+.founder-photo-ring {
+  position: absolute; inset: -3px;
+  border-radius: 50%;
+  border: 2px solid var(--g1);
+  opacity: 0.35;
+  pointer-events: none;
+}
+.founder-av {
+  width: 84px; height: 84px; border-radius: 50%; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-head); font-size: 24px; font-weight: 700;
+}
+
+/* ════════════════════════════════
+   TESTIMONIAL THUMBNAIL FIX
+════════════════════════════════ */
+.tcard-video {
+  aspect-ratio: 16/9;
+  max-height: none;
+  position: relative; background: #0a0a0a; overflow: hidden;
+  cursor: pointer; flex-shrink: 0;
+  border-radius: 0;
+}
+.tcard-video-bg {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  object-fit: cover; object-position: center center;
+  opacity: 0.75;
+  transition: transform .3s, opacity .3s;
+}
+.tcard-video:hover .tcard-video-bg {
+  transform: scale(1.03);
+  opacity: 0.85;
+}
+.tcard-video-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to bottom, transparent 30%, rgba(0,0,0,0.65) 100%);
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 8px;
+}
+.tcard-play {
+  width: 48px; height: 48px; border-radius: 50%;
+  background: var(--g1); display: flex; align-items: center;
+  justify-content: center; transition: transform .2s, box-shadow .2s;
+  box-shadow: 0 4px 20px rgba(34,197,94,0.45);
+}
+.tcard-video:hover .tcard-play {
+  transform: scale(1.12);
+  box-shadow: 0 6px 28px rgba(34,197,94,0.6);
+}
+.tcard-play-label { font-size: 12px; color: rgba(255,255,255,0.9); font-weight: 500; }
+.tcard-video.coming .tcard-video-bg { opacity: 0.15; filter: blur(3px); }
+.tcard-video.coming .tcard-video-overlay {
+  background: rgba(0,0,0,0.6);
+}
+
 </style>
 </head>
 <body>
+
+<!-- ═══════════════════════════════════
+     NAVBAR
+═══════════════════════════════════ -->
+<nav class="navbar" id="navbar">
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">learn<span class="dot">.</span>sanestix</a>
+    <div class="nav-links">
+      <a href="#curriculum">Curriculum</a>
+      <a href="#testimonials">Student Stories</a>
+      <a href="#instructors">Instructors</a>
+      <a href="#faq">FAQ</a>
+    </div>
+    <div class="nav-right">
+      <div class="nav-badge">
+        <div class="pulse"></div>
+        40 seats / cohort
+      </div>
+      <a href="#apply" class="nav-cta">Enroll Now →</a>
+    </div>
+    <button class="nav-hamburger" id="navHamburger" onclick="toggleMobileNav()" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="nav-mobile-menu" id="navMobileMenu">
+    <a href="#curriculum" onclick="closeMobileNav()">Curriculum</a>
+    <a href="#testimonials" onclick="closeMobileNav()">Student Stories</a>
+    <a href="#instructors" onclick="closeMobileNav()">Instructors</a>
+    <a href="#faq" onclick="closeMobileNav()">FAQ</a>
+    <a href="#apply" onclick="closeMobileNav()" style="color:var(--g1);font-weight:600;">Enroll Now →</a>
+  </div>
+</nav>
 
 <!-- ═══════════════════════════════════
      HERO SECTION
@@ -970,7 +1161,7 @@ footer { background: var(--bg2); border-top: 1px solid var(--border); padding: 6
       <div class="founder-card">
         <div class="founder-top">
           <div class="founder-photo-wrap">
-            <img src="https://sanestix.com/SaadFaisal2.png" alt="Saad Faisal Qureshi" class="founder-photo" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+            <img src="SaadFaisal2.png" alt="Saad Faisal Qureshi" class="founder-photo" style="object-position: center 15%;" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="founder-photo-ring"></div>
             <div class="founder-av founder-av-teal" style="display:none">SF</div>
           </div>
           <div>
@@ -1000,7 +1191,7 @@ footer { background: var(--bg2); border-top: 1px solid var(--border); padding: 6
       <div class="founder-card">
         <div class="founder-top">
           <div class="founder-photo-wrap">
-            <img src="https://sanestix.com/abwbsid.png" alt="Abdul Wahab Siddiqi" class="founder-photo" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+            <img src="abwbsid.png" alt="Abdul Wahab Siddiqi" class="founder-photo" style="object-position: center 10%;" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="founder-photo-ring"></div>
             <div class="founder-av founder-av-purple" style="display:none">AW</div>
           </div>
           <div>
@@ -1225,6 +1416,23 @@ footer { background: var(--bg2); border-top: 1px solid var(--border); padding: 6
 </a>
 
 <script>
+
+// Navbar scroll effect
+window.addEventListener('scroll', function() {
+  const nav = document.getElementById('navbar');
+  if (window.scrollY > 40) nav.classList.add('scrolled');
+  else nav.classList.remove('scrolled');
+});
+
+// Mobile nav toggle
+function toggleMobileNav() {
+  const menu = document.getElementById('navMobileMenu');
+  menu.classList.toggle('open');
+}
+function closeMobileNav() {
+  document.getElementById('navMobileMenu').classList.remove('open');
+}
+
 // Hero video
 function loadHeroVideo() {
   const wrap = document.getElementById('heroThumb');
