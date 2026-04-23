@@ -166,37 +166,151 @@ a { color: inherit; text-decoration: none; }
 .auth-lbl { font-size: 10px; color: var(--text3); margin-top: 2px; text-transform: uppercase; letter-spacing: .08em; }
 
 /* ════════════════════════════════
-   TESTIMONIALS
+   TESTIMONIALS — CLEAN REDESIGN
 ════════════════════════════════ */
 .testi-section { padding: 88px 0; background: var(--bg2); }
-.testi-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; margin-bottom: 24px; }
-.tcard { background: var(--bg3); border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; display: flex; flex-direction: column; transition: border-color .2s; }
-.tcard:hover { border-color: var(--border2); }
-.tcard-video { aspect-ratio: 9/16; max-height: 220px; position: relative; background: #0a0a0a; overflow: hidden; cursor: pointer; flex-shrink: 0; }
-.tcard-video-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: .55; }
-.tcard-video-overlay { position: absolute; inset: 0; background: rgba(0,0,0,.35); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; }
-.tcard-play { width: 40px; height: 40px; border-radius: 50%; background: var(--g1); display: flex; align-items: center; justify-content: center; transition: transform .2s; }
-.tcard-video:hover .tcard-play { transform: scale(1.1); }
-.tcard-play-label { font-size: 12px; color: #fff; font-weight: 500; }
-.tcard-video.coming .tcard-video-overlay { background: rgba(0,0,0,.7); }
-.tcard-soon-label { font-size: 11px; color: var(--text3); }
-.yt-badge { position: absolute; top: 10px; left: 10px; display: flex; align-items: center; gap: 5px; background: rgba(0,0,0,.7); border: 1px solid rgba(255,255,255,.1); border-radius: 100px; padding: 3px 9px; font-size: 10px; color: #aaa; }
-.tcard-body { padding: 18px 18px 20px; display: flex; flex-direction: column; gap: 12px; flex: 1; }
-.tcard-top { display: flex; align-items: center; justify-content: space-between; }
-.stars { color: var(--amber); font-size: 12px; letter-spacing: 1px; }
-.badge-pill { background: rgba(34,197,94,0.08); border: 1px solid rgba(34,197,94,0.2); color: var(--g1); font-size: 10px; font-weight: 500; padding: 3px 9px; border-radius: 100px; white-space: nowrap; }
-.tcard-quote { font-size: 13px; color: #aaa; line-height: 1.7; font-style: italic; flex: 1; }
-.tcard-author { display: flex; align-items: center; gap: 10px; border-top: 1px solid var(--border); padding-top: 12px; }
-.av { width: 32px; height: 32px; border-radius: 50%; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 600; font-family: var(--font-head); }
+.testi-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+  margin-bottom: 28px;
+}
+.tcard {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: border-color .25s, transform .25s, box-shadow .25s;
+}
+.tcard:hover {
+  border-color: rgba(34,197,94,0.3);
+  transform: translateY(-3px);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.35);
+}
+
+/* Video / quote thumbnail — fixed 16:9 */
+.tcard-video {
+  aspect-ratio: 16 / 9;
+  position: relative;
+  background: #0a0a0a;
+  overflow: hidden;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+.tcard-video-bg {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: center top;
+  opacity: 0.72;
+  transition: transform .35s, opacity .35s;
+}
+.tcard-video:hover .tcard-video-bg { transform: scale(1.04); opacity: 0.88; }
+.tcard-video-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(160deg, transparent 35%, rgba(0,0,0,0.55) 100%);
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 8px;
+}
+.tcard-play {
+  width: 46px; height: 46px; border-radius: 50%;
+  background: var(--g1);
+  display: flex; align-items: center; justify-content: center;
+  transition: transform .2s, box-shadow .2s;
+  box-shadow: 0 4px 20px rgba(34,197,94,0.35);
+}
+.tcard-video:hover .tcard-play { transform: scale(1.1); box-shadow: 0 6px 28px rgba(34,197,94,0.5); }
+.tcard-play-label { font-size: 11px; color: rgba(255,255,255,0.8); font-weight: 500; letter-spacing: .03em; }
+.yt-badge {
+  position: absolute; top: 10px; left: 10px;
+  display: flex; align-items: center; gap: 5px;
+  background: rgba(0,0,0,0.65); backdrop-filter: blur(6px);
+  border: 1px solid rgba(255,255,255,.1);
+  border-radius: 100px; padding: 3px 10px;
+  font-size: 10px; color: #ccc;
+}
+
+/* Quote-bg cards (no video yet) */
+.tcard-quote-bg {
+  cursor: default;
+  background: linear-gradient(135deg, #0d1f0d 0%, #0a0a12 100%);
+}
+.tcard-quote-bg--purple {
+  background: linear-gradient(135deg, #120d1f 0%, #0a0a0a 100%);
+}
+.tcard-quote-visual {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  padding: 20px 22px; text-align: center; gap: 10px;
+}
+.tcard-big-quote {
+  font-family: var(--font-head);
+  font-size: 56px; font-weight: 700;
+  color: rgba(34,197,94,0.18);
+  line-height: 1; margin-bottom: -4px;
+}
+.tcard-quote-bg--purple .tcard-big-quote { color: rgba(167,139,250,0.18); }
+.tcard-preview-text {
+  font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.72);
+  line-height: 1.6; max-width: 200px;
+}
+.tcard-soon-badge {
+  position: absolute; bottom: 10px; right: 10px;
+  font-size: 9px; font-weight: 600; letter-spacing: .08em;
+  text-transform: uppercase; color: var(--text3);
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 100px; padding: 3px 9px;
+}
+
+/* Card body */
+.tcard-body {
+  padding: 16px 18px 18px;
+  display: flex; flex-direction: column; gap: 10px;
+  flex: 1;
+}
+.tcard-top { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.stars { color: var(--amber); font-size: 11px; letter-spacing: 1.5px; }
+.badge-pill {
+  background: rgba(34,197,94,0.07);
+  border: 1px solid rgba(34,197,94,0.18);
+  color: var(--g1); font-size: 9.5px; font-weight: 600;
+  padding: 3px 9px; border-radius: 100px; white-space: nowrap;
+  letter-spacing: .03em;
+}
+.tcard-quote {
+  font-size: 13px; color: rgba(255,255,255,0.62);
+  line-height: 1.65; font-style: italic;
+  display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.tcard-author {
+  display: flex; align-items: center; gap: 10px;
+  border-top: 1px solid var(--border); padding-top: 12px; margin-top: auto;
+}
+.av {
+  width: 30px; height: 30px; border-radius: 50%; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 10px; font-weight: 700; font-family: var(--font-head);
+}
 .av-g { background: rgba(34,197,94,0.1); border: 1px solid rgba(34,197,94,0.25); color: var(--g1); }
 .av-a { background: rgba(245,158,11,0.1); border: 1px solid rgba(245,158,11,0.2); color: var(--amber); }
 .av-p { background: rgba(167,139,250,0.1); border: 1px solid rgba(167,139,250,0.2); color: var(--purple); }
-.tcard-name { font-size: 13px; font-weight: 500; color: var(--text); }
-.tcard-role { font-size: 11px; color: var(--text3); }
-.proof-strip { display: grid; grid-template-columns: repeat(4,1fr); background: var(--border); gap: 1px; border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; margin-bottom: 32px; }
-.proof-cell { background: var(--bg3); padding: 18px 16px; text-align: center; }
-.proof-num { font-family: var(--font-head); font-size: 20px; font-weight: 700; color: var(--text); line-height: 1; }
-.proof-lbl { font-size: 11px; color: var(--text3); margin-top: 3px; }
+.tcard-name { font-size: 12.5px; font-weight: 600; color: var(--text); line-height: 1.2; }
+.tcard-role { font-size: 10.5px; color: var(--text3); margin-top: 1px; }
+
+/* Stats strip */
+.proof-strip {
+  display: grid; grid-template-columns: repeat(4,1fr);
+  background: var(--border); gap: 1px;
+  border: 1px solid var(--border); border-radius: var(--radius-lg);
+  overflow: hidden; margin-bottom: 32px;
+}
+.proof-cell { background: var(--bg3); padding: 20px 16px; text-align: center; }
+.proof-num { font-family: var(--font-head); font-size: 22px; font-weight: 700; color: var(--g1); line-height: 1; }
+.proof-lbl { font-size: 11px; color: var(--text3); margin-top: 4px; }
 .testi-cta { text-align: center; }
 
 /* ════════════════════════════════
@@ -571,31 +685,8 @@ body { padding-top: 98px; }
 }
 
 /* ════════════════════════════════
-   TESTIMONIAL THUMBNAIL FIX
+   TESTIMONIAL THUMBNAIL FIX (legacy — kept for play button only)
 ════════════════════════════════ */
-.tcard-video {
-  aspect-ratio: 16/9;
-  max-height: none;
-  position: relative; background: #0a0a0a; overflow: hidden;
-  cursor: pointer; flex-shrink: 0;
-  border-radius: 0;
-}
-.tcard-video-bg {
-  position: absolute; inset: 0; width: 100%; height: 100%;
-  object-fit: cover; object-position: center center;
-  opacity: 0.75;
-  transition: transform .3s, opacity .3s;
-}
-.tcard-video:hover .tcard-video-bg {
-  transform: scale(1.03);
-  opacity: 0.85;
-}
-.tcard-video-overlay {
-  position: absolute; inset: 0;
-  background: linear-gradient(to bottom, transparent 30%, rgba(0,0,0,0.65) 100%);
-  display: flex; flex-direction: column;
-  align-items: center; justify-content: center; gap: 8px;
-}
 .tcard-play {
   width: 48px; height: 48px; border-radius: 50%;
   background: var(--g1); display: flex; align-items: center;
@@ -1033,7 +1124,7 @@ body { padding-top: 98px; }
         </div>
         <div class="tcard-body">
           <div class="tcard-top"><div class="stars">★★★★★</div><span class="badge-pill">Built system in Week 2</span></div>
-          <p class="tcard-quote">"I didn't know what n8n was on Day 1. By Week 2 I had a live automation system and was pitching it to a real client. That's how fast this moves."</p>
+          <p class="tcard-quote">"Didn't know what n8n was on Day 1. By Week 2 I had a live system and was pitching it to a real client."</p>
           <div class="tcard-author"><div class="av av-g">ER</div><div><div class="tcard-name">Ebbad Ur Rehman</div><div class="tcard-role">Student · Cohort 1</div></div></div>
         </div>
       </div>
@@ -1053,7 +1144,7 @@ body { padding-top: 98px; }
         </div>
         <div class="tcard-body">
           <div class="tcard-top"><div class="stars">★★★★★</div><span class="badge-pill">PKR 45K billed in Week 3</span></div>
-          <p class="tcard-quote">"The WhatsApp automation module alone was worth 10× the course fee. I set it up for a client in Week 3 and invoiced PKR 45,000. First money I've ever made from AI."</p>
+          <p class="tcard-quote">"The WhatsApp module was worth 10× the course fee. I invoiced PKR 45,000 in Week 3 — first money I've ever made from AI."</p>
           <div class="tcard-author"><div class="av av-a">ZA</div><div><div class="tcard-name">Zara Ahmed</div><div class="tcard-role">Freelancer · Karachi</div></div></div>
         </div>
       </div>
@@ -1072,9 +1163,9 @@ body { padding-top: 98px; }
           </div>
         </div>
         <div class="tcard-body">
-          <div class="tcard-top"><div class="stars">★★★★★</div><span class="badge-pill" style="background:rgba(167,139,250,0.08);border-color:rgba(167,139,250,0.2);color:var(--purple);">Sanestix Client · Type of system you'll build</span></div>
-          <p class="tcard-quote">"Our clothing brand was drowning in 200+ DMs daily. Sanestix built a system that replies instantly, sends our catalogue, and captures leads. This is exactly the type of system students learn to build."</p>
-          <div class="tcard-author"><div class="av av-p">SF</div><div><div class="tcard-name">Sara Farouk</div><div class="tcard-role">Fashion Brand · Karachi · Sanestix Client</div></div></div>
+          <div class="tcard-top"><div class="stars">★★★★★</div><span class="badge-pill" style="background:rgba(167,139,250,0.08);border-color:rgba(167,139,250,0.2);color:var(--purple);">Sanestix Client</span></div>
+          <p class="tcard-quote">"We were drowning in 200+ DMs daily. The system replies instantly, sends our catalogue, and captures leads — automatically."</p>
+          <div class="tcard-author"><div class="av av-p">SF</div><div><div class="tcard-name">Sara Farouk</div><div class="tcard-role">Fashion Brand Owner</div></div></div>
         </div>
       </div>
     </div>
