@@ -20,11 +20,25 @@ document.addEventListener('DOMContentLoaded', function() {
       var videoId = 'FwOTs4UxQS4';
       var wrap = document.getElementById('heroVideoWrap');
       if (wrap) {
-        wrap.innerHTML = '<iframe src="https://www.youtube.com/embed/' + videoId + '?autoplay=1&rel=0&modestbranding=1" title="AI Launchpad Course Intro" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;"></iframe>';
+        wrap.innerHTML = '<iframe src="https://www.youtube.com/embed/' + videoId + '?autoplay=1&rel=0&modestbranding=1" title="AI Launchpad Course Intro" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;border:none;"></iframe>';
       }
     });
   }
 });
+
+// ── NAV SCROLL EFFECT ──
+(function() {
+  var nav = document.getElementById('nav');
+  if (!nav) return;
+  function onNavScroll() {
+    if (window.scrollY > 20) {
+      nav.classList.add('scrolled');
+    } else {
+      nav.classList.remove('scrolled');
+    }
+  }
+  window.addEventListener('scroll', onNavScroll, { passive: true });
+})();
 
 // ── STICKY BAR ──
 (function() {
