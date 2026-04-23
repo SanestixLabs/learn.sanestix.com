@@ -172,7 +172,7 @@ a { color: inherit; text-decoration: none; }
 .testi-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 18px;
+  gap: 16px;
   margin-bottom: 28px;
 }
 .tcard {
@@ -190,9 +190,9 @@ a { color: inherit; text-decoration: none; }
   box-shadow: 0 16px 40px rgba(0,0,0,0.35);
 }
 
-/* Video / quote thumbnail — fixed 16:9 */
+/* Vertical 9:16 thumbnail */
 .tcard-video {
-  aspect-ratio: 16 / 9;
+  aspect-ratio: 9 / 14;
   position: relative;
   background: #0a0a0a;
   overflow: hidden;
@@ -214,7 +214,7 @@ a { color: inherit; text-decoration: none; }
   align-items: center; justify-content: center; gap: 8px;
 }
 .tcard-play {
-  width: 46px; height: 46px; border-radius: 50%;
+  width: 44px; height: 44px; border-radius: 50%;
   background: var(--g1);
   display: flex; align-items: center; justify-content: center;
   transition: transform .2s, box-shadow .2s;
@@ -231,7 +231,7 @@ a { color: inherit; text-decoration: none; }
   font-size: 10px; color: #ccc;
 }
 
-/* Quote-bg cards (no video yet) */
+/* Quote-bg cards */
 .tcard-quote-bg {
   cursor: default;
   background: linear-gradient(135deg, #0d1f0d 0%, #0a0a12 100%);
@@ -243,63 +243,62 @@ a { color: inherit; text-decoration: none; }
   position: absolute; inset: 0;
   display: flex; flex-direction: column;
   align-items: center; justify-content: center;
-  padding: 20px 22px; text-align: center; gap: 10px;
+  padding: 20px 22px; text-align: center; gap: 8px;
 }
 .tcard-big-quote {
   font-family: var(--font-head);
-  font-size: 56px; font-weight: 700;
+  font-size: 64px; font-weight: 700;
   color: rgba(34,197,94,0.18);
   line-height: 1; margin-bottom: -4px;
 }
 .tcard-quote-bg--purple .tcard-big-quote { color: rgba(167,139,250,0.18); }
 .tcard-preview-text {
   font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.72);
-  line-height: 1.6; max-width: 200px;
+  line-height: 1.6; max-width: 180px;
 }
 .tcard-soon-badge {
-  position: absolute; bottom: 10px; right: 10px;
+  position: absolute; bottom: 10px; left: 50%; transform: translateX(-50%);
   font-size: 9px; font-weight: 600; letter-spacing: .08em;
   text-transform: uppercase; color: var(--text3);
   background: rgba(255,255,255,0.04);
   border: 1px solid rgba(255,255,255,0.08);
-  border-radius: 100px; padding: 3px 9px;
+  border-radius: 100px; padding: 3px 10px;
+  white-space: nowrap;
 }
 
-/* Card body */
+/* Card body — compact */
 .tcard-body {
-  padding: 16px 18px 18px;
-  display: flex; flex-direction: column; gap: 10px;
-  flex: 1;
+  padding: 14px 16px 16px;
+  display: flex; flex-direction: column; gap: 9px;
 }
-.tcard-top { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
-.stars { color: var(--amber); font-size: 11px; letter-spacing: 1.5px; }
+.tcard-top { display: flex; align-items: center; justify-content: space-between; gap: 6px; }
+.stars { color: var(--amber); font-size: 10px; letter-spacing: 1.5px; }
 .badge-pill {
   background: rgba(34,197,94,0.07);
   border: 1px solid rgba(34,197,94,0.18);
-  color: var(--g1); font-size: 9.5px; font-weight: 600;
-  padding: 3px 9px; border-radius: 100px; white-space: nowrap;
+  color: var(--g1); font-size: 9px; font-weight: 600;
+  padding: 2px 8px; border-radius: 100px; white-space: nowrap;
   letter-spacing: .03em;
 }
 .tcard-quote {
-  font-size: 13px; color: rgba(255,255,255,0.62);
-  line-height: 1.65; font-style: italic;
+  font-size: 12.5px; color: rgba(255,255,255,0.58);
+  line-height: 1.6; font-style: italic;
   display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical;
   overflow: hidden;
 }
 .tcard-author {
-  display: flex; align-items: center; gap: 10px;
-  border-top: 1px solid var(--border); padding-top: 12px; margin-top: auto;
+  display: flex; align-items: center; gap: 9px;
+  border-top: 1px solid var(--border); padding-top: 11px; margin-top: 2px;
 }
 .av {
-  width: 30px; height: 30px; border-radius: 50%; flex-shrink: 0;
+  width: 28px; height: 28px; border-radius: 50%; flex-shrink: 0;
   display: flex; align-items: center; justify-content: center;
-  font-size: 10px; font-weight: 700; font-family: var(--font-head);
+  font-size: 9px; font-weight: 700; font-family: var(--font-head);
 }
 .av-g { background: rgba(34,197,94,0.1); border: 1px solid rgba(34,197,94,0.25); color: var(--g1); }
 .av-a { background: rgba(245,158,11,0.1); border: 1px solid rgba(245,158,11,0.2); color: var(--amber); }
 .av-p { background: rgba(167,139,250,0.1); border: 1px solid rgba(167,139,250,0.2); color: var(--purple); }
-.tcard-name { font-size: 12.5px; font-weight: 600; color: var(--text); line-height: 1.2; }
-.tcard-role { font-size: 10.5px; color: var(--text3); margin-top: 1px; }
+.tcard-name { font-size: 12px; font-weight: 600; color: var(--text); line-height: 1.2; }
 
 /* Stats strip */
 .proof-strip {
@@ -1109,6 +1108,8 @@ body { padding-top: 98px; }
     <h2 class="section-title">Real people. Real outcomes.</h2>
     <p class="section-sub">Students who built live systems. Clients whose businesses run on what we teach.</p>
     <div class="testi-grid">
+
+      <!-- Card 1 — Ebbad (video) -->
       <div class="tcard">
         <div class="tcard-video" id="tv1" onclick="loadTestiVideo(this,'qBRPqkjVTck')">
           <img class="tcard-video-bg" src="https://img.youtube.com/vi/qBRPqkjVTck/maxresdefault.jpg" alt="Ebbad Ur Rehman review" onerror="this.src='https://img.youtube.com/vi/qBRPqkjVTck/hqdefault.jpg'">
@@ -1117,57 +1118,55 @@ body { padding-top: 98px; }
             <div class="tcard-play"><svg width="16" height="16" viewBox="0 0 22 22" fill="#000"><path d="M5 3.5l14 7.5-14 7.5z"/></svg></div>
             <span class="tcard-play-label">Tap to watch</span>
           </div>
-          <div class="tcard-thumb-meta">
-            <div class="tcard-thumb-name">Ebbad Ur Rehman</div>
-            <div class="tcard-thumb-tag">Cohort 1</div>
-          </div>
         </div>
         <div class="tcard-body">
           <div class="tcard-top"><div class="stars">★★★★★</div><span class="badge-pill">Built system in Week 2</span></div>
           <p class="tcard-quote">"Didn't know what n8n was on Day 1. By Week 2 I had a live system and was pitching it to a real client."</p>
-          <div class="tcard-author"><div class="av av-g">ER</div><div><div class="tcard-name">Ebbad Ur Rehman</div><div class="tcard-role">Student · Cohort 1</div></div></div>
+          <div class="tcard-author">
+            <div class="av av-g">ER</div>
+            <div class="tcard-name">Ebbad Ur Rehman</div>
+          </div>
         </div>
       </div>
+
+      <!-- Card 2 — Zara (quote bg) -->
       <div class="tcard">
-        <div class="tcard-video coming tcard-quote-bg">
+        <div class="tcard-video tcard-quote-bg">
           <div class="tcard-quote-visual">
             <div class="tcard-big-quote">"</div>
-            <p class="tcard-preview-text">The WhatsApp automation module alone paid for the course 10× over.</p>
+            <p class="tcard-preview-text">The WhatsApp module alone paid for the course 10× over.</p>
           </div>
-          <div class="tcard-video-overlay" style="background:transparent;">
-            <div class="tcard-soon-badge">Video Coming Soon</div>
-          </div>
-          <div class="tcard-thumb-meta">
-            <div class="tcard-thumb-name">Zara Ahmed</div>
-            <div class="tcard-thumb-tag">Karachi</div>
-          </div>
+          <div class="tcard-soon-badge">Video Coming Soon</div>
         </div>
         <div class="tcard-body">
-          <div class="tcard-top"><div class="stars">★★★★★</div><span class="badge-pill">PKR 45K billed in Week 3</span></div>
-          <p class="tcard-quote">"The WhatsApp module was worth 10× the course fee. I invoiced PKR 45,000 in Week 3 — first money I've ever made from AI."</p>
-          <div class="tcard-author"><div class="av av-a">ZA</div><div><div class="tcard-name">Zara Ahmed</div><div class="tcard-role">Freelancer · Karachi</div></div></div>
+          <div class="tcard-top"><div class="stars">★★★★★</div><span class="badge-pill">PKR 45K · Week 3</span></div>
+          <p class="tcard-quote">"The WhatsApp module was worth 10× the course fee. First money I've ever made from AI."</p>
+          <div class="tcard-author">
+            <div class="av av-a">ZA</div>
+            <div class="tcard-name">Zara Ahmed</div>
+          </div>
         </div>
       </div>
+
+      <!-- Card 3 — Sara (quote bg purple) -->
       <div class="tcard">
-        <div class="tcard-video coming tcard-quote-bg tcard-quote-bg--purple">
+        <div class="tcard-video tcard-quote-bg tcard-quote-bg--purple">
           <div class="tcard-quote-visual">
             <div class="tcard-big-quote">"</div>
-            <p class="tcard-preview-text">200+ DMs a day, now automated. Replies instantly, sends catalogue, captures leads.</p>
+            <p class="tcard-preview-text">200+ DMs a day, now automated. Replies instantly, captures leads.</p>
           </div>
-          <div class="tcard-video-overlay" style="background:transparent;">
-            <div class="tcard-soon-badge">Video Coming Soon</div>
-          </div>
-          <div class="tcard-thumb-meta">
-            <div class="tcard-thumb-name">Sara Farouk</div>
-            <div class="tcard-thumb-tag">Fashion Brand</div>
-          </div>
+          <div class="tcard-soon-badge">Video Coming Soon</div>
         </div>
         <div class="tcard-body">
           <div class="tcard-top"><div class="stars">★★★★★</div><span class="badge-pill" style="background:rgba(167,139,250,0.08);border-color:rgba(167,139,250,0.2);color:var(--purple);">Sanestix Client</span></div>
-          <p class="tcard-quote">"We were drowning in 200+ DMs daily. The system replies instantly, sends our catalogue, and captures leads — automatically."</p>
-          <div class="tcard-author"><div class="av av-p">SF</div><div><div class="tcard-name">Sara Farouk</div><div class="tcard-role">Fashion Brand Owner</div></div></div>
+          <p class="tcard-quote">"Drowning in 200+ DMs daily. The system now replies, sends our catalogue, and captures leads — automatically."</p>
+          <div class="tcard-author">
+            <div class="av av-p">SF</div>
+            <div class="tcard-name">Sara Farouk</div>
+          </div>
         </div>
       </div>
+
     </div>
     <div class="proof-strip">
       <div class="proof-cell"><div class="proof-num">100%</div><div class="proof-lbl">Students built real systems</div></div>
