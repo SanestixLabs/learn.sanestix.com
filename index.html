@@ -1182,7 +1182,27 @@ body { padding-top: 98px; }
         </div>
       </div>
 
-      <!-- Card 2 — Zara (quote bg) -->
+      <!-- Card 2 — YouTube Shorts testimonial (lkav78KZ2KQ) -->
+      <div class="tcard">
+        <div class="tcard-video" id="tv2" onclick="loadTestiVideo(this,'lkav78KZ2KQ')">
+          <img class="tcard-video-bg" src="https://img.youtube.com/vi/lkav78KZ2KQ/maxresdefault.jpg" alt="Student testimonial" onerror="this.src='https://img.youtube.com/vi/lkav78KZ2KQ/hqdefault.jpg'">
+          <div class="tcard-video-overlay">
+            <div class="yt-badge"><svg width="12" height="12" viewBox="0 0 24 24" fill="#ff0000"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>Shorts</div>
+            <div class="tcard-play"><svg width="16" height="16" viewBox="0 0 22 22" fill="#000"><path d="M5 3.5l14 7.5-14 7.5z"/></svg></div>
+            <span class="tcard-play-label">Tap to watch</span>
+          </div>
+        </div>
+        <div class="tcard-body">
+          <div class="tcard-top"><div class="stars">★★★★★</div><span class="badge-pill">Student Win</span></div>
+          <p class="tcard-quote">"A real result from a real student — watch the full story."</p>
+          <div class="tcard-author">
+            <div class="av av-g">ST</div>
+            <div class="tcard-name">Student Testimonial</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 3 — Zara (quote bg) -->
       <div class="tcard">
         <div class="tcard-video tcard-quote-bg">
           <div class="tcard-quote-visual">
@@ -1878,11 +1898,19 @@ function loadHeroVideo() {
 // Testimonial video
 function loadTestiVideo(el, videoId) {
   if (!videoId || videoId === 'YOUR_VIDEO_ID') return;
+  const shortsIds = ['lkav78KZ2KQ'];
+  const isShorts = shortsIds.includes(videoId);
   const iframe = document.createElement('iframe');
   iframe.src = 'https://www.youtube.com/embed/' + videoId + '?autoplay=1&rel=0';
   iframe.allow = 'autoplay; encrypted-media';
   iframe.allowFullscreen = true;
-  iframe.style.cssText = 'width:100%;height:100%;border:none;display:block;';
+  if (isShorts) {
+    el.style.aspectRatio = '9/16';
+    el.style.height = 'auto';
+    iframe.style.cssText = 'width:100%;height:100%;min-height:320px;border:none;display:block;';
+  } else {
+    iframe.style.cssText = 'width:100%;height:100%;border:none;display:block;';
+  }
   el.innerHTML = '';
   el.appendChild(iframe);
   el.onclick = null;
