@@ -548,6 +548,144 @@ body { padding-top: 62px; }
   background: rgba(0,0,0,0.6);
 }
 
+
+/* ════════════════════════════════
+   NAV DROPDOWN MENUS
+════════════════════════════════ */
+.nav-item { position: relative; }
+.nav-item > a {
+  display: flex; align-items: center; gap: 4px;
+}
+.nav-chevron {
+  width: 12px; height: 12px; flex-shrink: 0;
+  transition: transform .2s;
+  opacity: 0.5;
+}
+.nav-item:hover .nav-chevron { transform: rotate(180deg); opacity: 1; }
+.nav-dropdown {
+  position: absolute; top: calc(100% + 10px); left: 50%;
+  transform: translateX(-50%);
+  background: #0e0e0e;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 12px;
+  padding: 8px;
+  min-width: 220px;
+  opacity: 0; visibility: hidden;
+  transform: translateX(-50%) translateY(-6px);
+  transition: opacity .18s, transform .18s, visibility .18s;
+  z-index: 200;
+  box-shadow: 0 16px 48px rgba(0,0,0,0.7);
+}
+.nav-item:hover .nav-dropdown {
+  opacity: 1; visibility: visible;
+  transform: translateX(-50%) translateY(0);
+}
+.nav-dropdown a {
+  display: flex !important; align-items: center; gap: 10px;
+  padding: 9px 12px !important; border-radius: 8px !important;
+  font-size: 13px !important; color: var(--text2) !important;
+  background: transparent !important;
+  transition: background .12s, color .12s !important;
+  white-space: nowrap;
+}
+.nav-dropdown a:hover {
+  background: rgba(255,255,255,0.06) !important;
+  color: var(--text) !important;
+}
+.nav-dropdown-icon {
+  width: 28px; height: 28px; border-radius: 7px; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px;
+}
+.nav-dropdown-icon.green { background: rgba(34,197,94,0.12); }
+.nav-dropdown-icon.amber { background: rgba(245,158,11,0.12); }
+.nav-dropdown-icon.purple { background: rgba(167,139,250,0.12); }
+.nav-dropdown-icon.blue { background: rgba(96,165,250,0.12); }
+.nav-dropdown-divider {
+  height: 1px; background: rgba(255,255,255,0.07);
+  margin: 5px 4px;
+}
+.nav-dropdown-label {
+  font-size: 10px; font-weight: 600; color: var(--text3);
+  letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 6px 12px 3px;
+}
+
+/* mobile dropdown accordion */
+.nav-mobile-sub {
+  display: none;
+  flex-direction: column;
+  padding-left: 16px;
+  border-left: 2px solid rgba(255,255,255,0.07);
+  margin: 0 0 4px 8px;
+}
+.nav-mobile-sub.open { display: flex; }
+.nav-mobile-sub a {
+  font-size: 13px !important; color: var(--text3) !important;
+  padding: 8px 0 !important; border-bottom: none !important;
+}
+.nav-mobile-trigger {
+  display: flex; align-items: center; justify-content: space-between;
+  cursor: pointer;
+}
+.nav-mobile-trigger svg { transition: transform .2s; }
+.nav-mobile-trigger.open svg { transform: rotate(180deg); }
+
+
+/* ════════════════════════════════
+   TESTIMONIAL THUMBNAIL OVERRIDES
+════════════════════════════════ */
+.tcard-video {
+  aspect-ratio: 4/3 !important;
+  max-height: none !important;
+}
+.tcard-thumb-meta {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  padding: 10px 14px;
+  background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 100%);
+  display: flex; align-items: center; justify-content: space-between;
+  z-index: 3;
+}
+.tcard-thumb-name {
+  font-size: 12px; font-weight: 600; color: #fff;
+  font-family: var(--font-head);
+}
+.tcard-thumb-tag {
+  font-size: 10px; color: rgba(255,255,255,0.6);
+  background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.15);
+  padding: 2px 7px; border-radius: 100px;
+}
+
+/* Quote-card thumbnails for cards without video */
+.tcard-quote-bg {
+  background: linear-gradient(135deg, #0d1a0d 0%, #0a0a0a 60%, #111 100%) !important;
+  cursor: default !important;
+}
+.tcard-quote-bg--purple {
+  background: linear-gradient(135deg, #100d1a 0%, #0a0a0a 60%, #111 100%) !important;
+}
+.tcard-quote-visual {
+  position: absolute; inset: 0; padding: 20px 18px 40px;
+  display: flex; flex-direction: column; justify-content: center; gap: 8px;
+  z-index: 2;
+}
+.tcard-big-quote {
+  font-size: 64px; line-height: 0.8; color: var(--g1); opacity: 0.25;
+  font-family: Georgia, serif; font-weight: 700; flex-shrink: 0;
+}
+.tcard-quote-bg--purple .tcard-big-quote { color: var(--purple); }
+.tcard-preview-text {
+  font-size: 14px; font-weight: 400; color: rgba(255,255,255,0.72);
+  line-height: 1.6; font-style: italic;
+}
+.tcard-soon-badge {
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.14);
+  border-radius: 100px; padding: 4px 12px;
+  font-size: 10px; font-weight: 500; color: rgba(255,255,255,0.4);
+  letter-spacing: 0.06em; text-transform: uppercase;
+}
+
 </style>
 </head>
 <body>
@@ -559,7 +697,25 @@ body { padding-top: 62px; }
   <div class="nav-inner">
     <a href="#" class="nav-logo">learn<span class="dot">.</span>sanestix</a>
     <div class="nav-links">
-      <a href="#curriculum">Curriculum</a>
+      <!-- Course dropdown -->
+      <div class="nav-item">
+        <a href="#curriculum">Course
+          <svg class="nav-chevron" viewBox="0 0 12 12" fill="none"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <div class="nav-dropdown">
+          <div class="nav-dropdown-label">Curriculum</div>
+          <a href="#curriculum"><span class="nav-dropdown-icon green">📚</span>Full Curriculum</a>
+          <a href="#curriculum" onclick="setTimeout(()=>switchWeek(1),100)"><span class="nav-dropdown-icon green">1️⃣</span>Week 1 — AI Foundations</a>
+          <a href="#curriculum" onclick="setTimeout(()=>switchWeek(4),100)"><span class="nav-dropdown-icon amber">🎙️</span>Week 4 — Voice Agents</a>
+          <a href="#curriculum" onclick="setTimeout(()=>switchWeek(5),100)"><span class="nav-dropdown-icon purple">💻</span>Week 5 — Vibe Coding</a>
+          <a href="#curriculum" onclick="setTimeout(()=>switchWeek(7),100)"><span class="nav-dropdown-icon blue">🤝</span>Week 7 — Client Acquisition</a>
+          <a href="#curriculum" onclick="setTimeout(()=>switchWeek(9),100)"><span class="nav-dropdown-icon amber">🏆</span>Week 9 — Capstone</a>
+          <div class="nav-dropdown-divider"></div>
+          <div class="nav-dropdown-label">Projects</div>
+          <a href="#curriculum"><span class="nav-dropdown-icon green">🔨</span>27 Live Projects</a>
+          <a href="./#projects-bonus" onclick="document.querySelector('.projects-bonus-section').scrollIntoView({behavior:'smooth'});return false;"><span class="nav-dropdown-icon amber">🎁</span>Bonus Project Library</a>
+        </div>
+      </div>
       <a href="#testimonials">Student Stories</a>
       <a href="#instructors">Instructors</a>
       <a href="#faq">FAQ</a>
@@ -576,7 +732,18 @@ body { padding-top: 62px; }
     </button>
   </div>
   <div class="nav-mobile-menu" id="navMobileMenu">
-    <a href="#curriculum" onclick="closeMobileNav()">Curriculum</a>
+    <div class="nav-mobile-trigger" onclick="toggleMobileSub(this)" style="font-size:15px;color:var(--text2);padding:12px 0;border-bottom:1px solid var(--border);">
+      Course
+      <svg width="14" height="14" viewBox="0 0 12 12" fill="none"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </div>
+    <div class="nav-mobile-sub">
+      <a href="#curriculum" onclick="closeMobileNav()">Full Curriculum</a>
+      <a href="#curriculum" onclick="closeMobileNav();setTimeout(()=>switchWeek(1),200)">Week 1 — AI Foundations</a>
+      <a href="#curriculum" onclick="closeMobileNav();setTimeout(()=>switchWeek(4),200)">Week 4 — Voice Agents</a>
+      <a href="#curriculum" onclick="closeMobileNav();setTimeout(()=>switchWeek(5),200)">Week 5 — Vibe Coding</a>
+      <a href="#curriculum" onclick="closeMobileNav();setTimeout(()=>switchWeek(7),200)">Week 7 — Client Acquisition</a>
+      <a href="#curriculum" onclick="closeMobileNav();setTimeout(()=>switchWeek(9),200)">Week 9 — Capstone</a>
+    </div>
     <a href="#testimonials" onclick="closeMobileNav()">Student Stories</a>
     <a href="#instructors" onclick="closeMobileNav()">Instructors</a>
     <a href="#faq" onclick="closeMobileNav()">FAQ</a>
@@ -670,11 +837,15 @@ body { padding-top: 62px; }
     <div class="testi-grid">
       <div class="tcard">
         <div class="tcard-video" id="tv1" onclick="loadTestiVideo(this,'qBRPqkjVTck')">
-          <img class="tcard-video-bg" src="https://img.youtube.com/vi/qBRPqkjVTck/maxresdefault.jpg" alt="">
+          <img class="tcard-video-bg" src="https://img.youtube.com/vi/qBRPqkjVTck/maxresdefault.jpg" alt="Ebbad Ur Rehman review" onerror="this.src='https://img.youtube.com/vi/qBRPqkjVTck/hqdefault.jpg'">
           <div class="tcard-video-overlay">
             <div class="yt-badge"><svg width="12" height="12" viewBox="0 0 24 24" fill="#ff0000"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>Watch review</div>
-            <div class="tcard-play"><svg width="14" height="14" viewBox="0 0 22 22" fill="#000"><path d="M5 3.5l14 7.5-14 7.5z"/></svg></div>
+            <div class="tcard-play"><svg width="16" height="16" viewBox="0 0 22 22" fill="#000"><path d="M5 3.5l14 7.5-14 7.5z"/></svg></div>
             <span class="tcard-play-label">Tap to watch</span>
+          </div>
+          <div class="tcard-thumb-meta">
+            <div class="tcard-thumb-name">Ebbad Ur Rehman</div>
+            <div class="tcard-thumb-tag">Cohort 1</div>
           </div>
         </div>
         <div class="tcard-body">
@@ -684,12 +855,17 @@ body { padding-top: 62px; }
         </div>
       </div>
       <div class="tcard">
-        <div class="tcard-video" id="tv2" onclick="loadTestiVideo(this,'YOUR_VIDEO_ID')">
-          <img class="tcard-video-bg" src="https://img.youtube.com/vi/YOUR_VIDEO_ID/maxresdefault.jpg" alt="" onerror="this.style.display='none'">
-          <div class="tcard-video-overlay">
-            <div class="yt-badge"><svg width="12" height="12" viewBox="0 0 24 24" fill="#ff0000"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>Watch review</div>
-            <div class="tcard-play"><svg width="14" height="14" viewBox="0 0 22 22" fill="#000"><path d="M5 3.5l14 7.5-14 7.5z"/></svg></div>
-            <span class="tcard-play-label">Tap to watch</span>
+        <div class="tcard-video coming tcard-quote-bg">
+          <div class="tcard-quote-visual">
+            <div class="tcard-big-quote">"</div>
+            <p class="tcard-preview-text">The WhatsApp automation module alone paid for the course 10× over.</p>
+          </div>
+          <div class="tcard-video-overlay" style="background:transparent;">
+            <div class="tcard-soon-badge">Video Coming Soon</div>
+          </div>
+          <div class="tcard-thumb-meta">
+            <div class="tcard-thumb-name">Zara Ahmed</div>
+            <div class="tcard-thumb-tag">Karachi</div>
           </div>
         </div>
         <div class="tcard-body">
@@ -699,10 +875,17 @@ body { padding-top: 62px; }
         </div>
       </div>
       <div class="tcard">
-        <div class="tcard-video coming">
-          <div class="tcard-video-overlay">
-            <div class="tcard-play" style="background:var(--bg4); border:1px solid var(--border2);"><svg width="14" height="14" viewBox="0 0 22 22" fill="#444"><path d="M5 3.5l14 7.5-14 7.5z"/></svg></div>
-            <span class="tcard-soon-label">Video coming soon</span>
+        <div class="tcard-video coming tcard-quote-bg tcard-quote-bg--purple">
+          <div class="tcard-quote-visual">
+            <div class="tcard-big-quote">"</div>
+            <p class="tcard-preview-text">200+ DMs a day, now automated. Replies instantly, sends catalogue, captures leads.</p>
+          </div>
+          <div class="tcard-video-overlay" style="background:transparent;">
+            <div class="tcard-soon-badge">Video Coming Soon</div>
+          </div>
+          <div class="tcard-thumb-meta">
+            <div class="tcard-thumb-name">Sara Farouk</div>
+            <div class="tcard-thumb-tag">Fashion Brand</div>
           </div>
         </div>
         <div class="tcard-body">
@@ -1384,14 +1567,14 @@ body { padding-top: 62px; }
         <a href="#">Shopify &amp; Meta Ads</a>
       </div>
 
-      <!-- Company col -->
+      <!-- Legal col -->
       <div class="footer-col">
-        <h5>Sanestix</h5>
-        <a href="#">About Us</a>
-        <a href="#">Our Agency</a>
-        <a href="#">Case Studies</a>
-        <a href="#">Discord Community</a>
-        <a href="#">Privacy Policy</a>
+        <h5>Legal</h5>
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="terms.html">Terms &amp; Conditions</a>
+        <a href="refund.html">Refund Policy</a>
+        <a href="https://www.linkedin.com/company/sanestix" target="_blank" rel="noopener">About Sanestix</a>
+        <a href="https://wa.me/923014422951" target="_blank" rel="noopener">Contact Us</a>
       </div>
     </div>
   </div>
@@ -1399,7 +1582,7 @@ body { padding-top: 62px; }
   <div class="footer-bottom">
     <div class="container">
       <div class="footer-bottom-inner">
-        <span>© 2025 Sanestix · All rights reserved · Lahore, Pakistan</span>
+        <span>© 2025 Sanestix · All rights reserved · Lahore, Pakistan · <a href="privacy.html" style="color:var(--text3);transition:color .15s;" onmouseover="this.style.color='var(--g1)'" onmouseout="this.style.color='var(--text3)'">Privacy</a> · <a href="terms.html" style="color:var(--text3);transition:color .15s;" onmouseover="this.style.color='var(--g1)'" onmouseout="this.style.color='var(--text3)'">Terms</a> · <a href="refund.html" style="color:var(--text3);transition:color .15s;" onmouseover="this.style.color='var(--g1)'" onmouseout="this.style.color='var(--text3)'">Refund</a></span>
         <span class="footer-badge">
           <div class="pulse"></div>
           Next cohort filling fast
@@ -1431,6 +1614,14 @@ function toggleMobileNav() {
 }
 function closeMobileNav() {
   document.getElementById('navMobileMenu').classList.remove('open');
+  document.querySelectorAll('.nav-mobile-sub').forEach(s=>s.classList.remove('open'));
+  document.querySelectorAll('.nav-mobile-trigger').forEach(t=>t.classList.remove('open'));
+}
+function toggleMobileSub(trigger) {
+  const sub = trigger.nextElementSibling;
+  const isOpen = sub.classList.contains('open');
+  sub.classList.toggle('open', !isOpen);
+  trigger.classList.toggle('open', !isOpen);
 }
 
 // Hero video
