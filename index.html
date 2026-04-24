@@ -1078,35 +1078,246 @@ body { padding-top: 98px; }
 </nav>
 
 <!-- ═══════════════════════════════════
-     HERO SECTION
+     HERO SECTION — Educational AI Theme
 ═══════════════════════════════════ -->
+<style>
+/* ── Hero Redesign ── */
+.hero {
+  padding: 80px 0 72px;
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+  position: relative;
+  overflow: hidden;
+}
+/* Subtle radial glow behind hero */
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -120px; left: 50%;
+  transform: translateX(-50%);
+  width: 900px; height: 500px;
+  background: radial-gradient(ellipse at center, rgba(34,197,94,0.06) 0%, transparent 68%);
+  pointer-events: none;
+}
+
+.hero-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+}
+.hero-left { display: flex; flex-direction: column; gap: 24px; }
+
+/* Top badge row */
+.hero-badge-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 7px;
+  border: 1px solid rgba(34,197,94,0.28); background: rgba(34,197,94,0.07);
+  color: var(--g1); font-size: 12px; font-weight: 600;
+  padding: 6px 14px; border-radius: 100px; width: fit-content;
+  letter-spacing: 0.02em;
+}
+.hero-badge-secondary {
+  display: inline-flex; align-items: center; gap: 7px;
+  border: 1px solid rgba(255,255,255,0.08); background: rgba(255,255,255,0.04);
+  color: var(--text2); font-size: 12px; font-weight: 500;
+  padding: 6px 14px; border-radius: 100px;
+}
+
+/* Headline */
+.hero h1 {
+  font-family: var(--font-head);
+  font-size: clamp(30px, 3.8vw, 52px);
+  font-weight: 700;
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  color: var(--text);
+  margin: 0;
+}
+.hero h1 .green { color: var(--g1); }
+.hero h1 .underline-green {
+  position: relative; display: inline-block;
+}
+.hero h1 .underline-green::after {
+  content: '';
+  position: absolute;
+  bottom: -4px; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--g1), transparent);
+  border-radius: 2px;
+}
+
+/* Sub */
+.hero-sub {
+  font-size: 15px; color: var(--text2); line-height: 1.75;
+  font-weight: 300; max-width: 440px; margin: 0;
+}
+
+/* Learning path pills */
+.hero-path {
+  display: flex; flex-wrap: wrap; gap: 8px;
+}
+.path-pill {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: var(--bg3); border: 1px solid var(--border);
+  border-radius: 8px; padding: 7px 13px;
+  font-size: 12px; font-weight: 500; color: var(--text2);
+  transition: border-color .2s, color .2s;
+}
+.path-pill:hover { border-color: rgba(34,197,94,0.3); color: var(--text); }
+.path-pill-dot {
+  width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0;
+}
+
+/* Bullets */
+.bullets { display: flex; flex-direction: column; gap: 11px; }
+.bullet { display: flex; align-items: flex-start; gap: 10px; font-size: 14px; color: #ccc; line-height: 1.5; }
+.tick {
+  width: 18px; height: 18px; border-radius: 50%; flex-shrink: 0; margin-top: 1px;
+  background: rgba(34,197,94,0.08); border: 1px solid rgba(34,197,94,0.25);
+  display: flex; align-items: center; justify-content: center;
+}
+
+/* CTA */
+.cta-row { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.urgency { display: flex; align-items: center; gap: 7px; font-size: 12px; color: #ef9999; }
+
+/* ── RIGHT SIDE: AI Learning Panel ── */
+.hero-right { display: flex; flex-direction: column; gap: 14px; }
+
+.ai-panel {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  overflow: hidden;
+}
+.ai-panel-header {
+  display: flex; align-items: center; gap: 10px;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg4);
+}
+.ai-panel-dots { display: flex; gap: 5px; }
+.ai-panel-dot { width: 9px; height: 9px; border-radius: 50%; }
+.ai-panel-title { font-size: 12px; color: var(--text3); font-family: var(--font-head); margin-left: 4px; }
+.ai-panel-live {
+  margin-left: auto; display: flex; align-items: center; gap: 5px;
+  font-size: 10px; color: var(--g1); font-weight: 600; letter-spacing: 0.08em;
+}
+
+/* Curriculum week cards inside panel */
+.ai-curriculum { padding: 14px; display: flex; flex-direction: column; gap: 6px; }
+.curr-week {
+  display: flex; align-items: center; gap: 12px;
+  background: var(--bg2); border: 1px solid var(--border);
+  border-radius: 10px; padding: 10px 14px;
+  transition: border-color .2s, transform .15s;
+  cursor: default;
+}
+.curr-week:hover { border-color: rgba(34,197,94,0.25); transform: translateX(3px); }
+.curr-week-num {
+  font-family: var(--font-head); font-size: 11px; font-weight: 700;
+  color: var(--text3); min-width: 28px;
+}
+.curr-week-icon {
+  width: 30px; height: 30px; border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.curr-week-info { flex: 1; }
+.curr-week-name { font-size: 13px; font-weight: 600; color: var(--text); line-height: 1.2; }
+.curr-week-desc { font-size: 11px; color: var(--text3); margin-top: 1px; }
+.curr-week-badge {
+  font-size: 10px; padding: 2px 8px; border-radius: 100px;
+  font-weight: 600; white-space: nowrap; flex-shrink: 0;
+}
+.badge-live { background: rgba(34,197,94,0.1); color: var(--g1); border: 1px solid rgba(34,197,94,0.2); }
+.badge-project { background: rgba(245,158,11,0.1); color: var(--amber); border: 1px solid rgba(245,158,11,0.2); }
+.badge-hands { background: rgba(96,165,250,0.1); color: #60a5fa; border: 1px solid rgba(96,165,250,0.2); }
+
+/* Stats row */
+.stats-row {
+  display: grid; grid-template-columns: 1fr 1fr 1fr;
+  background: var(--border); gap: 1px;
+  border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden;
+}
+.stat-cell { background: var(--bg3); padding: 16px 12px; text-align: center; }
+.stat-num { font-family: var(--font-head); font-size: 20px; font-weight: 700; color: var(--g1); line-height: 1; }
+.stat-lbl { font-size: 11px; color: var(--text3); margin-top: 3px; }
+
+/* Trust row */
+.hero-trust {
+  display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+  padding: 12px 16px;
+  background: var(--bg3); border: 1px solid var(--border);
+  border-radius: 12px;
+}
+.trust-item {
+  display: flex; align-items: center; gap: 6px;
+  font-size: 12px; color: var(--text2);
+}
+.trust-sep { width: 1px; height: 14px; background: var(--border); }
+
+/* AUTHORITY STRIP — redesigned */
+.auth-strip {
+  background: var(--bg2);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  display: grid; grid-template-columns: repeat(5,1fr);
+}
+.auth-cell { padding: 20px 0; text-align: center; border-right: 1px solid var(--border); }
+.auth-cell:last-child { border-right: none; }
+.auth-val { font-size: 13px; font-weight: 600; color: var(--text); font-family: var(--font-head); }
+.auth-lbl { font-size: 10px; color: var(--text3); margin-top: 3px; text-transform: uppercase; letter-spacing: .08em; }
+.auth-icon { margin: 0 auto 6px; width: 28px; height: 28px; border-radius: 8px; display: flex; align-items: center; justify-content: center; }
+</style>
+
 <section class="hero">
   <div class="container hero-inner">
+
+    <!-- LEFT: Copy -->
     <div class="hero-left">
+
+      <!-- Headline -->
       <h1>
-        We've Automated 50+ Businesses.<br>
-        Now We'll Teach You<br>
-        <span class="green">Exactly How.</span>
+        Learn to Build <span class="green">Real AI Systems</span><br>
+        the Same Way <span class="underline-green">Agencies Do</span> —<br>
+        Then Get Paid for It.
       </h1>
-      <p class="hero-sub">The same AI systems Sanestix deploys for real paying clients — packaged into a 9-week live program. No fluff. No theory. Just builds that earn.</p>
+
+      <!-- Sub -->
+      <p class="hero-sub">A structured 9-week curriculum taught by operators who've deployed AI for 50+ real businesses. From zero to building, billing, and beyond.</p>
+
+      <!-- Tool stack pills -->
+      <div class="hero-path">
+        <div class="path-pill"><div class="path-pill-dot" style="background:#ff6b35;"></div>n8n Automation</div>
+        <div class="path-pill"><div class="path-pill-dot" style="background:#a78bfa;"></div>Claude API & MCP</div>
+        <div class="path-pill"><div class="path-pill-dot" style="background:#22c55e;"></div>Vapi Voice Agents</div>
+        <div class="path-pill"><div class="path-pill-dot" style="background:#60a5fa;"></div>Vibe Coding</div>
+        <div class="path-pill"><div class="path-pill-dot" style="background:#f59e0b;"></div>Meta Ads & Ecom</div>
+      </div>
+
+      <!-- Bullets -->
       <div class="bullets">
         <div class="bullet">
           <div class="tick"><svg width="9" height="9" viewBox="0 0 10 10" fill="none"><polyline points="1.5,5 4,7.5 8.5,2.5" stroke="#22c55e" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-          Build the exact systems our clients pay us for
+          Structured curriculum — 9 weeks, 27 live classes, 27 real projects
         </div>
         <div class="bullet">
           <div class="tick"><svg width="9" height="9" viewBox="0 0 10 10" fill="none"><polyline points="1.5,5 4,7.5 8.5,2.5" stroke="#22c55e" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-          n8n · Claude API · Vapi · MCP · Vibe Coding
+          Taught by active AI agency founders — not educators or influencers
         </div>
         <div class="bullet">
           <div class="tick"><svg width="9" height="9" viewBox="0 0 10 10" fill="none"><polyline points="1.5,5 4,7.5 8.5,2.5" stroke="#22c55e" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-          Land your first paid client before the cohort ends
+          Land your first paying client before the cohort ends
         </div>
         <div class="bullet">
           <div class="tick"><svg width="9" height="9" viewBox="0 0 10 10" fill="none"><polyline points="1.5,5 4,7.5 8.5,2.5" stroke="#22c55e" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-          Zero coding background? You'll be fine.
+          No coding background needed — we start from the ground up
         </div>
       </div>
+
+      <!-- CTAs -->
       <div class="cta-row">
         <a href="seminar.html" class="btn-green btn-green-lg">Join Free Seminar →</a>
         <a href="course.html" class="btn-white" style="font-size:15px; padding:15px 28px;">See Curriculum</a>
@@ -1116,39 +1327,148 @@ body { padding-top: 98px; }
         33 of 40 founding seats claimed — no credit card for seminar
       </div>
     </div>
+
+    <!-- RIGHT: AI Curriculum Preview Panel -->
     <div class="hero-right">
-      <div class="video-card">
-        <div class="video-topbar">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="#ff0000"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
-          <span>Course Intro</span>
-          <span class="dur-badge">3 min</span>
+
+      <!-- Curriculum panel -->
+      <div class="ai-panel">
+        <div class="ai-panel-header">
+          <div class="ai-panel-dots">
+            <div class="ai-panel-dot" style="background:#ef4444;"></div>
+            <div class="ai-panel-dot" style="background:#f59e0b;"></div>
+            <div class="ai-panel-dot" style="background:#22c55e;"></div>
+          </div>
+          <span class="ai-panel-title">Course Curriculum — 9 Weeks</span>
+          <div class="ai-panel-live">
+            <div class="pulse"></div> LIVE
+          </div>
         </div>
-        <div class="video-thumb" id="heroThumb" onclick="loadHeroVideo()">
-          <img src="https://img.youtube.com/vi/FwOTs4UxQS4/maxresdefault.jpg" alt="Course intro thumbnail" id="heroThumbImg">
-          <div class="play-btn"><svg width="16" height="16" viewBox="0 0 22 22" fill="#000"><path d="M5 3.5l14 7.5-14 7.5z"/></svg></div>
-        </div>
-        <div class="video-foot">
-          <span class="vtag">n8n</span>
-          <span class="vtag">Claude API</span>
-          <span class="vtag">Vapi</span>
+        <div class="ai-curriculum">
+          <div class="curr-week">
+            <span class="curr-week-num">W1–2</span>
+            <div class="curr-week-icon" style="background:rgba(34,197,94,0.1);">
+              <svg width="14" height="14" viewBox="0 0 20 20" fill="none"><path d="M10 2l2 4 4.5.7-3.25 3.17.77 4.47L10 12.2l-4.02 2.14.77-4.47L3.5 6.7 8 6z" stroke="#22c55e" stroke-width="1.5" stroke-linejoin="round"/></svg>
+            </div>
+            <div class="curr-week-info">
+              <div class="curr-week-name">AI Foundations & n8n</div>
+              <div class="curr-week-desc">Automations, APIs, first live system</div>
+            </div>
+            <span class="curr-week-badge badge-live">Live Build</span>
+          </div>
+          <div class="curr-week">
+            <span class="curr-week-num">W3</span>
+            <div class="curr-week-icon" style="background:rgba(37,211,102,0.1);">
+              <svg width="14" height="14" viewBox="0 0 20 20" fill="none"><path d="M4 2h3.5l1.5 4-2 1.5a10 10 0 004.5 4.5L13 10l4 1.5V15a2 2 0 01-2 2C7.163 17 3 12.837 3 7.5A2 2 0 014 5.5" stroke="#25d366" stroke-width="1.5" stroke-linecap="round"/></svg>
+            </div>
+            <div class="curr-week-info">
+              <div class="curr-week-name">WhatsApp AI Bots</div>
+              <div class="curr-week-desc">Lead capture, customer replies, DMs</div>
+            </div>
+            <span class="curr-week-badge badge-project">+PKR 45K</span>
+          </div>
+          <div class="curr-week">
+            <span class="curr-week-num">W4</span>
+            <div class="curr-week-icon" style="background:rgba(245,158,11,0.1);">
+              <svg width="14" height="14" viewBox="0 0 20 20" fill="none"><path d="M10 2a3 3 0 00-3 3v5a3 3 0 006 0V5a3 3 0 00-3-3z" stroke="#f59e0b" stroke-width="1.5"/><path d="M5 9v1a5 5 0 0010 0V9M10 15v3" stroke="#f59e0b" stroke-width="1.5" stroke-linecap="round"/></svg>
+            </div>
+            <div class="curr-week-info">
+              <div class="curr-week-name">Voice Agents with Vapi</div>
+              <div class="curr-week-desc">AI phone calls, appointment booking</div>
+            </div>
+            <span class="curr-week-badge badge-hands">Hands-On</span>
+          </div>
+          <div class="curr-week">
+            <span class="curr-week-num">W5–6</span>
+            <div class="curr-week-icon" style="background:rgba(96,165,250,0.1);">
+              <svg width="14" height="14" viewBox="0 0 20 20" fill="none"><polyline points="4,14 8,10 11,13 16,6" stroke="#60a5fa" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <div class="curr-week-info">
+              <div class="curr-week-name">Vibe Coding & Ecom AI</div>
+              <div class="curr-week-desc">Lovable, Cursor, Shopify automation</div>
+            </div>
+            <span class="curr-week-badge badge-live">Live Build</span>
+          </div>
+          <div class="curr-week">
+            <span class="curr-week-num">W7–9</span>
+            <div class="curr-week-icon" style="background:rgba(167,139,250,0.1);">
+              <svg width="14" height="14" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="8" r="4" stroke="#a78bfa" stroke-width="1.5"/><path d="M3 17c0-2.76 3.13-5 7-5s7 2.24 7 5" stroke="#a78bfa" stroke-width="1.5" stroke-linecap="round"/></svg>
+            </div>
+            <div class="curr-week-info">
+              <div class="curr-week-name">Client Acquisition & Launch</div>
+              <div class="curr-week-desc">Pitching, pricing, capstone project</div>
+            </div>
+            <span class="curr-week-badge badge-project">Earn Phase</span>
+          </div>
         </div>
       </div>
+
+      <!-- Stats row -->
       <div class="stats-row">
         <div class="stat-cell"><div class="stat-num">50+</div><div class="stat-lbl">Businesses Automated</div></div>
         <div class="stat-cell"><div class="stat-num">1M+</div><div class="stat-lbl">AI Messages Sent</div></div>
         <div class="stat-cell"><div class="stat-num">27</div><div class="stat-lbl">Live Projects</div></div>
       </div>
+
+      <!-- Trust strip -->
+      <div class="hero-trust">
+        <div class="trust-item">
+          <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M8 1l1.5 3 3.5.5-2.5 2.5.6 3.5L8 9 4.9 10.5l.6-3.5L3 4.5 6.5 4z" fill="#22c55e" opacity="0.8"/></svg>
+          7-Day Refund Guarantee
+        </div>
+        <div class="trust-sep"></div>
+        <div class="trust-item">
+          <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><rect x="2" y="4" width="12" height="9" rx="1.5" stroke="#888" stroke-width="1.2"/><path d="M5 4V3a3 3 0 016 0v1" stroke="#888" stroke-width="1.2" stroke-linecap="round"/></svg>
+          Installments Available
+        </div>
+        <div class="trust-sep"></div>
+        <div class="trust-item">
+          <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6.5" stroke="#888" stroke-width="1.2"/><path d="M8 5v3l2 1.5" stroke="#888" stroke-width="1.2" stroke-linecap="round"/></svg>
+          Sessions Recorded
+        </div>
+        <div class="trust-sep"></div>
+        <div class="trust-item">
+          <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M2 12l4-4 3 3 5-6" stroke="#888" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          PKR 14,999 One-Time
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
 
 <!-- AUTHORITY STRIP -->
 <div class="auth-strip">
-  <div class="auth-cell"><div class="auth-val">9 Weeks</div><div class="auth-lbl">Duration</div></div>
-  <div class="auth-cell"><div class="auth-val">27 Classes</div><div class="auth-lbl">Live Sessions</div></div>
-  <div class="auth-cell"><div class="auth-val">54 Hours</div><div class="auth-lbl">Instruction</div></div>
-  <div class="auth-cell"><div class="auth-val">27 Projects</div><div class="auth-lbl">Hands-On Builds</div></div>
-  <div class="auth-cell"><div class="auth-val">81 Quizzes</div><div class="auth-lbl">Assessments</div></div>
+  <div class="auth-cell">
+    <div class="auth-icon" style="background:rgba(34,197,94,0.08);">
+      <svg width="14" height="14" viewBox="0 0 20 20" fill="none"><rect x="3" y="4" width="14" height="13" rx="2" stroke="#22c55e" stroke-width="1.4"/><path d="M7 2v4M13 2v4M3 9h14" stroke="#22c55e" stroke-width="1.4" stroke-linecap="round"/></svg>
+    </div>
+    <div class="auth-val">9 Weeks</div><div class="auth-lbl">Duration</div>
+  </div>
+  <div class="auth-cell">
+    <div class="auth-icon" style="background:rgba(96,165,250,0.08);">
+      <svg width="14" height="14" viewBox="0 0 20 20" fill="none"><path d="M10 2l2 4 4.5.7-3.25 3.17.77 4.47L10 12.2l-4.02 2.14.77-4.47L3.5 6.7 8 6z" stroke="#60a5fa" stroke-width="1.4" stroke-linejoin="round"/></svg>
+    </div>
+    <div class="auth-val">27 Classes</div><div class="auth-lbl">Live Sessions</div>
+  </div>
+  <div class="auth-cell">
+    <div class="auth-icon" style="background:rgba(245,158,11,0.08);">
+      <svg width="14" height="14" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="7.5" stroke="#f59e0b" stroke-width="1.4"/><path d="M10 6.5v3.5l2.5 1.5" stroke="#f59e0b" stroke-width="1.4" stroke-linecap="round"/></svg>
+    </div>
+    <div class="auth-val">54 Hours</div><div class="auth-lbl">Instruction</div>
+  </div>
+  <div class="auth-cell">
+    <div class="auth-icon" style="background:rgba(167,139,250,0.08);">
+      <svg width="14" height="14" viewBox="0 0 20 20" fill="none"><polyline points="3,14 7,10 10,13 17,5" stroke="#a78bfa" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </div>
+    <div class="auth-val">27 Projects</div><div class="auth-lbl">Hands-On Builds</div>
+  </div>
+  <div class="auth-cell">
+    <div class="auth-icon" style="background:rgba(34,197,94,0.08);">
+      <svg width="14" height="14" viewBox="0 0 20 20" fill="none"><path d="M10 2l1.8 3.6 4 .6-2.9 2.8.7 4L10 11l-3.6 1.9.7-4L4.2 6.2l4-.6z" stroke="#22c55e" stroke-width="1.4" stroke-linejoin="round"/></svg>
+    </div>
+    <div class="auth-val">81 Quizzes</div><div class="auth-lbl">Assessments</div>
+  </div>
 </div>
 
 
@@ -1221,24 +1541,6 @@ body { padding-top: 98px; }
         </div>
       </div>
 
-      <!-- Card 3 — Sara (quote bg purple) -->
-      <div class="tcard">
-        <div class="tcard-video tcard-quote-bg tcard-quote-bg--purple">
-          <div class="tcard-quote-visual">
-            <div class="tcard-big-quote">"</div>
-            <p class="tcard-preview-text">200+ DMs a day, now automated. Replies instantly, captures leads.</p>
-          </div>
-          <div class="tcard-soon-badge">Video Coming Soon</div>
-        </div>
-        <div class="tcard-body">
-          <div class="tcard-top"><div class="stars">★★★★★</div><span class="badge-pill" style="background:rgba(167,139,250,0.08);border-color:rgba(167,139,250,0.2);color:var(--purple);">Sanestix Client</span></div>
-          <p class="tcard-quote">"Drowning in 200+ DMs daily. The system now replies, sends our catalogue, and captures leads — automatically."</p>
-          <div class="tcard-author">
-            <div class="av av-p">SF</div>
-            <div class="tcard-name">Sara Farouk</div>
-          </div>
-        </div>
-      </div>
 
     </div>
     <div class="proof-strip">
