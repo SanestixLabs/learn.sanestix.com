@@ -1586,7 +1586,7 @@ nav.scrolled {
   border: 1px solid var(--border2);
   border-radius: 8px;
   padding: 12px 15px;
-  font-size: 14px;
+  font-size: 16px; /* Must be ≥16px to prevent iOS Safari auto-zoom on focus */
   font-family: var(--font-body);
   color: var(--text);
   outline: none;
@@ -1863,7 +1863,8 @@ footer {
   .form-row { grid-template-columns: 1fr; }
   .form-card { padding: 28px 20px; }
   .footer-inner { grid-template-columns: 1fr; }
-  .sticky-text { display: none; }
+  .sticky-text { font-size: 12px; }
+  .sticky-text .sticky-text-detail { display: none; }
   .authority-inner { flex-direction: column; }
   .auth-cell { border-right: none; border-bottom: 1px solid var(--border); }
   .auth-cell:last-child { border-bottom: none; }
@@ -2096,4 +2097,48 @@ footer {
   color: var(--text3);
   line-height: 1.5;
   margin: 0;
+}
+
+/* ═══════════════════════════════════════════
+   SMALL PHONE BREAKPOINT (≤400px)
+   Targets iPhone SE, base Android phones
+   ═══════════════════════════════════════════ */
+@media (max-width: 400px) {
+  /* Bump smallest text to stay readable */
+  .eyebrow { font-size: 10px; }
+  .hero-bullets .hero-bullet-text { font-size: 13px; }
+  .hero-stat-pills { gap: 6px; }
+  .stat-pill { padding: 8px 12px; }
+  .stat-pill-num { font-size: 16px; }
+  .stat-pill-label { font-size: 9px; }
+
+  /* Increase tap targets for nav and CTA buttons */
+  .nav-hamburger { width: 44px; height: 44px; }
+  .btn-green, .btn-green-lg { padding: 14px 22px; font-size: 14px; }
+  .btn-cta-full { padding: 16px; font-size: 15px; }
+
+  /* Proof cards: tighten padding on very small screens */
+  .testi-proof-card { padding: 12px; }
+  .testi-proof-icon { font-size: 18px; margin-bottom: 6px; }
+  .testi-proof-card h4 { font-size: 12px; }
+  .testi-proof-card p { font-size: 11px; }
+
+  /* FAQ readable at 375px */
+  .faq-q { font-size: 14px; }
+  .faq-a { font-size: 13px; }
+
+  /* Form card padding */
+  .form-card { padding: 22px 16px; }
+
+  /* Container edge padding */
+  .container { padding: 0 16px; }
+
+  /* Section vertical rhythm — tighten slightly */
+  .section { padding: 64px 0; }
+
+  /* Curriculum cards */
+  .curriculum-card { padding: 16px; }
+
+  /* Sticky bar: ensure button label visible */
+  .sticky-btn { font-size: 12px; padding: 9px 14px; }
 }
