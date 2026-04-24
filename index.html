@@ -1078,10 +1078,10 @@ body { padding-top: 98px; }
 </nav>
 
 <!-- ═══════════════════════════════════
-     HERO SECTION — Educational AI Theme
+     HERO SECTION — Clean Redesign
 ═══════════════════════════════════ -->
 <style>
-/* ── Hero Redesign ── */
+/* ── Hero Clean Redesign ── */
 .hero {
   padding: 80px 0 72px;
   background: var(--bg);
@@ -1089,187 +1089,222 @@ body { padding-top: 98px; }
   position: relative;
   overflow: hidden;
 }
-/* Subtle radial glow behind hero */
 .hero::before {
   content: '';
   position: absolute;
-  top: -120px; left: 50%;
+  top: -80px; left: 50%;
   transform: translateX(-50%);
-  width: 900px; height: 500px;
-  background: radial-gradient(ellipse at center, rgba(34,197,94,0.06) 0%, transparent 68%);
+  width: 700px; height: 380px;
+  background: radial-gradient(ellipse at center, rgba(34,197,94,0.07) 0%, transparent 65%);
   pointer-events: none;
 }
 
 .hero-inner {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 60px;
-  align-items: center;
+  gap: 52px;
+  align-items: start;
 }
-.hero-left { display: flex; flex-direction: column; gap: 24px; }
 
-/* Top badge row */
-.hero-badge-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+/* ── LEFT ── */
+.hero-left {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
 .hero-badge {
-  display: inline-flex; align-items: center; gap: 7px;
-  border: 1px solid rgba(34,197,94,0.28); background: rgba(34,197,94,0.07);
-  color: var(--g1); font-size: 12px; font-weight: 600;
-  padding: 6px 14px; border-radius: 100px; width: fit-content;
+  display: inline-flex; align-items: center; gap: 8px;
+  width: fit-content;
+  border: 1px solid rgba(34,197,94,0.25);
+  background: rgba(34,197,94,0.07);
+  border-radius: 100px;
+  padding: 5px 14px 5px 8px;
+  font-size: 12px; font-weight: 500; color: #4ade80;
   letter-spacing: 0.02em;
 }
-.hero-badge-secondary {
-  display: inline-flex; align-items: center; gap: 7px;
-  border: 1px solid rgba(255,255,255,0.08); background: rgba(255,255,255,0.04);
-  color: var(--text2); font-size: 12px; font-weight: 500;
-  padding: 6px 14px; border-radius: 100px;
+.hero-badge-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--g1);
+  box-shadow: 0 0 8px rgba(34,197,94,0.85);
+  flex-shrink: 0;
 }
 
-/* Headline */
 .hero h1 {
   font-family: var(--font-head);
-  font-size: clamp(30px, 3.8vw, 52px);
+  font-size: clamp(32px, 3.6vw, 48px);
   font-weight: 700;
   line-height: 1.08;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.025em;
   color: var(--text);
   margin: 0;
 }
 .hero h1 .green { color: var(--g1); }
-.hero h1 .underline-green {
-  position: relative; display: inline-block;
-}
-.hero h1 .underline-green::after {
-  content: '';
-  position: absolute;
-  bottom: -4px; left: 0; right: 0;
-  height: 3px;
-  background: linear-gradient(90deg, var(--g1), transparent);
-  border-radius: 2px;
-}
 
-/* Sub */
 .hero-sub {
-  font-size: 15px; color: var(--text2); line-height: 1.75;
-  font-weight: 300; max-width: 440px; margin: 0;
+  font-size: 15px; color: var(--text2); line-height: 1.72;
+  font-weight: 300; max-width: 420px; margin: 0;
 }
 
-/* Learning path pills */
-.hero-path {
-  display: flex; flex-wrap: wrap; gap: 8px;
+.hero-chips {
+  display: flex; flex-wrap: wrap; gap: 6px;
 }
-.path-pill {
+.hero-chip {
   display: inline-flex; align-items: center; gap: 6px;
-  background: var(--bg3); border: 1px solid var(--border);
-  border-radius: 8px; padding: 7px 13px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 6px;
+  padding: 6px 12px;
   font-size: 12px; font-weight: 500; color: var(--text2);
   transition: border-color .2s, color .2s;
 }
-.path-pill:hover { border-color: rgba(34,197,94,0.3); color: var(--text); }
-.path-pill-dot {
-  width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0;
-}
+.hero-chip:hover { border-color: rgba(34,197,94,0.25); color: var(--text); }
+.hero-chip-dot { width: 5px; height: 5px; border-radius: 50%; flex-shrink: 0; }
 
-/* Bullets */
-.bullets { display: flex; flex-direction: column; gap: 11px; }
-.bullet { display: flex; align-items: flex-start; gap: 10px; font-size: 14px; color: #ccc; line-height: 1.5; }
-.tick {
-  width: 18px; height: 18px; border-radius: 50%; flex-shrink: 0; margin-top: 1px;
-  background: rgba(34,197,94,0.08); border: 1px solid rgba(34,197,94,0.25);
+.hero-bullets {
+  display: flex; flex-direction: column; gap: 10px;
+}
+.hero-bullet {
+  display: flex; align-items: flex-start; gap: 10px;
+  font-size: 13.5px; color: #888; line-height: 1.5;
+}
+.hero-tick {
+  width: 17px; height: 17px; border-radius: 50%;
+  flex-shrink: 0; margin-top: 1px;
+  background: rgba(34,197,94,0.08);
+  border: 1px solid rgba(34,197,94,0.25);
   display: flex; align-items: center; justify-content: center;
 }
 
-/* CTA */
-.cta-row { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
-.urgency { display: flex; align-items: center; gap: 7px; font-size: 12px; color: #ef9999; }
+.hero-cta-row {
+  display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+}
+.hero-urgency {
+  display: flex; align-items: center; gap: 7px;
+  font-size: 12px; color: #f87171; margin-top: 4px;
+}
+.hero-urgency-dot {
+  width: 5px; height: 5px; border-radius: 50%;
+  background: var(--red); flex-shrink: 0;
+  animation: pulse 1.5s infinite;
+}
 
-/* ── RIGHT SIDE: AI Learning Panel ── */
-.hero-right { display: flex; flex-direction: column; gap: 14px; }
+/* ── RIGHT CARD ── */
+.hero-right {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
 
-.ai-panel {
+.curr-card {
   background: var(--bg3);
   border: 1px solid var(--border);
-  border-radius: 16px;
+  border-radius: var(--radius-lg);
   overflow: hidden;
 }
-.ai-panel-header {
+
+.curr-card-header {
   display: flex; align-items: center; gap: 10px;
-  padding: 12px 16px;
+  padding: 11px 14px;
   border-bottom: 1px solid var(--border);
   background: var(--bg4);
 }
-.ai-panel-dots { display: flex; gap: 5px; }
-.ai-panel-dot { width: 9px; height: 9px; border-radius: 50%; }
-.ai-panel-title { font-size: 12px; color: var(--text3); font-family: var(--font-head); margin-left: 4px; }
-.ai-panel-live {
-  margin-left: auto; display: flex; align-items: center; gap: 5px;
-  font-size: 10px; color: var(--g1); font-weight: 600; letter-spacing: 0.08em;
+.curr-card-dots { display: flex; gap: 5px; }
+.curr-card-dot { width: 8px; height: 8px; border-radius: 50%; }
+.curr-card-title {
+  font-size: 11px; color: var(--text3); font-weight: 500;
+  letter-spacing: 0.05em; text-transform: uppercase;
+}
+.curr-card-live {
+  display: flex; align-items: center; gap: 5px;
+  font-size: 10px; font-weight: 600; color: var(--g1);
+  letter-spacing: 0.07em; margin-left: auto;
+}
+.curr-card-live-dot {
+  width: 5px; height: 5px; border-radius: 50%;
+  background: var(--g1);
 }
 
-/* Curriculum week cards inside panel */
-.ai-curriculum { padding: 14px; display: flex; flex-direction: column; gap: 6px; }
-.curr-week {
-  display: flex; align-items: center; gap: 12px;
-  background: var(--bg2); border: 1px solid var(--border);
-  border-radius: 10px; padding: 10px 14px;
-  transition: border-color .2s, transform .15s;
+.curr-week-list {
+  padding: 10px;
+  display: flex; flex-direction: column; gap: 4px;
+}
+
+.curr-week-row {
+  display: flex; align-items: center; gap: 9px;
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 9px 11px;
+  transition: border-color .18s, transform .15s;
   cursor: default;
 }
-.curr-week:hover { border-color: rgba(34,197,94,0.25); transform: translateX(3px); }
+.curr-week-row:hover {
+  border-color: rgba(34,197,94,0.22);
+  transform: translateX(2px);
+}
 .curr-week-num {
-  font-family: var(--font-head); font-size: 11px; font-weight: 700;
-  color: var(--text3); min-width: 28px;
+  font-size: 10px; font-weight: 600; color: var(--text3);
+  min-width: 24px; flex-shrink: 0;
 }
 .curr-week-icon {
-  width: 30px; height: 30px; border-radius: 8px;
-  display: flex; align-items: center; justify-content: center;
-  flex-shrink: 0;
+  width: 26px; height: 26px; border-radius: 6px;
+  flex-shrink: 0; display: flex; align-items: center; justify-content: center;
 }
-.curr-week-info { flex: 1; }
-.curr-week-name { font-size: 13px; font-weight: 600; color: var(--text); line-height: 1.2; }
-.curr-week-desc { font-size: 11px; color: var(--text3); margin-top: 1px; }
+.curr-week-info { flex: 1; min-width: 0; }
+.curr-week-name {
+  font-size: 12.5px; font-weight: 600; color: var(--text); line-height: 1.2;
+}
+.curr-week-desc {
+  font-size: 10.5px; color: var(--text3); margin-top: 2px;
+}
 .curr-week-badge {
-  font-size: 10px; padding: 2px 8px; border-radius: 100px;
-  font-weight: 600; white-space: nowrap; flex-shrink: 0;
+  font-size: 9.5px; font-weight: 600;
+  padding: 2px 7px; border-radius: 100px;
+  white-space: nowrap; flex-shrink: 0;
 }
-.badge-live { background: rgba(34,197,94,0.1); color: var(--g1); border: 1px solid rgba(34,197,94,0.2); }
-.badge-project { background: rgba(245,158,11,0.1); color: var(--amber); border: 1px solid rgba(245,158,11,0.2); }
-.badge-hands { background: rgba(96,165,250,0.1); color: #60a5fa; border: 1px solid rgba(96,165,250,0.2); }
+.badge-live   { background: rgba(34,197,94,0.09);  color: #4ade80; border: 1px solid rgba(34,197,94,0.2); }
+.badge-money  { background: rgba(245,158,11,0.09); color: #fbbf24; border: 1px solid rgba(245,158,11,0.2); }
+.badge-earn   { background: rgba(96,165,250,0.09); color: #93c5fd; border: 1px solid rgba(96,165,250,0.2); }
 
-/* Stats row */
-.stats-row {
+.curr-quote {
+  margin: 0 10px 10px;
+  background: rgba(34,197,94,0.05);
+  border: 1px solid rgba(34,197,94,0.13);
+  border-radius: 7px;
+  padding: 9px 12px;
+  font-size: 11.5px; color: #4d7a56; line-height: 1.55;
+  display: flex; gap: 7px; align-items: flex-start;
+}
+.curr-quote-icon { flex-shrink: 0; margin-top: 1px; }
+
+.curr-stats {
   display: grid; grid-template-columns: 1fr 1fr 1fr;
-  background: var(--border); gap: 1px;
-  border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden;
-}
-.stat-cell { background: var(--bg3); padding: 16px 12px; text-align: center; }
-.stat-num { font-family: var(--font-head); font-size: 20px; font-weight: 700; color: var(--g1); line-height: 1; }
-.stat-lbl { font-size: 11px; color: var(--text3); margin-top: 3px; }
-
-/* Trust row */
-.hero-trust {
-  display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
-  padding: 12px 16px;
-  background: var(--bg3); border: 1px solid var(--border);
-  border-radius: 12px;
-}
-.trust-item {
-  display: flex; align-items: center; gap: 6px;
-  font-size: 12px; color: var(--text2);
-}
-.trust-sep { width: 1px; height: 14px; background: var(--border); }
-
-/* AUTHORITY STRIP — redesigned */
-.auth-strip {
-  background: var(--bg2);
   border-top: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
-  display: grid; grid-template-columns: repeat(5,1fr);
 }
-.auth-cell { padding: 20px 0; text-align: center; border-right: 1px solid var(--border); }
-.auth-cell:last-child { border-right: none; }
-.auth-val { font-size: 13px; font-weight: 600; color: var(--text); font-family: var(--font-head); }
-.auth-lbl { font-size: 10px; color: var(--text3); margin-top: 3px; text-transform: uppercase; letter-spacing: .08em; }
-.auth-icon { margin: 0 auto 6px; width: 28px; height: 28px; border-radius: 8px; display: flex; align-items: center; justify-content: center; }
+.curr-stat {
+  padding: 12px 6px; text-align: center;
+  border-right: 1px solid var(--border);
+}
+.curr-stat:last-child { border-right: none; }
+.curr-stat-num {
+  font-family: var(--font-head); font-size: 18px; font-weight: 700;
+  color: var(--g1); line-height: 1;
+}
+.curr-stat-lbl { font-size: 9.5px; color: var(--text3); margin-top: 3px; }
+
+.curr-trust {
+  display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+  border-top: 1px solid var(--border);
+  padding: 9px 13px;
+}
+.curr-trust-item {
+  display: flex; align-items: center; gap: 5px;
+  font-size: 11px; color: var(--text3);
+}
+.curr-trust-sep {
+  width: 1px; height: 11px; background: var(--border);
+}
 </style>
 
 <section class="hero">
@@ -1278,374 +1313,187 @@ body { padding-top: 98px; }
     <!-- LEFT: Copy -->
     <div class="hero-left">
 
-      <!-- Headline -->
+      <div class="hero-badge">
+        <div class="hero-badge-dot"></div>
+        Cohort 3 · Starts May 12
+      </div>
+
       <h1>
-        Learn to Build <span class="green">Real AI Systems</span><br>
-        the Same Way <span class="underline-green">Agencies Do</span> —<br>
-        Then Get Paid for It.
+        Learn to Build<br>
+        <span class="green">Real AI Systems</span><br>
+        Then Get Paid.
       </h1>
 
-      <!-- Sub -->
-      <p class="hero-sub">A structured 9-week curriculum taught by operators who've deployed AI for 50+ real businesses. From zero to building, billing, and beyond.</p>
+      <p class="hero-sub">
+        9-week live curriculum taught by agency founders who've deployed AI for 50+ real businesses — from zero to billing your first client.
+      </p>
 
-      <!-- Tool stack pills -->
-      <div class="hero-path">
-        <div class="path-pill"><div class="path-pill-dot" style="background:#ff6b35;"></div>n8n Automation</div>
-        <div class="path-pill"><div class="path-pill-dot" style="background:#a78bfa;"></div>Claude API & MCP</div>
-        <div class="path-pill"><div class="path-pill-dot" style="background:#22c55e;"></div>Vapi Voice Agents</div>
-        <div class="path-pill"><div class="path-pill-dot" style="background:#60a5fa;"></div>Vibe Coding</div>
-        <div class="path-pill"><div class="path-pill-dot" style="background:#f59e0b;"></div>Meta Ads & Ecom</div>
+      <div class="hero-chips">
+        <div class="hero-chip"><div class="hero-chip-dot" style="background:#ff6b35;"></div>n8n Automation</div>
+        <div class="hero-chip"><div class="hero-chip-dot" style="background:#a78bfa;"></div>Claude API</div>
+        <div class="hero-chip"><div class="hero-chip-dot" style="background:#22c55e;"></div>Vapi Voice</div>
+        <div class="hero-chip"><div class="hero-chip-dot" style="background:#60a5fa;"></div>Vibe Coding</div>
+        <div class="hero-chip"><div class="hero-chip-dot" style="background:#f59e0b;"></div>Meta Ads</div>
       </div>
 
-      <!-- Bullets -->
-      <div class="bullets">
-        <div class="bullet">
-          <div class="tick"><svg width="9" height="9" viewBox="0 0 10 10" fill="none"><polyline points="1.5,5 4,7.5 8.5,2.5" stroke="#22c55e" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-          Structured curriculum — 9 weeks, 27 live classes, 27 real projects
+      <div class="hero-bullets">
+        <div class="hero-bullet">
+          <div class="hero-tick"><svg width="8" height="8" viewBox="0 0 10 10" fill="none"><polyline points="1.5,5 4,7.5 8.5,2.5" stroke="#22c55e" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          27 live classes · 27 real projects — not YouTube tutorials
         </div>
-        <div class="bullet">
-          <div class="tick"><svg width="9" height="9" viewBox="0 0 10 10" fill="none"><polyline points="1.5,5 4,7.5 8.5,2.5" stroke="#22c55e" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-          Taught by active AI agency founders — not educators or influencers
+        <div class="hero-bullet">
+          <div class="hero-tick"><svg width="8" height="8" viewBox="0 0 10 10" fill="none"><polyline points="1.5,5 4,7.5 8.5,2.5" stroke="#22c55e" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          Taught by active AI agency founders — not influencers
         </div>
-        <div class="bullet">
-          <div class="tick"><svg width="9" height="9" viewBox="0 0 10 10" fill="none"><polyline points="1.5,5 4,7.5 8.5,2.5" stroke="#22c55e" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="hero-bullet">
+          <div class="hero-tick"><svg width="8" height="8" viewBox="0 0 10 10" fill="none"><polyline points="1.5,5 4,7.5 8.5,2.5" stroke="#22c55e" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
           Land your first paying client before the cohort ends
         </div>
-        <div class="bullet">
-          <div class="tick"><svg width="9" height="9" viewBox="0 0 10 10" fill="none"><polyline points="1.5,5 4,7.5 8.5,2.5" stroke="#22c55e" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-          No coding background needed — we start from the ground up
+        <div class="hero-bullet">
+          <div class="hero-tick"><svg width="8" height="8" viewBox="0 0 10 10" fill="none"><polyline points="1.5,5 4,7.5 8.5,2.5" stroke="#22c55e" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          No coding background needed — start from zero
         </div>
       </div>
 
-      <!-- CTAs -->
-      <div class="cta-row">
-        <a href="seminar.html" class="btn-green btn-green-lg">Join Free Seminar →</a>
-        <a href="course.html" class="btn-white" style="font-size:15px; padding:15px 28px;">See Curriculum</a>
+      <div>
+        <div class="hero-cta-row">
+          <a href="seminar.html" class="btn-green btn-green-lg">Join Free Seminar →</a>
+          <a href="course.html" class="btn-white" style="font-size:15px; padding:14px 26px;">See Curriculum</a>
+        </div>
+        <div class="hero-urgency">
+          <div class="hero-urgency-dot"></div>
+          33 of 40 founding seats claimed · No credit card for seminar
+        </div>
       </div>
-      <div class="urgency">
-        <div class="red-dot"></div>
-        Cohort 3 · Starts May 12 · 33 of 40 seats claimed
-      </div>
+
     </div>
 
-    <!-- RIGHT: Animated Tool Integration Visual -->
+    <!-- RIGHT: Curriculum Card -->
     <div class="hero-right">
 
-      <div class="ai-panel" style="overflow:visible;background:transparent;border:none;">
+      <div class="curr-card">
 
-        <!-- Integration visual card -->
-        <div class="integration-card">
-          <div class="integration-header">
-            <div class="ai-panel-dots">
-              <div class="ai-panel-dot" style="background:#ef4444;"></div>
-              <div class="ai-panel-dot" style="background:#f59e0b;"></div>
-              <div class="ai-panel-dot" style="background:#22c55e;"></div>
+        <div class="curr-card-header">
+          <div class="curr-card-dots">
+            <div class="curr-card-dot" style="background:#ef4444;"></div>
+            <div class="curr-card-dot" style="background:#f59e0b;"></div>
+            <div class="curr-card-dot" style="background:#22c55e;"></div>
+          </div>
+          <span class="curr-card-title">9-Week Curriculum</span>
+          <div class="curr-card-live"><div class="curr-card-live-dot"></div>LIVE</div>
+        </div>
+
+        <div class="curr-week-list">
+
+          <div class="curr-week-row">
+            <span class="curr-week-num">W1–2</span>
+            <div class="curr-week-icon" style="background:rgba(255,107,53,0.12);">
+              <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><circle cx="5" cy="8" r="3" stroke="#ff6b35" stroke-width="1.4"/><circle cx="11" cy="8" r="3" stroke="#ff6b35" stroke-width="1.4"/><path d="M8 8h0" stroke="#ff6b35" stroke-width="2" stroke-linecap="round"/></svg>
             </div>
-            <span class="ai-panel-title">Your AI Automation Stack</span>
-            <div class="ai-panel-live"><div class="pulse"></div> LIVE</div>
+            <div class="curr-week-info">
+              <div class="curr-week-name">AI Foundations & n8n</div>
+              <div class="curr-week-desc">Automations, APIs, first live system</div>
+            </div>
+            <span class="curr-week-badge badge-live">LIVE</span>
           </div>
 
-          <!-- Central AI node -->
-          <div class="integration-body">
-            <div class="int-center-wrap">
-              <div class="int-center-glow"></div>
-              <div class="int-center">
-                <svg width="28" height="28" viewBox="0 0 32 32" fill="none">
-                  <circle cx="16" cy="16" r="14" stroke="#22c55e" stroke-width="1.5" opacity="0.3"/>
-                  <circle cx="16" cy="16" r="9" stroke="#22c55e" stroke-width="1.5" opacity="0.6"/>
-                  <circle cx="16" cy="16" r="4" fill="#22c55e"/>
-                </svg>
-                <span class="int-center-label">AI Agent</span>
-              </div>
-
-              <!-- Tool nodes orbiting -->
-              <!-- n8n -->
-              <div class="int-node" style="--angle:0deg;--dist:110px;--delay:0s;">
-                <div class="int-node-icon" style="background:#ff6b35;box-shadow:0 0 16px rgba(255,107,53,0.3);">
-                  <svg width="16" height="16" viewBox="0 0 32 32" fill="none"><circle cx="10" cy="16" r="5" fill="#fff" opacity="0.9"/><circle cx="22" cy="16" r="5" fill="#fff" opacity="0.9"/><path d="M15 16h2" stroke="#ff6b35" stroke-width="2" stroke-linecap="round"/></svg>
-                </div>
-                <span class="int-node-label">n8n</span>
-                <div class="int-connector"></div>
-              </div>
-
-              <!-- WhatsApp -->
-              <div class="int-node" style="--angle:51deg;--dist:110px;--delay:0.2s;">
-                <div class="int-node-icon" style="background:#25d366;box-shadow:0 0 16px rgba(37,211,102,0.3);">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/></svg>
-                </div>
-                <span class="int-node-label">WhatsApp</span>
-                <div class="int-connector"></div>
-              </div>
-
-              <!-- Claude API -->
-              <div class="int-node" style="--angle:103deg;--dist:110px;--delay:0.4s;">
-                <div class="int-node-icon" style="background:#a78bfa;box-shadow:0 0 16px rgba(167,139,250,0.3);">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="white" stroke-width="1.8"/><path d="M8 12h8M12 8v8" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg>
-                </div>
-                <span class="int-node-label">Claude API</span>
-                <div class="int-connector"></div>
-              </div>
-
-              <!-- Vapi -->
-              <div class="int-node" style="--angle:154deg;--dist:110px;--delay:0.6s;">
-                <div class="int-node-icon" style="background:#f59e0b;box-shadow:0 0 16px rgba(245,158,11,0.3);">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 2a3 3 0 00-3 3v7a3 3 0 006 0V5a3 3 0 00-3-3z" stroke="white" stroke-width="1.8"/><path d="M5 10v2a7 7 0 0014 0v-2" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg>
-                </div>
-                <span class="int-node-label">Vapi</span>
-                <div class="int-connector"></div>
-              </div>
-
-              <!-- Shopify -->
-              <div class="int-node" style="--angle:205deg;--dist:110px;--delay:0.8s;">
-                <div class="int-node-icon" style="background:#96bf48;box-shadow:0 0 16px rgba(150,191,72,0.3);">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M6 2l1.5 10.5L12 14l4.5-1.5L18 2" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 6h16" stroke="white" stroke-width="1.8" stroke-linecap="round"/><circle cx="9" cy="20" r="1.5" fill="white"/><circle cx="15" cy="20" r="1.5" fill="white"/></svg>
-                </div>
-                <span class="int-node-label">Shopify</span>
-                <div class="int-connector"></div>
-              </div>
-
-              <!-- Meta Ads -->
-              <div class="int-node" style="--angle:257deg;--dist:110px;--delay:1s;">
-                <div class="int-node-icon" style="background:#0668e1;box-shadow:0 0 16px rgba(6,104,225,0.3);">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.879V14.89h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.989C18.343 21.129 22 16.99 22 12c0-5.523-4.477-10-10-10z"/></svg>
-                </div>
-                <span class="int-node-label">Meta Ads</span>
-                <div class="int-connector"></div>
-              </div>
-
-              <!-- Supabase -->
-              <div class="int-node" style="--angle:308deg;--dist:110px;--delay:1.2s;">
-                <div class="int-node-icon" style="background:#3ecf8e;box-shadow:0 0 16px rgba(62,207,142,0.3);">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M4 4l8 16 8-16H4z" stroke="white" stroke-width="1.8" stroke-linejoin="round"/></svg>
-                </div>
-                <span class="int-node-label">Supabase</span>
-                <div class="int-connector"></div>
-              </div>
-
-              <!-- Orbit ring -->
-              <div class="int-orbit-ring"></div>
+          <div class="curr-week-row">
+            <span class="curr-week-num">W3</span>
+            <div class="curr-week-icon" style="background:rgba(37,211,102,0.09);">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z" fill="#25d366"/></svg>
             </div>
-
-            <!-- Live data packets animation -->
-            <div class="data-packet" style="--p-angle:0deg;--p-delay:0s;"></div>
-            <div class="data-packet" style="--p-angle:103deg;--p-delay:0.7s;"></div>
-            <div class="data-packet" style="--p-angle:205deg;--p-delay:1.4s;"></div>
+            <div class="curr-week-info">
+              <div class="curr-week-name">WhatsApp AI Bots</div>
+              <div class="curr-week-desc">Lead capture, customer replies</div>
+            </div>
+            <span class="curr-week-badge badge-money">+PKR 45K</span>
           </div>
 
-          <!-- Bottom tool scroll -->
-          <div class="tool-ticker-wrap">
-            <div class="tool-ticker">
-              <span class="ttool"><svg width="12" height="12" viewBox="0 0 16 16" fill="#22c55e"><circle cx="8" cy="8" r="4"/></svg> n8n</span>
-              <span class="ttool"><svg width="12" height="12" viewBox="0 0 16 16" fill="#a78bfa"><circle cx="8" cy="8" r="4"/></svg> Claude API</span>
-              <span class="ttool"><svg width="12" height="12" viewBox="0 0 16 16" fill="#f59e0b"><circle cx="8" cy="8" r="4"/></svg> Vapi</span>
-              <span class="ttool"><svg width="12" height="12" viewBox="0 0 16 16" fill="#25d366"><circle cx="8" cy="8" r="4"/></svg> WhatsApp</span>
-              <span class="ttool"><svg width="12" height="12" viewBox="0 0 16 16" fill="#60a5fa"><circle cx="8" cy="8" r="4"/></svg> Lovable</span>
-              <span class="ttool"><svg width="12" height="12" viewBox="0 0 16 16" fill="#96bf48"><circle cx="8" cy="8" r="4"/></svg> Shopify</span>
-              <span class="ttool"><svg width="12" height="12" viewBox="0 0 16 16" fill="#0668e1"><circle cx="8" cy="8" r="4"/></svg> Meta Ads</span>
-              <span class="ttool"><svg width="12" height="12" viewBox="0 0 16 16" fill="#3ecf8e"><circle cx="8" cy="8" r="4"/></svg> Supabase</span>
-              <span class="ttool"><svg width="12" height="12" viewBox="0 0 16 16" fill="#ef4444"><circle cx="8" cy="8" r="4"/></svg> MCP</span>
-              <!-- duplicate for seamless loop -->
-              <span class="ttool"><svg width="12" height="12" viewBox="0 0 16 16" fill="#22c55e"><circle cx="8" cy="8" r="4"/></svg> n8n</span>
-              <span class="ttool"><svg width="12" height="12" viewBox="0 0 16 16" fill="#a78bfa"><circle cx="8" cy="8" r="4"/></svg> Claude API</span>
-              <span class="ttool"><svg width="12" height="12" viewBox="0 0 16 16" fill="#f59e0b"><circle cx="8" cy="8" r="4"/></svg> Vapi</span>
-              <span class="ttool"><svg width="12" height="12" viewBox="0 0 16 16" fill="#25d366"><circle cx="8" cy="8" r="4"/></svg> WhatsApp</span>
-              <span class="ttool"><svg width="12" height="12" viewBox="0 0 16 16" fill="#60a5fa"><circle cx="8" cy="8" r="4"/></svg> Lovable</span>
-              <span class="ttool"><svg width="12" height="12" viewBox="0 0 16 16" fill="#96bf48"><circle cx="8" cy="8" r="4"/></svg> Shopify</span>
-              <span class="ttool"><svg width="12" height="12" viewBox="0 0 16 16" fill="#0668e1"><circle cx="8" cy="8" r="4"/></svg> Meta Ads</span>
-              <span class="ttool"><svg width="12" height="12" viewBox="0 0 16 16" fill="#3ecf8e"><circle cx="8" cy="8" r="4"/></svg> Supabase</span>
-              <span class="ttool"><svg width="12" height="12" viewBox="0 0 16 16" fill="#ef4444"><circle cx="8" cy="8" r="4"/></svg> MCP</span>
+          <div class="curr-week-row">
+            <span class="curr-week-num">W4</span>
+            <div class="curr-week-icon" style="background:rgba(245,158,11,0.1);">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M12 2a3 3 0 00-3 3v7a3 3 0 006 0V5a3 3 0 00-3-3z" stroke="#f59e0b" stroke-width="1.6"/><path d="M5 10v2a7 7 0 0014 0v-2" stroke="#f59e0b" stroke-width="1.6" stroke-linecap="round"/></svg>
             </div>
+            <div class="curr-week-info">
+              <div class="curr-week-name">Voice Agents — Vapi</div>
+              <div class="curr-week-desc">AI phone calls, appointment booking</div>
+            </div>
+            <span class="curr-week-badge badge-live">LIVE</span>
+          </div>
+
+          <div class="curr-week-row">
+            <span class="curr-week-num">W5–6</span>
+            <div class="curr-week-icon" style="background:rgba(96,165,250,0.1);">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="3" stroke="#60a5fa" stroke-width="1.6"/><path d="M8 12h8M12 8v8" stroke="#60a5fa" stroke-width="1.6" stroke-linecap="round"/></svg>
+            </div>
+            <div class="curr-week-info">
+              <div class="curr-week-name">Vibe Coding & Ecom AI</div>
+              <div class="curr-week-desc">Lovable, Cursor, Shopify automation</div>
+            </div>
+            <span class="curr-week-badge badge-live">LIVE</span>
+          </div>
+
+          <div class="curr-week-row">
+            <span class="curr-week-num">W7–9</span>
+            <div class="curr-week-icon" style="background:rgba(167,139,250,0.1);">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M12 2l2 7h7l-6 4 2 7-5-4-5 4 2-7-6-4h7z" stroke="#a78bfa" stroke-width="1.5" stroke-linejoin="round"/></svg>
+            </div>
+            <div class="curr-week-info">
+              <div class="curr-week-name">Client Acquisition & Launch</div>
+              <div class="curr-week-desc">Pitching, pricing, capstone project</div>
+            </div>
+            <span class="curr-week-badge badge-earn">Earn Phase</span>
+          </div>
+
+        </div>
+
+        <div class="curr-quote">
+          <span class="curr-quote-icon">
+            <svg width="12" height="12" viewBox="0 0 16 16" fill="none"><path d="M8 1l1.5 3 3.5.5-2.5 2.5.6 3.5L8 9 4.9 10.5l.6-3.5L3 4.5 6.5 4z" fill="#22c55e" opacity="0.6"/></svg>
+          </span>
+          Cohort 1 students landed paying clients by Week 3 — charging PKR 30K–100K per project.
+        </div>
+
+        <div class="curr-stats">
+          <div class="curr-stat">
+            <div class="curr-stat-num">50+</div>
+            <div class="curr-stat-lbl">Businesses Automated</div>
+          </div>
+          <div class="curr-stat">
+            <div class="curr-stat-num">27</div>
+            <div class="curr-stat-lbl">Live Projects</div>
+          </div>
+          <div class="curr-stat">
+            <div class="curr-stat-num">1M+</div>
+            <div class="curr-stat-lbl">AI Messages Sent</div>
           </div>
         </div>
 
-      </div>
+        <div class="curr-trust">
+          <div class="curr-trust-item">
+            <svg width="11" height="11" viewBox="0 0 16 16" fill="none"><path d="M8 1l1.5 3 3.5.5-2.5 2.5.6 3.5L8 9 4.9 10.5l.6-3.5L3 4.5 6.5 4z" fill="#22c55e" opacity="0.55"/></svg>
+            7-Day Refund
+          </div>
+          <div class="curr-trust-sep"></div>
+          <div class="curr-trust-item">
+            <svg width="11" height="11" viewBox="0 0 16 16" fill="none"><rect x="2" y="4" width="12" height="9" rx="1.5" stroke="#444" stroke-width="1.2"/><path d="M5 4V3a3 3 0 016 0v1" stroke="#444" stroke-width="1.2" stroke-linecap="round"/></svg>
+            Installments
+          </div>
+          <div class="curr-trust-sep"></div>
+          <div class="curr-trust-item">
+            <svg width="11" height="11" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6" stroke="#444" stroke-width="1.2"/><path d="M8 5v3l2 1.5" stroke="#444" stroke-width="1.2" stroke-linecap="round"/></svg>
+            Sessions Recorded
+          </div>
+          <div class="curr-trust-sep"></div>
+          <div class="curr-trust-item">PKR 14,999</div>
+        </div>
 
-      <!-- Stats row -->
-      <div class="stats-row">
-        <div class="stat-cell"><div class="stat-num">50+</div><div class="stat-lbl">Businesses Automated</div></div>
-        <div class="stat-cell"><div class="stat-num">1M+</div><div class="stat-lbl">AI Messages Sent</div></div>
-        <div class="stat-cell"><div class="stat-num">27</div><div class="stat-lbl">Live Projects</div></div>
       </div>
-
-      <!-- Trust strip -->
-      <div class="hero-trust">
-        <div class="trust-item">
-          <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M8 1l1.5 3 3.5.5-2.5 2.5.6 3.5L8 9 4.9 10.5l.6-3.5L3 4.5 6.5 4z" fill="#22c55e" opacity="0.8"/></svg>
-          7-Day Refund Guarantee
-        </div>
-        <div class="trust-sep"></div>
-        <div class="trust-item">
-          <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><rect x="2" y="4" width="12" height="9" rx="1.5" stroke="#888" stroke-width="1.2"/><path d="M5 4V3a3 3 0 016 0v1" stroke="#888" stroke-width="1.2" stroke-linecap="round"/></svg>
-          Installments Available
-        </div>
-        <div class="trust-sep"></div>
-        <div class="trust-item">
-          <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6.5" stroke="#888" stroke-width="1.2"/><path d="M8 5v3l2 1.5" stroke="#888" stroke-width="1.2" stroke-linecap="round"/></svg>
-          Sessions Recorded
-        </div>
-        <div class="trust-sep"></div>
-        <div class="trust-item">
-          <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M2 12l4-4 3 3 5-6" stroke="#888" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          PKR 14,999 One-Time
-        </div>
-      </div>
-
     </div>
+
   </div>
 </section>
 
-<style>
-/* ── Integration Visual ── */
-.integration-card {
-  background: var(--bg3);
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  overflow: hidden;
-}
-.integration-header {
-  display: flex; align-items: center; gap: 10px;
-  padding: 12px 16px;
-  border-bottom: 1px solid var(--border);
-  background: var(--bg4);
-}
-.integration-body {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 280px;
-  overflow: hidden;
-}
-
-/* Subtle grid bg inside panel */
-.integration-body::before {
-  content: '';
-  position: absolute; inset: 0;
-  background-image:
-    linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
-  background-size: 32px 32px;
-  pointer-events: none;
-}
-
-/* Center node */
-.int-center-wrap {
-  position: relative;
-  width: 240px; height: 240px;
-  display: flex; align-items: center; justify-content: center;
-}
-.int-center-glow {
-  position: absolute;
-  width: 120px; height: 120px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(34,197,94,0.15) 0%, transparent 70%);
-  animation: glow-pulse 3s ease-in-out infinite;
-}
-@keyframes glow-pulse {
-  0%,100% { transform: scale(1); opacity: 0.8; }
-  50% { transform: scale(1.3); opacity: 1; }
-}
-.int-center {
-  display: flex; flex-direction: column; align-items: center; gap: 6px;
-  z-index: 10;
-  animation: center-float 4s ease-in-out infinite;
-}
-@keyframes center-float {
-  0%,100% { transform: translateY(0); }
-  50% { transform: translateY(-4px); }
-}
-.int-center-label {
-  font-size: 11px; font-weight: 700; color: #22c55e;
-  letter-spacing: 0.08em; text-transform: uppercase;
-  font-family: var(--font-head);
-}
-
-/* Orbit ring */
-.int-orbit-ring {
-  position: absolute;
-  width: 220px; height: 220px;
-  border-radius: 50%;
-  border: 1px dashed rgba(34,197,94,0.15);
-  animation: orbit-spin 20s linear infinite;
-  pointer-events: none;
-}
-@keyframes orbit-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-
-/* Tool nodes */
-.int-node {
-  position: absolute;
-  display: flex; flex-direction: column; align-items: center; gap: 5px;
-  transform:
-    rotate(var(--angle))
-    translateX(var(--dist))
-    rotate(calc(-1 * var(--angle)));
-  animation: node-appear 0.5s ease forwards;
-  animation-delay: var(--delay);
-  opacity: 0;
-}
-@keyframes node-appear {
-  from { opacity: 0; transform: rotate(var(--angle)) translateX(calc(var(--dist) - 16px)) rotate(calc(-1 * var(--angle))); }
-  to { opacity: 1; transform: rotate(var(--angle)) translateX(var(--dist)) rotate(calc(-1 * var(--angle))); }
-}
-.int-node-icon {
-  width: 40px; height: 40px; border-radius: 12px;
-  display: flex; align-items: center; justify-content: center;
-  transition: transform 0.2s;
-}
-.int-node-icon:hover { transform: scale(1.12); }
-.int-node-label {
-  font-size: 9px; font-weight: 600; color: var(--text3);
-  white-space: nowrap; letter-spacing: 0.04em;
-  font-family: var(--font-head);
-}
-
-/* Data packet animation (travelling dot) */
-.data-packet {
-  position: absolute;
-  width: 6px; height: 6px; border-radius: 50%;
-  background: #22c55e;
-  box-shadow: 0 0 8px rgba(34,197,94,0.8);
-  animation: packet-travel 2.4s ease-in-out infinite;
-  animation-delay: var(--p-delay);
-  transform-origin: center;
-  opacity: 0;
-}
-@keyframes packet-travel {
-  0%   { opacity: 0; transform: rotate(var(--p-angle)) translateX(0px); }
-  10%  { opacity: 1; }
-  50%  { opacity: 1; transform: rotate(var(--p-angle)) translateX(110px); }
-  60%  { opacity: 0; transform: rotate(var(--p-angle)) translateX(110px); }
-  100% { opacity: 0; transform: rotate(var(--p-angle)) translateX(0px); }
-}
-
-/* Tool ticker */
-.tool-ticker-wrap {
-  border-top: 1px solid var(--border);
-  overflow: hidden;
-  padding: 10px 0;
-  background: var(--bg4);
-  -webkit-mask-image: linear-gradient(90deg, transparent 0%, black 10%, black 90%, transparent 100%);
-  mask-image: linear-gradient(90deg, transparent 0%, black 10%, black 90%, transparent 100%);
-}
-.tool-ticker {
-  display: flex; align-items: center; gap: 24px;
-  width: max-content;
-  animation: ticker-scroll 18s linear infinite;
-}
-@keyframes ticker-scroll {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
-}
-.ttool {
-  display: inline-flex; align-items: center; gap: 6px;
-  font-size: 11px; font-weight: 600; color: var(--text3);
-  white-space: nowrap; letter-spacing: 0.04em;
-  font-family: var(--font-head);
-}
-</style>
 
 <!-- AUTHORITY STRIP -->
 <div class="auth-strip">
