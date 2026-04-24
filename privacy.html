@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+  <link rel="icon" type="image/png" href="sanestix-logo.svg">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Privacy Policy — Learn by Sanestix</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -19,15 +20,17 @@
 .legal-body ul li { font-size: 15px; font-weight: 300; color: var(--text2); line-height: 1.8; margin-bottom: 6px; }
 .legal-body a { color: var(--g1); }
 .legal-divider { height: 1px; background: var(--border); margin: 28px 0; }
-</style>
+      .nav-logo { display:flex; align-items:center; text-decoration:none; flex-shrink:0; transition:opacity .2s; }
+    .nav-logo:hover { opacity:0.82; }
+    .nav-logo-img { height:40px; width:auto; object-fit:contain; display:block; background:transparent; }
+    .footer-logo { margin-bottom:14px; }
+    .footer-logo-img { height:46px; width:auto; object-fit:contain; display:block; background:transparent; }
+  </style>
 </head>
 <body>
 <nav>
   <div class="nav-inner">
-    <a href="index.html" class="nav-logo">
-      <div class="logo-mark"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="#030a04" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="2,8 6,12 12,3"/></svg></div>
-      <span>Sanestix<em>.Academy</em></span>
-    </a>
+    <a href="index.html" class="nav-logo"><img src="sanestix-logo.svg" alt="Sanestix Academy" class="nav-logo-img"></a>
     <a href="index.html#apply" class="btn-cta nav-cta">Apply Now →</a>
   </div>
 </nav>
@@ -127,7 +130,7 @@
 <footer>
   <div class="container footer-inner" style="grid-template-columns:1fr 1fr 1fr">
     <div class="footer-brand">
-      <div class="footer-logo">Learn<span class="footer-dot">.</span>Sanestix</div>
+      <div class="footer-logo"><img src="sanestix-logo.svg" alt="Sanestix Academy" class="nav-logo-img"></div>
       <p class="footer-desc">The learning division of Sanestix — Pakistan's AI automation agency.</p>
     </div>
     <div class="footer-col">
