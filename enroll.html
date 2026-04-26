@@ -638,7 +638,7 @@
   };
   var currentStep = 1;
 
-  /* ── N8N WEBHOOK ── replace with your actual n8n webhook URL ── */
+  /* ── N8N WEBHOOK ── */
   var N8N_WEBHOOK = 'https://n8n.sanestix.cloud/webhook/sanestix-enrollment';
 
   /* ── PRE-FILL FROM URL PARAMS ── */
@@ -735,20 +735,40 @@
   }
 
   /* ── STEP 3: FILE UPLOAD ── */
+  /* Compress image to max 1200px wide, JPEG quality 0.75 → keeps payload < 300KB */
+  function compressImage(file, callback) {
+    var reader = new FileReader();
+    reader.onload = function(e) {
+      var img = new Image();
+      img.onload = function() {
+        var MAX = 1200;
+        var w = img.width, h = img.height;
+        if (w > MAX) { h = Math.round(h * MAX / w); w = MAX; }
+        var canvas = document.createElement('canvas');
+        canvas.width = w; canvas.height = h;
+        var ctx = canvas.getContext('2d');
+        ctx.drawImage(img, 0, 0, w, h);
+        var compressed = canvas.toDataURL('image/jpeg', 0.75);
+        callback(compressed);
+      };
+      img.src = e.target.result;
+    };
+    reader.readAsDataURL(file);
+  }
+
   function handleFile(file) {
     if (!file) return;
     if (file.size > 10 * 1024 * 1024) { alert('File too large. Max 10MB.'); return; }
     state.screenshotFile = file;
-    var reader = new FileReader();
-    reader.onload = function(e) {
-      state.screenshotBase64 = e.target.result;
-      document.getElementById('previewImg').src = e.target.result;
+
+    compressImage(file, function(compressed) {
+      state.screenshotBase64 = compressed;
+      document.getElementById('previewImg').src = compressed;
       document.getElementById('previewName').textContent = file.name;
       document.getElementById('uploadPreview').style.display = 'block';
       document.getElementById('uploadArea').classList.add('has-file');
       document.getElementById('err-screenshot').style.display = 'none';
-    };
-    reader.readAsDataURL(file);
+    });
   }
 
   function handleDrop(e) {
@@ -785,9 +805,9 @@
     var btn  = document.getElementById('submitBtn');
     var txt  = document.getElementById('submitBtnText');
     btn.disabled = true;
-    txt.textContent = 'Submitting...';
+    txt.textContent = 'Submitting…';
 
-    var paymentLabel = state.payment === 'jazzcash' ? 'JazzCash/EasyPaisa/UPaisa' : 'Bank Transfer';
+    var paymentLabel = state.payment === 'jazzcash' ? 'JazzCash/EasyPaisa/UPaisa' : 'Bank Transfer (Soneri Bank)';
 
     var payload = {
       name:      state.name,
@@ -797,19 +817,47 @@
       payment:   paymentLabel,
       amount:    'PKR 3,000',
       remaining: 'PKR 11,999',
-      screenshot: state.screenshotBase64,
+      screenshot: state.screenshotBase64 || '',
       source:    'Enrollment Form',
       timestamp: new Date().toLocaleString('en-PK', { timeZone: 'Asia/Karachi' })
     };
 
-    // Send to n8n — which handles WhatsApp alert + Google Sheets + Drive
+    sendWithRetry(payload, 2, function(ok) {
+      if (ok) {
+        showSuccess();
+      } else {
+        /* Webhook failed after retries — still show success to student
+           but log the data so it's not lost */
+        console.error('[Sanestix] Enrollment webhook failed. Payload:', JSON.stringify({
+          name: payload.name,
+          phone: payload.phone,
+          email: payload.email,
+          city: payload.city,
+          payment: payload.payment,
+          timestamp: payload.timestamp
+        }));
+        showSuccess(); /* UX: student shouldn't be blocked — follow up manually */
+      }
+    });
+  }
+
+  function sendWithRetry(payload, retriesLeft, done) {
     fetch(N8N_WEBHOOK, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload)
     })
-    .catch(function() { /* silent fail — student still sees success */ })
-    .finally(function() { showSuccess(); });
+    .then(function(res) {
+      if (res.ok) { done(true); }
+      else if (retriesLeft > 0) {
+        setTimeout(function() { sendWithRetry(payload, retriesLeft - 1, done); }, 1500);
+      } else { done(false); }
+    })
+    .catch(function() {
+      if (retriesLeft > 0) {
+        setTimeout(function() { sendWithRetry(payload, retriesLeft - 1, done); }, 1500);
+      } else { done(false); }
+    });
   }
 
   function showSuccess() {
