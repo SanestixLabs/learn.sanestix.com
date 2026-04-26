@@ -418,7 +418,7 @@
         </div>
         <div>
           <label class="field-label" for="e-city">City</label>
-          <select id="e-city" class="field-input">
+          <select id="e-city" class="field-input" onchange="toggleOtherCity(this)">
             <option value="">Select city</option>
             <option>Karachi</option>
             <option>Lahore</option>
@@ -432,6 +432,8 @@
             <option>Other</option>
           </select>
           <div class="field-error" id="err-city">Please select your city</div>
+          <input type="text" id="e-city-other" class="field-input" placeholder="Enter your city" style="display:none;margin-top:10px;">
+          <div class="field-error" id="err-city-other">Please enter your city</div>
         </div>
       </div>
 
@@ -613,13 +615,10 @@
       </div>
       <div class="success-title">You're registered! 🎉</div>
       <p class="success-sub">
-        Your enrollment has been submitted. Saad or Wahab will confirm your seat on WhatsApp within 24 hours.<br><br>
+        Your enrollment has been submitted. We will confirm your seat on WhatsApp within 24 hours.<br><br>
         <strong>Remaining fee: PKR 11,999</strong> — due before the cohort starts on May 12.
       </p>
-      <a class="success-whatsapp" href="https://wa.me/923098802364?text=Hi!%20I%20just%20submitted%20my%20enrollment%20for%20Cohort%203.%20Please%20confirm%20my%20seat%20%F0%9F%99%8F" target="_blank" rel="noopener">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.115 1.524 5.843L.057 23.5l5.81-1.524A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.007-1.371l-.36-.214-3.727.977.994-3.634-.234-.373A9.818 9.818 0 0112 2.182c5.424 0 9.818 4.394 9.818 9.818 0 5.425-4.394 9.818-9.818 9.818z"/></svg>
-        Message us on WhatsApp
-      </a>
+      <p style="font-size:13px;color:var(--text3);margin-top:8px;">You don't need to do anything else — sit tight, we'll reach out to you shortly! ✅</p>
     </div>
 
   </div><!-- /form-card -->
@@ -639,12 +638,36 @@
   };
   var currentStep = 1;
 
+  /* ── N8N WEBHOOK ── replace with your actual n8n webhook URL ── */
+  var N8N_WEBHOOK = 'https://YOUR_N8N_INSTANCE/webhook/enrollment';
+
+  /* ── PRE-FILL FROM URL PARAMS ── */
+  window.addEventListener('DOMContentLoaded', function() {
+    var params = new URLSearchParams(window.location.search);
+    var name  = params.get('name')  || '';
+    var phone = params.get('phone') || '';
+    var email = params.get('email') || '';
+    if (name)  document.getElementById('e-name').value  = name;
+    if (phone) document.getElementById('e-phone').value = phone;
+    if (email) document.getElementById('e-email').value = email;
+  });
+
+  /* ── OTHER CITY TOGGLE ── */
+  function toggleOtherCity(sel) {
+    var otherInput = document.getElementById('e-city-other');
+    if (sel.value === 'Other') {
+      otherInput.style.display = 'block';
+    } else {
+      otherInput.style.display = 'none';
+      otherInput.value = '';
+    }
+  }
+
   /* ── STEP NAVIGATION ── */
   function goStep(n) {
     document.getElementById('panel' + currentStep).classList.remove('active');
     document.getElementById('s' + currentStep).classList.remove('active');
 
-    // Mark previous steps as done
     for (var i = 1; i < n; i++) {
       var s = document.getElementById('s' + i);
       s.classList.remove('active');
@@ -665,6 +688,7 @@
     var phone = document.getElementById('e-phone').value.trim();
     var email = document.getElementById('e-email').value.trim();
     var city  = document.getElementById('e-city').value;
+    var cityOther = document.getElementById('e-city-other').value.trim();
     var ok = true;
 
     toggle('err-name',  !name);  if (!name)  ok = false;
@@ -672,8 +696,17 @@
     toggle('err-email', !email || !email.includes('@')); if (!email || !email.includes('@')) ok = false;
     toggle('err-city',  !city);  if (!city)  ok = false;
 
+    // If "Other" selected, validate the text field
+    if (city === 'Other') {
+      toggle('err-city-other', !cityOther);
+      if (!cityOther) ok = false;
+    }
+
     if (!ok) return;
-    state.name = name; state.phone = phone; state.email = email; state.city = city;
+    state.name  = name;
+    state.phone = phone;
+    state.email = email;
+    state.city  = city === 'Other' ? cityOther : city;
     goStep(2);
   }
 
@@ -738,7 +771,6 @@
       document.getElementById('err-screenshot').style.display = 'block';
       return;
     }
-    // Populate summary
     document.getElementById('sum-name').textContent     = state.name;
     document.getElementById('sum-phone').textContent    = state.phone;
     document.getElementById('sum-email').textContent    = state.email;
@@ -748,50 +780,54 @@
     goStep(4);
   }
 
-  /* ── SUBMIT ── */
+  /* ── SUBMIT → n8n webhook ── */
   function submitEnrollment() {
     var btn  = document.getElementById('submitBtn');
     var txt  = document.getElementById('submitBtnText');
     btn.disabled = true;
     txt.textContent = 'Submitting...';
 
-    var SHEET_URL = 'https://script.google.com/macros/s/AKfycbwPKuJlo5_uF_M__tvl1ZR3OSrgAGGqvRKkBhhlf4BEuX3SevAdqOE6ZxaxdNVmND0/exec';
+    var paymentLabel = state.payment === 'jazzcash' ? 'JazzCash/EasyPaisa/UPaisa' : 'Bank Transfer';
 
     var payload = {
-      name:          state.name,
-      phone:         state.phone,
-      email:         state.email,
-      city:          state.city,
-      payment:       state.payment === 'jazzcash' ? 'JazzCash/EasyPaisa/UPaisa' : 'Bank Transfer',
-      amountPaid:    'PKR 3,000',
-      remainingFee:  'PKR 11,999',
-      source:        'Enrollment Page',
-      timestamp:     new Date().toISOString()
+      name:         state.name,
+      phone:        state.phone,
+      email:        state.email,
+      city:         state.city,
+      payment:      paymentLabel,
+      amountPaid:   'PKR 3,000',
+      remainingFee: 'PKR 11,999',
+      screenshot:   state.screenshotBase64,
+      source:       'Enrollment Page',
+      timestamp:    new Date().toISOString()
     };
 
-    // 1. Send to Google Sheet
+    // 1. Google Sheet (existing)
+    var SHEET_URL = 'https://script.google.com/macros/s/AKfycbwPKuJlo5_uF_M__tvl1ZR3OSrgAGGqvRKkBhhlf4BEuX3SevAdqOE6ZxaxdNVmND0/exec';
     fetch(SHEET_URL, {
       method: 'POST',
       headers: { 'Content-Type': 'text/plain' },
       body: JSON.stringify(payload)
     });
 
-    // 2. Send WhatsApp notification via wa.me deep link
-    var waMsg = encodeURIComponent(
-      '🎓 *New Enrollment — Sanestix Academy*\n\n' +
-      '👤 *Name:* ' + state.name + '\n' +
-      '📱 *WhatsApp:* ' + state.phone + '\n' +
-      '✉️ *Email:* ' + state.email + '\n' +
-      '🏙️ *City:* ' + state.city + '\n' +
-      '💳 *Payment:* ' + payload.payment + '\n' +
-      '💰 *Amount Paid:* PKR 3,000 (Reservation)\n' +
-      '⏳ *Remaining:* PKR 11,999\n' +
-      '🕐 *Time:* ' + new Date().toLocaleString('en-PK') + '\n\n' +
-      '📎 Payment screenshot attached by student.\n' +
-      '_Please confirm their seat within 24 hours._'
-    );
+    // 2. n8n webhook → sends WhatsApp to owner automatically
+    fetch(N8N_WEBHOOK, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        name:      state.name,
+        phone:     state.phone,
+        email:     state.email,
+        city:      state.city,
+        payment:   paymentLabel,
+        amount:    'PKR 3,000',
+        remaining: 'PKR 11,999',
+        screenshot: state.screenshotBase64,
+        timestamp: new Date().toLocaleString('en-PK')
+      })
+    }).catch(function() { /* webhook failure silently ignored */ });
 
-    // Show success, then open WhatsApp
+    // Show success screen after brief delay
     setTimeout(function() {
       document.getElementById('panel4').classList.remove('active');
       document.getElementById('s4').classList.remove('active');
@@ -799,9 +835,6 @@
       document.getElementById('s4').querySelector('.step-circle').innerHTML =
         '<svg width="14" height="14" viewBox="0 0 16 16" fill="none"><polyline points="3,8 6,11 13,4" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
       document.getElementById('successPanel').classList.add('show');
-
-      // Auto-open WhatsApp with notification
-      window.open('https://wa.me/923098802364?text=' + waMsg, '_blank');
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }, 1000);
   }
