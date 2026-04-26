@@ -2037,8 +2037,8 @@ function handleLeadSubmit() {
   fetch(SHEET_URL, { method: 'POST', headers: { 'Content-Type': 'text/plain' }, body: JSON.stringify(payload) });
 
   // 2. HubSpot — replace YOUR_HUBSPOT_PORTAL_ID and YOUR_HUBSPOT_FORM_GUID below
-  var HS_PORTAL = 'YOUR_HUBSPOT_PORTAL_ID';
-  var HS_FORM   = 'YOUR_HUBSPOT_FORM_GUID';
+  var HS_PORTAL = '246014293';
+  var HS_FORM   = '5b76cd83-2f33-426d-afe1-60da1d224f30';
   if (HS_PORTAL !== 'YOUR_HUBSPOT_PORTAL_ID') {
     fetch('https://api.hsforms.com/submissions/v3/integration/submit/' + HS_PORTAL + '/' + HS_FORM, {
       method: 'POST',
