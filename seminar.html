@@ -573,11 +573,15 @@ function submitForm() {
 
   // 1. Google Sheet (primary)
   var SHEET_URL = 'https://script.google.com/macros/s/AKfycbwPKuJlo5_uF_M__tvl1ZR3OSrgAGGqvRKkBhhlf4BEuX3SevAdqOE6ZxaxdNVmND0/exec';
-  fetch(SHEET_URL, { method: 'POST', headers: { 'Content-Type': 'text/plain' }, body: JSON.stringify(payload) });
+  var formData1 = new FormData();
+  formData1.append('data', JSON.stringify(payload));
+  fetch(SHEET_URL, { method: 'POST', body: formData1, mode: 'no-cors' });
 
   // 1b. Google Sheet (secondary)
   var SHEET_URL_2 = 'https://script.google.com/macros/s/AKfycbxmZltKQZoDqUQGfgpS7qnMxs6s_p-diK-2mn6znmb55nkn5SXkEHAipuG1FN_wt8A/exec';
-  fetch(SHEET_URL_2, { method: 'POST', headers: { 'Content-Type': 'text/plain' }, body: JSON.stringify(payload) });
+  var formData2 = new FormData();
+  formData2.append('data', JSON.stringify(payload));
+  fetch(SHEET_URL_2, { method: 'POST', body: formData2, mode: 'no-cors' });
 
   // 2. HubSpot — replace YOUR_HUBSPOT_PORTAL_ID and YOUR_HUBSPOT_FORM_GUID below
   var HS_PORTAL = '246014293';
