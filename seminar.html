@@ -572,7 +572,7 @@ function submitForm() {
   var payload = { name: name, phone: phone, email: email, source: 'Seminar Page', timestamp: new Date().toISOString() };
 
   // 1. Google Sheet
-  var SHEET_URL = 'https://script.google.com/macros/s/AKfycbyV2jNzRp0b3ZkShxcd-jOpWUg6u2mebCeusjdS-69oFFPUERKcxIaSvXLsb4rVi3Y/exec';
+  var SHEET_URL = 'https://script.google.com/macros/s/AKfycbwPKuJlo5_uF_M__tvl1ZR3OSrgAGGqvRKkBhhlf4BEuX3SevAdqOE6ZxaxdNVmND0/exec';
   fetch(SHEET_URL, { method: 'POST', headers: { 'Content-Type': 'text/plain' }, body: JSON.stringify(payload) });
 
   // 2. HubSpot — replace YOUR_HUBSPOT_PORTAL_ID and YOUR_HUBSPOT_FORM_GUID below
