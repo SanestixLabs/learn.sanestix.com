@@ -560,6 +560,16 @@
   <h1 class="page-title">Secure Your <span>Seat</span></h1>
   <p class="page-sub">Reserve your spot with PKR 3,000. Our team will confirm your enrollment on WhatsApp within 24 hours.</p>
 
+  <!-- SEMINAR DISCOUNT BANNER (shown only when ?ref=seminar) -->
+  <div id="seminarDiscountBanner" style="display:none; background:linear-gradient(135deg,rgba(34,197,94,0.12),rgba(34,197,94,0.06)); border:1.5px solid rgba(34,197,94,0.4); border-radius:14px; padding:16px 20px; margin-bottom:20px; text-align:center;">
+    <div style="font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--g1);font-weight:700;margin-bottom:6px;">🎓 Seminar Attendee Discount Applied</div>
+    <div style="font-size:22px;font-family:var(--font-head);font-weight:800;color:var(--text1);">
+      <span style="text-decoration:line-through;color:var(--text3);font-size:15px;margin-right:8px;">PKR 18,000</span>
+      <span style="color:var(--g1);">PKR 15,000</span>
+    </div>
+    <div style="font-size:12px;color:var(--text2);margin-top:4px;">PKR 3,000 exclusive discount for seminar attendees · Remaining fee: PKR 12,000</div>
+  </div>
+
   <!-- PROGRESS -->
   <div class="steps" id="stepsBar">
     <div class="step active" id="s1"><div class="step-circle">1</div><div class="step-label">Your Info</div></div>
@@ -758,7 +768,7 @@
         <div class="summary-row"><span class="summary-key">City</span><span class="summary-val" id="sum-city">—</span></div>
         <div class="summary-row"><span class="summary-key">Payment Method</span><span class="summary-val" id="sum-payment">—</span></div>
         <div class="summary-row"><span class="summary-key">Amount Paid</span><span class="summary-val" style="color:var(--g1)">PKR 3,000 (Seat Reservation)</span></div>
-        <div class="summary-row"><span class="summary-key">Remaining Fee</span><span class="summary-val">PKR 11,999 (due before Cohort starts)</span></div>
+        <div class="summary-row"><span class="summary-key">Remaining Fee</span><span class="summary-val" id="sum-remaining-fee">PKR 15,000 (due before Cohort starts)</span></div>
         <div class="summary-row"><span class="summary-key">Screenshot</span><span class="summary-val" id="sum-screenshot">—</span></div>
       </div>
 
@@ -868,7 +878,7 @@
         <div class="verif-eta-icon">⏱</div>
         <div class="verif-eta-text">
           <strong>Expected confirmation: within 24 hours</strong><br>
-          Remaining fee of <strong>PKR 11,999</strong> is due before the cohort starts on May 12.
+          Remaining fee of <strong id="success-remaining-fee">PKR 15,000</strong> is due before the cohort starts on May 12.
         </div>
       </div>
 
@@ -904,6 +914,30 @@
   /* ── N8N WEBHOOK ── */
   var N8N_WEBHOOK = 'https://n8n.sanestix.cloud/webhook/sanestix-enrollment';
 
+  /* ── SEMINAR DISCOUNT LOGIC ── */
+  var FULL_PRICE     = 18000;
+  var SEMINAR_DISCOUNT = 3000;
+  var SEAT_DEPOSIT   = 3000;
+  var isSeminarAttendee = false;
+
+  function detectSeminarSource() {
+    var params = new URLSearchParams(window.location.search);
+    var ref    = (params.get('ref')    || '').toLowerCase();
+    var source = (params.get('source') || '').toLowerCase();
+    return ref === 'seminar' || source === 'seminar';
+  }
+
+  function applyDiscountUI() {
+    /* Banner */
+    document.getElementById('seminarDiscountBanner').style.display = 'block';
+    /* Summary row — update remaining fee dynamically */
+    var remainingEl = document.getElementById('sum-remaining-fee');
+    if (remainingEl) remainingEl.textContent = 'PKR 12,000 (due before Cohort starts)';
+    /* Success message remaining fee */
+    var successRem = document.getElementById('success-remaining-fee');
+    if (successRem) successRem.textContent = 'PKR 12,000';
+  }
+
   /* ── PRE-FILL FROM URL PARAMS ── */
   window.addEventListener('DOMContentLoaded', function() {
     var params = new URLSearchParams(window.location.search);
@@ -913,6 +947,12 @@
     if (name)  document.getElementById('e-name').value  = name;
     if (phone) document.getElementById('e-phone').value = phone;
     if (email) document.getElementById('e-email').value = email;
+
+    /* Seminar discount detection */
+    isSeminarAttendee = detectSeminarSource();
+    if (isSeminarAttendee) {
+      applyDiscountUI();
+    }
   });
 
   /* ── OTHER CITY TOGGLE ── */
@@ -1079,9 +1119,11 @@
       city:      state.city,
       payment:   paymentLabel,
       amount:    'PKR 3,000',
-      remaining: 'PKR 11,999',
+      remaining: isSeminarAttendee ? 'PKR 12,000' : 'PKR 15,000',
+      totalFee:  isSeminarAttendee ? 'PKR 15,000 (seminar discount applied)' : 'PKR 18,000',
+      discount:  isSeminarAttendee ? 'PKR 3,000 seminar attendee discount' : 'none',
       screenshot: state.screenshotBase64 || '',
-      source:    'Enrollment Form',
+      source:    isSeminarAttendee ? 'Seminar Attendee' : 'Enrollment Form',
       timestamp: new Date().toLocaleString('en-PK', { timeZone: 'Asia/Karachi' })
     };
 
