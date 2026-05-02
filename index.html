@@ -1890,6 +1890,10 @@ footer { background: var(--bg2); border-top: 1px solid var(--border); padding: 6
       Join our <strong style="color:#e8f5e9;font-weight:500;">free live seminar</strong> — watch real AI automations built from scratch in 60 minutes. No sign-up pressure, no pitch. Just proof.
     </p>
 
+    <div class="seminar-popup-video">
+      <iframe src="https://www.youtube.com/embed/1Iz5empOpI8?rel=0&amp;origin=https%3A%2F%2Facademy.sanestix.com&amp;widget_referrer=https%3A%2F%2Facademy.sanestix.com%2F" title="Sanestix seminar video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    </div>
+
     <!-- What you'll see -->
     <div style="
       background:rgba(34,197,94,0.04);border:1px solid rgba(34,197,94,0.10);
@@ -1937,6 +1941,25 @@ footer { background: var(--bg2); border-top: 1px solid var(--border); padding: 6
 @keyframes popupIn {
   from { opacity:0; transform:scale(0.88) translateY(16px); }
   to   { opacity:1; transform:scale(1) translateY(0); }
+}
+
+.seminar-popup-video {
+  position: relative;
+  width: 100%;
+  padding-top: 56.25%;
+  margin: 0 0 20px;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid rgba(34,197,94,0.18);
+  background: rgba(255,255,255,0.03);
+}
+
+.seminar-popup-video iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
 }
 </style>
 

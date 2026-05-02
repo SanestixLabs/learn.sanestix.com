@@ -147,6 +147,30 @@ a { color: inherit; text-decoration: none; }
   max-width: 520px;
 }
 
+.seminar-video-wrap {
+  width: min(100%, 820px);
+  margin: 0 auto 40px;
+}
+
+.seminar-video-frame {
+  position: relative;
+  width: 100%;
+  padding-top: 56.25%;
+  border-radius: 18px;
+  overflow: hidden;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  box-shadow: 0 24px 60px rgba(0,0,0,0.35);
+}
+
+.seminar-video-frame iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
 /* CTA Button */
 .cta-wrap {
   display: flex;
@@ -410,6 +434,12 @@ footer a:hover { color: #888; }
   </h1>
 
   <p class="subtitle">Master the proven system behind Sanestix's AI automation success</p>
+
+  <div class="seminar-video-wrap">
+    <div class="seminar-video-frame">
+      <iframe src="https://www.youtube.com/embed/1Iz5empOpI8?rel=0&amp;origin=https%3A%2F%2Facademy.sanestix.com&amp;widget_referrer=https%3A%2F%2Facademy.sanestix.com%2F" title="Sanestix seminar video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    </div>
+  </div>
 
   <div class="cta-wrap">
     <button class="cta-btn" onclick="openModal()">
