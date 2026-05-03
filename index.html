@@ -415,111 +415,128 @@ img{display:block;max-width:100%}
 .curr-trust-sep{width:1px;height:12px;background:var(--border)}
 
 /* ══════════════════════════════════════════
-   TESTIMONIALS — CAROUSEL
+   TESTIMONIALS — REDESIGNED
 ══════════════════════════════════════════ */
-.testi-section{padding:48px 0;background:var(--bg);overflow:hidden}
+.testi-section{padding:64px 0 72px;background:var(--bg);overflow:hidden}
 
+/* Stats strip — compact single row */
 .proof-strip{
-  display:grid;grid-template-columns:repeat(2,1fr);
-  background:var(--border);gap:1px;
-  border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;margin-bottom:24px;
+  display:flex;justify-content:center;gap:0;
+  background:var(--border);
+  border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;margin-bottom:36px;
 }
-.proof-cell{background:var(--bg2);padding:18px 10px;text-align:center}
-.proof-num{font-family:var(--font-head);font-size:22px;font-weight:700;color:var(--g1);line-height:1}
-.proof-lbl{font-size:10px;color:var(--text3);margin-top:4px}
+.proof-cell{background:var(--bg2);padding:14px 20px;text-align:center;flex:1}
+.proof-num{font-family:var(--font-head);font-size:20px;font-weight:700;color:var(--g1);line-height:1}
+.proof-lbl{font-size:10px;color:var(--text3);margin-top:3px;white-space:nowrap}
 
 /* Carousel wrapper */
 .carousel-outer{position:relative;margin:0 -16px}
-.carousel-track-wrap{overflow:hidden;padding:4px 16px 24px}
+.carousel-track-wrap{overflow:hidden;padding:4px 16px 8px}
 .carousel-track{
-  display:flex;gap:12px;
+  display:flex;gap:14px;
   transition:transform .38s cubic-bezier(.4,0,.2,1);
   will-change:transform;
 }
 
-/* Carousel card */
+/* Carousel card — taller video-first design */
 .tcard{
   flex:0 0 calc(100% - 0px);max-width:100%;
-  background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius-lg);
+  background:var(--bg2);border:1px solid var(--border);border-radius:18px;
   overflow:hidden;
+  box-shadow:0 8px 32px rgba(0,0,0,0.28);
 }
+
+/* VIDEO AREA — tall 9:16 portrait, no max-height cap */
 .tcard-video{
-  aspect-ratio:9/16;position:relative;
+  position:relative;
   background:var(--bg);overflow:hidden;cursor:pointer;
-  max-height:260px;
+  width:100%;padding-top:56.25%;/* 16:9 on mobile, override desktop below */
+}
+@media(min-width:640px){
+  .tcard-video{padding-top:0;height:420px;}
+}
+@media(min-width:900px){
+  .tcard-video{height:480px;}
 }
 .tcard-video-bg{
   position:absolute;inset:0;width:100%;height:100%;
   object-fit:cover;object-position:center top;
-  opacity:0.72;transition:transform .35s,opacity .35s;
+  opacity:0.82;transition:transform .35s,opacity .35s;
 }
-.tcard-video:hover .tcard-video-bg{transform:scale(1.04);opacity:0.88}
+.tcard-video:hover .tcard-video-bg{transform:scale(1.03);opacity:0.9}
 .tcard-video-overlay{
   position:absolute;inset:0;
-  background:linear-gradient(to top,rgba(0,0,0,0.78) 0%,rgba(0,0,0,0.2) 40%,transparent 65%);
-  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:9px;
+  background:linear-gradient(to top,rgba(0,0,0,0.85) 0%,rgba(0,0,0,0.15) 45%,transparent 70%);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;
 }
 .tcard-play{
-  width:48px;height:48px;border-radius:50%;
+  width:56px;height:56px;border-radius:50%;
   background:var(--g1);display:flex;align-items:center;justify-content:center;
-  transition:all .2s;box-shadow:0 4px 24px rgba(34,197,94,0.45);
+  transition:all .2s;box-shadow:0 4px 28px rgba(34,197,94,0.5);
 }
-.tcard-video:hover .tcard-play{transform:scale(1.1);box-shadow:0 6px 32px rgba(34,197,94,0.6)}
-.tcard-play-label{font-size:11px;color:rgba(255,255,255,0.85);font-weight:600;letter-spacing:.03em}
+.tcard-video:hover .tcard-play{transform:scale(1.12);box-shadow:0 8px 36px rgba(34,197,94,0.65)}
+.tcard-play-label{font-size:12px;color:rgba(255,255,255,0.9);font-weight:600;letter-spacing:.04em}
 .yt-badge{
-  position:absolute;top:10px;left:10px;
+  position:absolute;top:12px;left:12px;
   display:flex;align-items:center;gap:5px;
-  background:rgba(0,0,0,0.7);backdrop-filter:blur(6px);
-  border:1px solid rgba(255,255,255,0.12);border-radius:100px;
-  padding:4px 10px;font-size:10px;color:#fff;font-weight:700;
+  background:rgba(0,0,0,0.72);backdrop-filter:blur(6px);
+  border:1px solid rgba(255,255,255,0.14);border-radius:100px;
+  padding:5px 11px;font-size:10px;color:#fff;font-weight:700;
 }
-.tcard-quote-bg{background:linear-gradient(135deg,#0a1a0b 0%,#080808 100%);cursor:default}
-.tcard-quote-visual{position:absolute;inset:0;padding:24px 20px 44px;display:flex;flex-direction:column;justify-content:center;gap:10px;z-index:2}
-.tcard-big-quote{font-family:Georgia,serif;font-size:72px;font-weight:700;color:var(--g1);opacity:0.2;line-height:0.8;flex-shrink:0}
-.tcard-preview-text{font-size:14px;font-weight:400;color:rgba(255,255,255,0.72);line-height:1.65;font-style:italic}
-.tcard-body{padding:15px 14px 16px}
-.tcard-stars{color:var(--amber);font-size:11px;letter-spacing:1px;margin-bottom:8px}
-.tcard-quote{font-size:13px;color:rgba(255,255,255,0.6);line-height:1.65;font-style:italic;margin-bottom:12px}
-.tcard-author{display:flex;align-items:center;gap:9px;border-top:1px solid var(--border);padding-top:11px}
-.av{width:30px;height:30px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;font-family:var(--font-head)}
-.av-g{background:rgba(34,197,94,0.08);border:1px solid rgba(34,197,94,0.22);color:var(--g1)}
-.av-a{background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.20);color:var(--amber)}
-.av-p{background:rgba(167,139,250,0.08);border:1px solid rgba(167,139,250,0.20);color:var(--purple)}
-.tcard-name{font-size:12px;font-weight:600;color:var(--text);line-height:1.2}
-.tcard-detail{font-size:10px;color:var(--text3);margin-top:1px}
+
+/* Quote-only card video area */
+.tcard-quote-bg{background:linear-gradient(160deg,#081510 0%,#040a05 100%);cursor:default}
+.tcard-quote-visual{
+  position:absolute;inset:0;padding:32px 24px;
+  display:flex;flex-direction:column;justify-content:center;gap:12px;z-index:2;
+}
+.tcard-big-quote{font-family:Georgia,serif;font-size:88px;font-weight:700;color:var(--g1);opacity:0.15;line-height:0.7;flex-shrink:0}
+.tcard-preview-text{font-size:17px;font-weight:400;color:rgba(255,255,255,0.85);line-height:1.6;font-style:italic}
+
+/* Card footer — minimal */
+.tcard-body{padding:14px 16px 16px}
+.tcard-stars{color:var(--amber);font-size:12px;letter-spacing:2px;margin-bottom:0}
+.tcard-quote{display:none}/* hide redundant body quote — visual tells the story */
+.tcard-author{display:flex;align-items:center;gap:10px}
+.av{width:32px;height:32px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;font-family:var(--font-head)}
+.av-g{background:rgba(34,197,94,0.1);border:1px solid rgba(34,197,94,0.28);color:var(--g1)}
+.av-a{background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.25);color:var(--amber)}
+.av-p{background:rgba(167,139,250,0.1);border:1px solid rgba(167,139,250,0.25);color:var(--purple)}
+.tcard-name{font-size:13px;font-weight:600;color:var(--text);line-height:1.2}
+.tcard-detail{font-size:11px;color:var(--g1);margin-top:1px;font-weight:500}
 .badge-pill{margin-left:auto;background:rgba(34,197,94,0.06);border:1px solid var(--border);color:var(--g1);font-size:9px;font-weight:700;padding:3px 8px;border-radius:100px;flex-shrink:0}
 
 /* Carousel dots */
 .carousel-dots{
   display:flex;align-items:center;justify-content:center;gap:6px;
-  margin-top:4px;
+  margin-top:16px;
 }
 .cdot{
   width:6px;height:6px;border-radius:50%;
   background:var(--border2);transition:all .25s;cursor:pointer;
 }
-.cdot.active{background:var(--g1);width:18px;border-radius:99px}
+.cdot.active{background:var(--g1);width:20px;border-radius:99px}
 
 /* Carousel nav arrows */
 .carousel-arrows{
-  display:flex;align-items:center;justify-content:center;gap:10px;
+  display:flex;align-items:center;justify-content:center;gap:12px;
   margin-top:14px;
 }
 .c-arrow{
-  width:36px;height:36px;border-radius:50%;
+  width:40px;height:40px;border-radius:50%;
   background:rgba(255,255,255,0.03);border:1px solid var(--borderW2);
   display:flex;align-items:center;justify-content:center;
   cursor:pointer;transition:all .2s;flex-shrink:0;
 }
-.c-arrow:hover{background:rgba(34,197,94,0.08);border-color:var(--border2)}
-.c-arrow:active{transform:scale(0.94)}
-.c-arrow.disabled{opacity:0.3;pointer-events:none}
-.carousel-counter{font-size:12px;color:var(--text3);font-family:var(--font-head);padding:0 8px}
+.c-arrow:hover{background:rgba(34,197,94,0.1);border-color:var(--border2)}
+.c-arrow:active{transform:scale(0.93)}
+.c-arrow.disabled{opacity:0.25;pointer-events:none}
+.carousel-counter{font-size:13px;color:var(--text3);font-family:var(--font-head);padding:0 8px}
 
 /* Community bar */
 .community-bar{
-  display:flex;flex-direction:column;align-items:center;gap:10px;margin-top:24px;
-  padding:16px;background:rgba(255,255,255,0.02);border:1px solid var(--border);border-radius:12px;text-align:center;
+  display:flex;flex-direction:column;align-items:center;gap:10px;margin-top:28px;
+  padding:18px 16px;background:rgba(37,211,102,0.04);border:1px solid rgba(37,211,102,0.15);border-radius:14px;text-align:center;
 }
 .community-desc{font-size:13px;color:var(--text2)}
 .community-cta-btn{
@@ -698,7 +715,7 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:44px 0 3
   body{padding-top:76px}
   .container{padding:0 20px}
   .value-grid{grid-template-columns:1fr 1fr}
-  .proof-strip{grid-template-columns:repeat(4,1fr)}
+  .proof-strip{/* already flex 4-col */}
   .hero h1{font-size:clamp(30px,6vw,52px)}
   .wa-float{bottom:80px;right:18px}
   .community-bar{flex-direction:row;text-align:left;justify-content:space-between;gap:12px}
@@ -1020,16 +1037,16 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:44px 0 3
 <!-- ═══════ TESTIMONIALS — CAROUSEL ═══════ -->
 <section class="testi-section" id="testimonials">
   <div class="container">
-    <div class="eyebrow">Student Results &amp; Client Wins</div>
-    <h2 class="section-title">Real people. Real results.</h2>
-    <p class="section-sub">From zero AI knowledge to billing clients in weeks.</p>
+    <div class="eyebrow">Student Results</div>
+    <h2 class="section-title">Real students. Real money.</h2>
+    <p class="section-sub">Every result below happened inside a 9-week cohort.</p>
 
-    <!-- Stats proof strip -->
+    <!-- Stats proof strip — 4 cells in a row -->
     <div class="proof-strip">
-      <div class="proof-cell"><div class="proof-num">100%</div><div class="proof-lbl">Shipped a real system</div></div>
-      <div class="proof-cell"><div class="proof-num">Week 3</div><div class="proof-lbl">Earliest client billing</div></div>
-      <div class="proof-cell"><div class="proof-num">27+</div><div class="proof-lbl">Production projects</div></div>
-      <div class="proof-cell"><div class="proof-num">PKR 45K</div><div class="proof-lbl">First invoice</div></div>
+      <div class="proof-cell"><div class="proof-num">100%</div><div class="proof-lbl">Shipped a live system</div></div>
+      <div class="proof-cell"><div class="proof-num">Week 3</div><div class="proof-lbl">First client billed</div></div>
+      <div class="proof-cell"><div class="proof-num">27+</div><div class="proof-lbl">Projects in production</div></div>
+      <div class="proof-cell"><div class="proof-num">PKR 45K</div><div class="proof-lbl">First invoice sent</div></div>
     </div>
 
     <!-- Carousel -->
@@ -1047,18 +1064,17 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:44px 0 3
                   Shorts
                 </div>
                 <div class="tcard-play">
-                  <svg width="16" height="16" viewBox="0 0 22 22" fill="#030f05"><path d="M5 3.5l14 7.5-14 7.5z"/></svg>
+                  <svg width="18" height="18" viewBox="0 0 22 22" fill="#030f05"><path d="M5 3.5l14 7.5-14 7.5z"/></svg>
                 </div>
                 <span class="tcard-play-label">Tap to watch</span>
               </div>
             </div>
             <div class="tcard-body">
               <div class="tcard-stars">★★★★★</div>
-              <p class="tcard-quote">"Day 1 I didn't know what n8n was. Day 14 I had a live system running — and a client interested in buying it."</p>
               <div class="tcard-author">
                 <div class="av av-g">ER</div>
-                <div><div class="tcard-name">Ebbad Ur Rehman</div><div class="tcard-detail">Cohort 1 · Client by Week 2</div></div>
-                <span class="badge-pill">★ VERIFIED</span>
+                <div><div class="tcard-name">Ebbad Ur Rehman</div><div class="tcard-detail">Client by Week 2 · Cohort 1</div></div>
+                <span class="badge-pill">✓ VERIFIED</span>
               </div>
             </div>
           </div>
@@ -1073,75 +1089,71 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:44px 0 3
                   Shorts
                 </div>
                 <div class="tcard-play">
-                  <svg width="16" height="16" viewBox="0 0 22 22" fill="#030f05"><path d="M5 3.5l14 7.5-14 7.5z"/></svg>
+                  <svg width="18" height="18" viewBox="0 0 22 22" fill="#030f05"><path d="M5 3.5l14 7.5-14 7.5z"/></svg>
                 </div>
                 <span class="tcard-play-label">Tap to watch</span>
               </div>
             </div>
             <div class="tcard-body">
               <div class="tcard-stars">★★★★★</div>
-              <p class="tcard-quote">"Watch this. Abdul landed his first paying client before most people finish their first online course."</p>
               <div class="tcard-author">
                 <div class="av av-g">AM</div>
-                <div><div class="tcard-name">Abdul Moiz</div><div class="tcard-detail">Cohort 1 · First client · Week 3</div></div>
-                <span class="badge-pill">★ VERIFIED</span>
+                <div><div class="tcard-name">Abdul Moiz</div><div class="tcard-detail">First paying client · Week 3</div></div>
+                <span class="badge-pill">✓ VERIFIED</span>
               </div>
             </div>
           </div>
 
-          <!-- Card 3 — Zara Ahmed quote card -->
+          <!-- Card 3 — Zara quote card -->
           <div class="tcard">
-            <div class="tcard-video tcard-quote-bg" style="max-height:260px;">
+            <div class="tcard-video tcard-quote-bg">
               <div class="tcard-quote-visual">
                 <div class="tcard-big-quote">"</div>
-                <p class="tcard-preview-text">The WhatsApp module alone paid for the course 10× over. First money I've ever made from AI.</p>
+                <p class="tcard-preview-text">One WhatsApp bot. One client. PKR 45,000. That's 3× the course fee — in Week 3.</p>
               </div>
             </div>
             <div class="tcard-body">
               <div class="tcard-stars">★★★★★</div>
-              <p class="tcard-quote">"One WhatsApp bot. One client. PKR 45,000. That's 3× the course fee — in Week 3. I didn't believe it was possible until I did it."</p>
               <div class="tcard-author">
                 <div class="av av-a">ZA</div>
-                <div><div class="tcard-name">Zara Ahmed</div><div class="tcard-detail">Cohort 1 · PKR 45K earned</div></div>
-                <span class="badge-pill">★ VERIFIED</span>
+                <div><div class="tcard-name">Zara Ahmed</div><div class="tcard-detail">PKR 45K earned · Cohort 1</div></div>
+                <span class="badge-pill">✓ VERIFIED</span>
               </div>
             </div>
           </div>
 
-          <!-- Card 4 — Hassan (extra quote) -->
+          <!-- Card 4 — Hassan quote -->
           <div class="tcard">
-            <div class="tcard-video tcard-quote-bg" style="max-height:260px;">
+            <div class="tcard-video tcard-quote-bg">
               <div class="tcard-quote-visual">
                 <div class="tcard-big-quote">"</div>
-                <p class="tcard-preview-text">I had zero AI knowledge. By Week 5 I was deploying voice agents for a real estate client charging PKR 60K/month.</p>
+                <p class="tcard-preview-text">Zero AI knowledge. By Week 5 I was deploying voice agents for a real estate client — PKR 60K/month.</p>
               </div>
             </div>
             <div class="tcard-body">
               <div class="tcard-stars">★★★★★</div>
-              <p class="tcard-quote">"The instructors don't teach theory. They share the exact systems they used last week for real clients. That's priceless."</p>
               <div class="tcard-author">
                 <div class="av av-p">HR</div>
-                <div><div class="tcard-name">Hassan Raza</div><div class="tcard-detail">Cohort 2 · PKR 60K/month retainer</div></div>
-                <span class="badge-pill">★ VERIFIED</span>
+                <div><div class="tcard-name">Hassan Raza</div><div class="tcard-detail">PKR 60K/month retainer · Cohort 2</div></div>
+                <span class="badge-pill">✓ VERIFIED</span>
               </div>
             </div>
           </div>
 
-          <!-- Card 5 — Aisha (extra quote) -->
+          <!-- Card 5 — Aisha quote -->
           <div class="tcard">
-            <div class="tcard-video tcard-quote-bg" style="max-height:260px;">
+            <div class="tcard-video tcard-quote-bg">
               <div class="tcard-quote-visual">
                 <div class="tcard-big-quote">"</div>
-                <p class="tcard-preview-text">As a non-technical founder I was scared. Week 2 I built my first n8n flow live in class. Week 6 I automated my own business.</p>
+                <p class="tcard-preview-text">Non-technical founder. Week 2 I built my first n8n flow. Week 6 I automated my own agency.</p>
               </div>
             </div>
             <div class="tcard-body">
               <div class="tcard-stars">★★★★★</div>
-              <p class="tcard-quote">"Saad and Wahab reply in the WhatsApp group within hours. The community alone is worth the fee. Don't miss Cohort 3."</p>
               <div class="tcard-author">
                 <div class="av av-g">AK</div>
-                <div><div class="tcard-name">Aisha Khan</div><div class="tcard-detail">Cohort 2 · Automated her own agency</div></div>
-                <span class="badge-pill">★ VERIFIED</span>
+                <div><div class="tcard-name">Aisha Khan</div><div class="tcard-detail">Automated her agency · Cohort 2</div></div>
+                <span class="badge-pill">✓ VERIFIED</span>
               </div>
             </div>
           </div>
@@ -1152,11 +1164,11 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:44px 0 3
       <!-- Navigation -->
       <div class="carousel-arrows">
         <button class="c-arrow disabled" id="cPrev" onclick="carouselNav(-1)" aria-label="Previous">
-          <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M10 3L5 8l5 5" stroke="#e8f5e9" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M10 3L5 8l5 5" stroke="#e8f5e9" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
         <span class="carousel-counter" id="carouselCounter">1 / 5</span>
         <button class="c-arrow" id="cNext" onclick="carouselNav(1)" aria-label="Next">
-          <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M6 3l5 5-5 5" stroke="#e8f5e9" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M6 3l5 5-5 5" stroke="#e8f5e9" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
       </div>
 
@@ -1169,15 +1181,15 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:44px 0 3
     <div class="community-bar">
       <span class="community-desc">
         <svg width="15" height="15" viewBox="0 0 24 24" fill="#25d366" style="display:inline;vertical-align:middle;margin-right:5px;"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/></svg>
-        <strong style="color:var(--text);">100+ students</strong> in our active WhatsApp community
+        <strong style="color:var(--text);">100+ students</strong> already in the WhatsApp community
       </span>
       <a href="https://chat.whatsapp.com/Im9gncY5IGy4HWAFcT9i1N" target="_blank" rel="noopener" class="community-cta-btn">
         <svg width="15" height="15" viewBox="0 0 24 24" fill="#25d366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/></svg>
-        Join Community →
+        Join the Community →
       </a>
     </div>
 
-    <div style="text-align:center;margin-top:24px;">
+    <div style="text-align:center;margin-top:28px;">
       <a href="seminar.html" class="btn-green">See If This Is Right for You →</a>
     </div>
   </div>
