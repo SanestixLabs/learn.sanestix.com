@@ -405,7 +405,7 @@ img { display: block; max-width: 100%; }
 .hero-grid { position: relative; z-index: 2; display: flex; flex-direction: column; }
 
 /* Text block */
-.hero-text-block { padding: 0 16px 14px; }
+.hero-text-block { padding: 0 0 14px; }
 .hero-badge {
   display: inline-flex; align-items: center; gap: 7px;
   border: 1px solid rgba(34,197,94,0.22); background: rgba(34,197,94,0.06);
@@ -1076,6 +1076,7 @@ footer { background: var(--bg2); border-top: 1px solid var(--border); padding: 4
 
 <!-- ═══════════════ HERO ═══════════════ -->
 <section class="hero">
+  <div class="container">
   <div class="hero-grid">
 
     <!-- LEFT COL (desktop) / top content (mobile) -->
@@ -1163,6 +1164,7 @@ footer { background: var(--bg2); border-top: 1px solid var(--border); padding: 4
     </div><!-- /hero-right-form -->
 
   </div><!-- /hero-grid -->
+  </div><!-- /hero container -->
 
   <!-- MOBILE-ONLY: Form below video -->
   <div class="hero-form-mobile" id="heroFormMobile">
