@@ -780,40 +780,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 0 24
 
 
 <!-- ═══════ INLINE FORM (single instance — mobile CTA) ═══════ -->
-<div class="form-section" id="heroFormMobile">
-  <div class="form-eyebrow">
-    <div class="pulse-dot"></div>
-    <span>Cohort 3 · May 22 · 7 seats left</span>
-  </div>
-  <h2 class="form-title">Reserve Your Seat</h2>
-  <p class="form-sub">30 seconds. We'll follow up on WhatsApp.</p>
-  <div id="mobileFormBody">
-    <div class="f-field">
-      <div class="f-input-wrap">
-        <svg class="f-icon" width="15" height="15" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="7" r="3.5" stroke="#3a5e41" stroke-width="1.5"/><path d="M3 17c0-3.866 3.134-7 7-7s7 3.134 7 7" stroke="#3a5e41" stroke-width="1.5" stroke-linecap="round"/></svg>
-        <input type="text" id="m-name" class="f-input" placeholder="Full name" autocomplete="name">
-      </div>
-    </div>
-    <div class="f-field">
-      <div class="f-input-wrap">
-        <svg class="f-icon" width="15" height="15" viewBox="0 0 20 20" fill="none"><path d="M4 2h3.5l1.5 4-2 1.5a11 11 0 004.5 4.5L13 10l4 1.5V15a2 2 0 01-2 2C7.163 17 3 12.837 3 7.5A2 2 0 014 5.5" stroke="#3a5e41" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        <input type="tel" id="m-phone" class="f-input" placeholder="+92 300 0000000" autocomplete="tel">
-      </div>
-    </div>
-    <button class="f-submit" onclick="handleMobileFormSubmit()">
-      <span id="mobileBtnText">Secure My Seat — Cohort 3 →</span>
-    </button>
-    <p class="f-privacy">
-      <svg width="11" height="11" viewBox="0 0 16 16" fill="none"><rect x="3" y="7" width="10" height="8" rx="1.5" stroke="#3a5e41" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 015 0v2" stroke="#3a5e41" stroke-width="1.4" stroke-linecap="round"/></svg>
-      No credit card · No commitment · 100% private
-    </p>
-  </div>
-  <div class="f-success" id="mobileSuccess">
-    <svg width="34" height="34" viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="18" stroke="var(--g1)" stroke-width="2"/><polyline points="12,20 17,26 28,14" stroke="var(--g1)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    <h4>You're on the list!</h4>
-    <p>Check WhatsApp — we'll confirm within 24 hrs.</p>
-  </div>
-</div>
+
 
 
 <!-- ═══════ VALUE SECTION ═══════ -->
@@ -1389,7 +1356,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 0 24
 
 <!-- ═══════ STICKY CTA BAR (mobile only) ═══════ -->
 <div class="sticky-cta-bar" id="stickyCta">
-  <button class="btn-primary" onclick="document.getElementById('heroFormMobile').scrollIntoView({behavior:'smooth'})">
+  <button class="btn-primary" onclick="document.getElementById('heroVideoWrap').scrollIntoView({behavior:'smooth'})">
     Reserve Seat — Cohort 3 →
   </button>
   <a href="seminar.html" class="btn-secondary">Free Seminar</a>
@@ -1414,7 +1381,7 @@ window.addEventListener('scroll',function(){
 /* ── Sticky CTA bar ── */
 (function(){
   var bar=document.getElementById('stickyCta');
-  var heroForm=document.getElementById('heroFormMobile');
+  var heroForm=document.getElementById('heroVideoWrap');
   if(!bar||!heroForm)return;
   window.addEventListener('scroll',function(){
     var rect=heroForm.getBoundingClientRect();
@@ -1613,19 +1580,6 @@ function handleHeroFormSubmit(){
   },800);
 }
 
-function handleMobileFormSubmit(){
-  var name=document.getElementById('m-name').value.trim();
-  var phone=document.getElementById('m-phone').value.trim();
-  var btn=document.getElementById('mobileBtnText');
-  if(!name){document.getElementById('m-name').focus();return}
-  if(!phone){document.getElementById('m-phone').focus();return}
-  btn.textContent='Saving...';
-  submitLead(name,phone,'','Hero Mobile');
-  setTimeout(function(){
-    document.getElementById('mobileFormBody').style.display='none';
-    document.getElementById('mobileSuccess').style.display='block';
-  },800);
-}
 
 /* ── Lead capture section ── */
 function goToEnroll(){
