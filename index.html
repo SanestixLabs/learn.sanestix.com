@@ -748,6 +748,46 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 0 24
   .community-bar{text-align:left}
 }
 @media(min-width:1100px){.container{padding:0 32px}}
+/* ── Country code selector ── */
+.f-phone-row{display:flex;gap:8px;align-items:stretch}
+.f-country-wrap{position:relative;flex-shrink:0}
+.f-country-btn{
+  display:flex;align-items:center;gap:5px;
+  background:var(--bg3);border:1.5px solid var(--border);border-radius:10px;
+  padding:0 10px;height:50px;cursor:pointer;white-space:nowrap;
+  transition:border-color .2s,box-shadow .2s;font-family:inherit;
+  color:var(--text);
+}
+.f-country-btn:hover,.f-country-btn:focus{border-color:var(--g1);outline:none;box-shadow:0 0 0 3px rgba(34,197,94,.12)}
+.f-flag{font-size:18px;line-height:1}
+.f-dialcode{font-size:13px;font-weight:600;color:var(--text);min-width:32px}
+.f-country-dropdown{
+  position:absolute;top:calc(100% + 6px);left:0;z-index:300;
+  background:var(--bg2);border:1.5px solid var(--border);border-radius:12px;
+  width:260px;box-shadow:0 8px 32px rgba(0,0,0,.4);
+  display:none;flex-direction:column;overflow:hidden;
+}
+.f-country-dropdown.open{display:flex}
+.f-country-search{
+  padding:10px 12px;background:var(--bg3);border:none;border-bottom:1px solid var(--border);
+  color:var(--text);font-size:13px;font-family:inherit;outline:none;
+}
+.f-country-search::placeholder{color:var(--text3)}
+.f-country-list{max-height:220px;overflow-y:auto;overscroll-behavior:contain}
+.f-country-list::-webkit-scrollbar{width:4px}
+.f-country-list::-webkit-scrollbar-track{background:transparent}
+.f-country-list::-webkit-scrollbar-thumb{background:var(--border);border-radius:4px}
+.f-country-item{
+  display:flex;align-items:center;gap:10px;padding:9px 12px;cursor:pointer;
+  font-size:13px;color:var(--text2);transition:background .1s;
+}
+.f-country-item:hover{background:var(--bg3);color:var(--text)}
+.f-country-item.selected{background:rgba(34,197,94,.08);color:var(--g1)}
+.f-country-item-flag{font-size:16px;flex-shrink:0;width:22px;text-align:center}
+.f-country-item-name{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.f-country-item-code{font-weight:600;color:var(--text3);font-size:12px;flex-shrink:0}
+.f-phone-input-wrap{flex:1;min-width:0}
+.f-phone-input{padding-left:14px!important}
 </style>
 </head>
 <body>
@@ -828,14 +868,26 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 0 24
             </div>
           </div>
           <div class="f-field">
-            <div class="f-input-wrap">
-              <svg class="f-icon" width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z" stroke="#3a5e41" stroke-width="1.3" fill="none"/></svg>
-              <input type="tel" id="h-phone" class="f-input" placeholder="WhatsApp Number (e.g. 03001234567)" autocomplete="tel" oninput="validateHeroPhone()">
-              <svg class="f-tick" width="16" height="16" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" fill="rgba(34,197,94,.15)"/><polyline points="6,10 9,13 14,7" stroke="#22c55e" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <div class="f-phone-row">
+              <div class="f-country-wrap" id="countryWrap">
+                <button type="button" class="f-country-btn" id="countryBtn" onclick="toggleCountryDropdown(event)" aria-haspopup="listbox" aria-expanded="false">
+                  <span class="f-flag" id="selectedFlag">🇵🇰</span>
+                  <span class="f-dialcode" id="selectedCode">+92</span>
+                  <svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M2 4l4 4 4-4" stroke="var(--text2)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </button>
+                <div class="f-country-dropdown" id="countryDropdown" role="listbox">
+                  <input class="f-country-search" id="countrySearch" type="text" placeholder="Search country…" oninput="filterCountries(this.value)" onclick="event.stopPropagation()">
+                  <div class="f-country-list" id="countryList"></div>
+                </div>
+              </div>
+              <div class="f-input-wrap f-phone-input-wrap">
+                <input type="tel" id="h-phone" class="f-input f-phone-input" placeholder="3001234567" autocomplete="tel" oninput="validateHeroPhone()" maxlength="15">
+                <svg class="f-tick" width="16" height="16" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" fill="rgba(34,197,94,.15)"/><polyline points="6,10 9,13 14,7" stroke="#22c55e" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
             </div>
             <div class="f-error-msg" id="h-phone-err">
               <svg width="12" height="12" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="#ef4444" stroke-width="1.4"/><line x1="8" y1="5" x2="8" y2="9" stroke="#ef4444" stroke-width="1.4" stroke-linecap="round"/><circle cx="8" cy="11.5" r=".8" fill="#ef4444"/></svg>
-              Enter a valid WhatsApp number (10–13 digits)
+              <span id="h-phone-err-text">Enter a valid WhatsApp number</span>
             </div>
           </div>
           <div class="f-field">
@@ -1674,6 +1726,97 @@ function toggleFaq(btn){
   if(!isOpen)item.classList.add('open');
 }
 
+/* ── Country data & selector ── */
+var COUNTRIES=[
+  {name:'Pakistan',flag:'🇵🇰',code:'+92',iso:'PK',len:[10],fmt:'3XX XXXXXXX',strip:/^0/},
+  {name:'United Arab Emirates',flag:'🇦🇪',code:'+971',iso:'AE',len:[9],fmt:'5X XXX XXXX'},
+  {name:'Saudi Arabia',flag:'🇸🇦',code:'+966',iso:'SA',len:[9],fmt:'5X XXX XXXX'},
+  {name:'United Kingdom',flag:'🇬🇧',code:'+44',iso:'GB',len:[10],fmt:'7XXX XXXXXX'},
+  {name:'United States',flag:'🇺🇸',code:'+1',iso:'US',len:[10],fmt:'XXX XXX XXXX'},
+  {name:'India',flag:'🇮🇳',code:'+91',iso:'IN',len:[10],fmt:'XXXXX XXXXX'},
+  {name:'Canada',flag:'🇨🇦',code:'+1',iso:'CA',len:[10],fmt:'XXX XXX XXXX'},
+  {name:'Australia',flag:'🇦🇺',code:'+61',iso:'AU',len:[9],fmt:'4XX XXX XXX'},
+  {name:'Germany',flag:'🇩🇪',code:'+49',iso:'DE',len:[10,11],fmt:'XXXX XXXXXXX'},
+  {name:'France',flag:'🇫🇷',code:'+33',iso:'FR',len:[9],fmt:'X XX XX XX XX'},
+  {name:'Turkey',flag:'🇹🇷',code:'+90',iso:'TR',len:[10],fmt:'5XX XXX XXXX'},
+  {name:'Egypt',flag:'🇪🇬',code:'+20',iso:'EG',len:[10],fmt:'1XX XXX XXXX'},
+  {name:'Bangladesh',flag:'🇧🇩',code:'+880',iso:'BD',len:[10],fmt:'1XXX XXXXXX'},
+  {name:'Malaysia',flag:'🇲🇾',code:'+60',iso:'MY',len:[9,10],fmt:'1X XXX XXXX'},
+  {name:'Singapore',flag:'🇸🇬',code:'+65',iso:'SG',len:[8],fmt:'XXXX XXXX'},
+  {name:'Qatar',flag:'🇶🇦',code:'+974',iso:'QA',len:[8],fmt:'XXXX XXXX'},
+  {name:'Kuwait',flag:'🇰🇼',code:'+965',iso:'KW',len:[8],fmt:'XXXX XXXX'},
+  {name:'Oman',flag:'🇴🇲',code:'+968',iso:'OM',len:[8],fmt:'XXXX XXXX'},
+  {name:'Bahrain',flag:'🇧🇭',code:'+973',iso:'BH',len:[8],fmt:'XXXX XXXX'},
+  {name:'Jordan',flag:'🇯🇴',code:'+962',iso:'JO',len:[9],fmt:'7X XXX XXXX'},
+  {name:'Netherlands',flag:'🇳🇱',code:'+31',iso:'NL',len:[9],fmt:'6 XXXX XXXX'},
+  {name:'Sweden',flag:'🇸🇪',code:'+46',iso:'SE',len:[9],fmt:'7X XXX XXXX'},
+  {name:'Norway',flag:'🇳🇴',code:'+47',iso:'NO',len:[8],fmt:'XXX XX XXX'},
+  {name:'Italy',flag:'🇮🇹',code:'+39',iso:'IT',len:[9,10],fmt:'3XX XXX XXXX'},
+  {name:'Spain',flag:'🇪🇸',code:'+34',iso:'ES',len:[9],fmt:'6XX XXX XXX'},
+  {name:'China',flag:'🇨🇳',code:'+86',iso:'CN',len:[11],fmt:'1XX XXXX XXXX'},
+  {name:'Japan',flag:'🇯🇵',code:'+81',iso:'JP',len:[10,11],fmt:'XX XXXX XXXX'},
+  {name:'South Korea',flag:'🇰🇷',code:'+82',iso:'KR',len:[10,11],fmt:'10 XXXX XXXX'},
+  {name:'Nigeria',flag:'🇳🇬',code:'+234',iso:'NG',len:[10],fmt:'XXX XXX XXXX'},
+  {name:'South Africa',flag:'🇿🇦',code:'+27',iso:'ZA',len:[9],fmt:'XX XXX XXXX'},
+];
+var selectedCountry=COUNTRIES[0]; // Pakistan default
+
+function buildCountryList(filter){
+  var list=document.getElementById('countryList');
+  if(!list)return;
+  var q=(filter||'').toLowerCase();
+  var filtered=q?COUNTRIES.filter(function(c){return c.name.toLowerCase().includes(q)||c.code.includes(q)}):COUNTRIES;
+  list.innerHTML=filtered.map(function(c){
+    var sel=c.iso===selectedCountry.iso?'selected':'';
+    return '<div class="f-country-item '+sel+'" onclick="selectCountry(\''+c.iso+'\')" role="option">'+
+      '<span class="f-country-item-flag">'+c.flag+'</span>'+
+      '<span class="f-country-item-name">'+c.name+'</span>'+
+      '<span class="f-country-item-code">'+c.code+'</span>'+
+    '</div>';
+  }).join('');
+}
+function selectCountry(iso){
+  var c=COUNTRIES.find(function(x){return x.iso===iso});
+  if(!c)return;
+  selectedCountry=c;
+  document.getElementById('selectedFlag').textContent=c.flag;
+  document.getElementById('selectedCode').textContent=c.code;
+  document.getElementById('h-phone').placeholder=c.fmt||'Phone number';
+  document.getElementById('h-phone').value='';
+  document.getElementById('h-phone').classList.remove('valid','error');
+  document.getElementById('h-phone-err').classList.remove('show');
+  closeCountryDropdown();
+  buildCountryList('');
+  document.getElementById('h-phone').focus();
+}
+function toggleCountryDropdown(e){
+  e.stopPropagation();
+  var dd=document.getElementById('countryDropdown');
+  var btn=document.getElementById('countryBtn');
+  var open=dd.classList.toggle('open');
+  btn.setAttribute('aria-expanded',open);
+  if(open){
+    buildCountryList('');
+    setTimeout(function(){document.getElementById('countrySearch').focus();},50);
+  }
+}
+function closeCountryDropdown(){
+  var dd=document.getElementById('countryDropdown');
+  dd.classList.remove('open');
+  document.getElementById('countryBtn').setAttribute('aria-expanded','false');
+  document.getElementById('countrySearch').value='';
+}
+function filterCountries(q){buildCountryList(q)}
+document.addEventListener('click',function(e){
+  var wrap=document.getElementById('countryWrap');
+  if(wrap&&!wrap.contains(e.target))closeCountryDropdown();
+});
+// Init placeholder
+document.addEventListener('DOMContentLoaded',function(){
+  var ph=document.getElementById('h-phone');
+  if(ph)ph.placeholder=selectedCountry.fmt||'3XX XXXXXXX';
+});
+
 /* ── Hero form validation ── */
 function validateHeroName(){
   var input=document.getElementById('h-name');
@@ -1687,12 +1830,19 @@ function validateHeroName(){
 }
 function validateHeroPhone(){
   var input=document.getElementById('h-phone');
-  var err=document.getElementById('h-phone-err');
-  var val=input.value.replace(/[\s\-\(\)]/g,'');
-  var valid=/^[\+]?[0-9]{10,13}$/.test(val);
+  var errEl=document.getElementById('h-phone-err');
+  var errTxt=document.getElementById('h-phone-err-text');
+  var raw=input.value.replace(/[\s\-\(\)]/g,'').replace(/^0+/,''); // strip leading zeros
+  var c=selectedCountry;
+  var lengths=c.len||[10];
+  var valid=raw.length>0&&lengths.indexOf(raw.length)!==-1&&/^\d+$/.test(raw);
+  // Pakistan-specific: must start with 3
+  if(valid&&c.iso==='PK'&&raw[0]!=='3'){valid=false;}
+  var msg=valid?'':('Enter a valid '+c.name+' number ('+lengths.join(' or ')+' digits after country code)');
+  if(errTxt)errTxt.textContent=msg||'Enter a valid number';
   input.classList.toggle('valid',valid);
-  input.classList.toggle('error',!valid&&val.length>0);
-  err.classList.toggle('show',!valid&&val.length>0);
+  input.classList.toggle('error',!valid&&raw.length>0);
+  errEl.classList.toggle('show',!valid&&raw.length>0);
   return valid;
 }
 function validateHeroEmail(){
