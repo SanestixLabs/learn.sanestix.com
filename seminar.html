@@ -580,6 +580,14 @@ function openModal() {
   document.getElementById('overlay').classList.add('open');
   document.body.style.overflow = 'hidden';
 }
+
+// Auto-open popup after 3 seconds (only once per session)
+if (!sessionStorage.getItem('seminarPopupShown')) {
+  setTimeout(function() {
+    openModal();
+    sessionStorage.setItem('seminarPopupShown', '1');
+  }, 3000);
+}
 function closeModal() {
   document.getElementById('overlay').classList.remove('open');
   document.body.style.overflow = '';
