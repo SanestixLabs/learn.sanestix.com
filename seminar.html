@@ -682,8 +682,8 @@ document.addEventListener('click',function(e){
 });
 sSeminarBuildList(S_COUNTRIES);
 
-// Set target: 1 day 23h 51m from page load (as shown in reference)
-var target = new Date().getTime() + (1 * 86400 + 23 * 3600 + 51 * 60) * 1000;
+// Set target: 3:00 PM on May 16, 2026 (local time)
+var target = new Date('2026-05-16T15:00:00').getTime();
 
 function updateCountdown() {
   var now = new Date().getTime();
