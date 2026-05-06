@@ -737,11 +737,12 @@ function submitForm() {
 
   var payload = { name: name, phone: phone, email: email, source: 'Seminar Page', timestamp: new Date().toISOString() };
 
-  // Google Sheet — use URLSearchParams for a simple CORS request (no preflight)
-  var SEMINAR_SHEET_URL = 'https://script.google.com/macros/s/AKfycbzlKJxzWuXuMZyd9LVskQzJ8fCGbRjEseIPdMOR3y_KlUAQsBKA1-arSMcf8NZ2aFw/exec';
-  var formData = new FormData();
-  formData.append('data', JSON.stringify(payload));
-  fetch(SEMINAR_SHEET_URL, { method: 'POST', body: formData, mode: 'no-cors' });
+  // Google Sheet
+  var SEMINAR_SHEET_URL = 'https://script.google.com/macros/s/AKfycbxjBs9xbaGetKpl2m-H1UcndjH4PoFOH9rVNegYVONuM9Bc0YQA-4Ztvhk93CYPTRA/exec';
+  fetch(SEMINAR_SHEET_URL + '?data=' + encodeURIComponent(JSON.stringify(payload)), {
+    method: 'GET',
+    mode: 'no-cors'
+  });
 
   setTimeout(function() {
     document.getElementById('formBody').style.display = 'none';
