@@ -1277,15 +1277,36 @@
   }
 
   function sendWithRetry(payload, retriesLeft, done) {
-    // Fire directly to Google Sheet via GET request (most reliable with Apps Script)
+    var ENROLLMENT_SHEET_URL = 'https://script.google.com/macros/s/AKfycbzFPTOSxJAsWSXV___H2dz7HYG41ZSm3KeqkI4_v-pKWVHPo1yJ3ctnuE6PnnJ4nrOJ/exec';
+
+    // Build a sheet-safe payload (no base64 screenshot — too large for GET querystring)
+    var sheetPayload = {
+      name:      payload.name,
+      phone:     payload.phone,
+      email:     payload.email,
+      city:      payload.city,
+      payment:   payload.payment,
+      amount:    payload.amount,
+      remaining: payload.remaining,
+      totalFee:  payload.totalFee,
+      discount:  payload.discount,
+      source:    payload.source,
+      timestamp: payload.timestamp
+    };
+    var qs = '?data=' + encodeURIComponent(JSON.stringify(sheetPayload));
+
+    // Primary sheet write: image beacon (bypasses CORS/redirect issues with Apps Script)
     try {
-      var ENROLLMENT_SHEET_URL = 'https://script.google.com/macros/s/AKfycbzFPTOSxJAsWSXV___H2dz7HYG41ZSm3KeqkI4_v-pKWVHPo1yJ3ctnuE6PnnJ4nrOJ/exec';
-      fetch(ENROLLMENT_SHEET_URL + '?data=' + encodeURIComponent(JSON.stringify(payload)), {
-        method: 'GET',
-        mode: 'no-cors'
-      });
+      var beacon = new Image();
+      beacon.src = ENROLLMENT_SHEET_URL + qs;
     } catch(e) {}
 
+    // Secondary sheet write: fetch no-cors as backup
+    try {
+      fetch(ENROLLMENT_SHEET_URL + qs, { method: 'GET', mode: 'no-cors', cache: 'no-store' });
+    } catch(e) {}
+
+    // n8n webhook (carries full payload including screenshot)
     fetch(N8N_WEBHOOK, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -1294,12 +1315,12 @@
     .then(function(res) {
       if (res.ok) { done(true); }
       else if (retriesLeft > 0) {
-        setTimeout(function() { sendWithRetry(payload, retriesLeft - 1, done); }, 1500);
+        setTimeout(function() { sendWithRetry(payload, retriesLeft - 1, done); }, 2000);
       } else { done(false); }
     })
     .catch(function() {
       if (retriesLeft > 0) {
-        setTimeout(function() { sendWithRetry(payload, retriesLeft - 1, done); }, 1500);
+        setTimeout(function() { sendWithRetry(payload, retriesLeft - 1, done); }, 2000);
       } else { done(false); }
     });
   }
