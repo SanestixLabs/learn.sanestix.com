@@ -813,17 +813,24 @@ function submitForm() {
 
   var payload = { name: name, phone: phone, email: email, source: 'Seminar Page', timestamp: new Date().toISOString() };
 
-  // Google Sheet
   var SEMINAR_SHEET_URL = 'https://script.google.com/macros/s/AKfycbxjBs9xbaGetKpl2m-H1UcndjH4PoFOH9rVNegYVONuM9Bc0YQA-4Ztvhk93CYPTRA/exec';
-  fetch(SEMINAR_SHEET_URL + '?data=' + encodeURIComponent(JSON.stringify(payload)), {
-    method: 'GET',
-    mode: 'no-cors'
-  });
+  var qs = '?data=' + encodeURIComponent(JSON.stringify(payload));
 
+  // Primary: image beacon — most reliable way to hit Apps Script cross-origin
+  // Apps Script executes on GET regardless of response type
+  var beacon = new Image();
+  beacon.src = SEMINAR_SHEET_URL + qs;
+
+  // Secondary: fetch with no-cors as belt-and-suspenders backup
+  try {
+    fetch(SEMINAR_SHEET_URL + qs, { method: 'GET', mode: 'no-cors', cache: 'no-store' });
+  } catch(e) {}
+
+  // Wait long enough for Apps Script cold-start (up to ~4s), then show success
   setTimeout(function() {
     document.getElementById('formBody').style.display = 'none';
     document.getElementById('successState').style.display = 'block';
-  }, 800);
+  }, 3000);
 }
 </script>
 </body>
