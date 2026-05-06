@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -177,6 +176,45 @@
   .field-input.error { border-color: var(--red); box-shadow: 0 0 0 3px rgba(239,68,68,0.1); }
   .field-error { font-size: 12px; color: var(--red); margin-top: 5px; display: none; }
   .field-error.show { display: block; }
+
+  /* Country code selector — enroll phone */
+  .e-phone-row{display:flex;gap:8px;align-items:stretch}
+  .e-cc-wrap{position:relative;flex-shrink:0}
+  .e-cc-btn{
+    display:flex;align-items:center;gap:5px;
+    background:var(--bg2);border:1.5px solid var(--border);
+    border-radius:10px;padding:0 11px;height:100%;
+    color:var(--text);font-size:13px;font-weight:600;font-family:inherit;
+    cursor:pointer;white-space:nowrap;min-width:72px;
+    transition:border-color 0.2s;
+  }
+  .e-cc-btn:hover,.e-cc-btn:focus{border-color:var(--green);outline:none}
+  .e-cc-arrow{font-size:9px;color:var(--text3);margin-left:2px}
+  .e-cc-dropdown{
+    display:none;flex-direction:column;
+    position:absolute;top:calc(100% + 6px);left:0;
+    background:var(--bg2);border:1.5px solid var(--border);
+    border-radius:10px;z-index:999;min-width:220px;overflow:hidden;
+    box-shadow:0 8px 24px rgba(0,0,0,0.3);
+  }
+  .e-cc-dropdown.open{display:flex}
+  .e-cc-search{
+    background:transparent;border:none;border-bottom:1px solid var(--border);
+    padding:9px 12px;color:var(--text);font-size:13px;font-family:inherit;outline:none;
+  }
+  .e-cc-search::placeholder{color:var(--text3)}
+  .e-cc-list{max-height:200px;overflow-y:auto;overscroll-behavior:contain}
+  .e-cc-list::-webkit-scrollbar{width:4px}
+  .e-cc-list::-webkit-scrollbar-thumb{background:var(--border);border-radius:4px}
+  .e-cc-item{
+    display:flex;align-items:center;gap:8px;padding:9px 12px;
+    cursor:pointer;font-size:13px;color:var(--text2);transition:background 0.15s;
+  }
+  .e-cc-item:hover{background:var(--bg3);color:var(--text)}
+  .e-cc-item.selected{background:rgba(34,197,94,.08);color:var(--green)}
+  .e-cc-item-flag{font-size:15px;width:20px;text-align:center;flex-shrink:0}
+  .e-cc-item-name{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .e-cc-item-code{font-weight:600;color:var(--text3);font-size:12px;flex-shrink:0}
 
   select.field-input {
     cursor: pointer;
@@ -615,7 +653,20 @@
 
       <div class="field-group">
         <label class="field-label" for="e-phone">WhatsApp Number</label>
-        <input type="tel" id="e-phone" class="field-input" placeholder="+92 300 0000000" autocomplete="tel">
+        <div class="e-phone-row">
+          <div class="e-cc-wrap" id="eCcWrap">
+            <button type="button" class="e-cc-btn" id="eCcBtn" onclick="eToggleCC(event)">
+              <span id="eCcFlag">🇵🇰</span>
+              <span id="eCcCode">+92</span>
+              <span class="e-cc-arrow">▾</span>
+            </button>
+            <div class="e-cc-dropdown" id="eCcDropdown">
+              <input class="e-cc-search" type="text" placeholder="Search country…" oninput="eFilterCC(this.value)" onclick="event.stopPropagation()">
+              <div class="e-cc-list" id="eCcList"></div>
+            </div>
+          </div>
+          <input type="tel" id="e-phone" class="field-input" placeholder="300 0000000" autocomplete="tel" style="flex:1;min-width:0;padding-left:14px;">
+        </div>
         <div class="field-error" id="err-phone">Please enter a valid WhatsApp number</div>
       </div>
 
@@ -988,7 +1039,9 @@
   /* ── STEP 1 VALIDATION ── */
   function goStep2() {
     var name  = document.getElementById('e-name').value.trim();
-    var phone = document.getElementById('e-phone').value.trim();
+    var phoneRaw = document.getElementById('e-phone').value.trim();
+    var eDialCode = document.getElementById('eCcCode') ? document.getElementById('eCcCode').textContent.trim() : '+92';
+    var phone = phoneRaw ? eDialCode + phoneRaw.replace(/^0+/, '') : '';
     var email = document.getElementById('e-email').value.trim();
     var city  = document.getElementById('e-city').value;
     var cityOther = document.getElementById('e-city-other').value.trim();
@@ -1208,6 +1261,75 @@
       else input.classList.remove('error');
     }
   }
+
+  // ── Enroll Country Code ──
+  var E_COUNTRIES=[
+    {flag:'🇵🇰',name:'Pakistan',code:'+92',fmt:'300 0000000'},
+    {flag:'🇺🇸',name:'United States',code:'+1',fmt:'201 555 0123'},
+    {flag:'🇬🇧',name:'United Kingdom',code:'+44',fmt:'7911 123456'},
+    {flag:'🇦🇪',name:'UAE',code:'+971',fmt:'50 123 4567'},
+    {flag:'🇸🇦',name:'Saudi Arabia',code:'+966',fmt:'50 123 4567'},
+    {flag:'🇮🇳',name:'India',code:'+91',fmt:'98765 43210'},
+    {flag:'🇧🇩',name:'Bangladesh',code:'+880',fmt:'1812 345678'},
+    {flag:'🇨🇦',name:'Canada',code:'+1',fmt:'204 555 0123'},
+    {flag:'🇦🇺',name:'Australia',code:'+61',fmt:'412 345 678'},
+    {flag:'🇩🇪',name:'Germany',code:'+49',fmt:'1512 3456789'},
+    {flag:'🇫🇷',name:'France',code:'+33',fmt:'6 12 34 56 78'},
+    {flag:'🇸🇬',name:'Singapore',code:'+65',fmt:'8123 4567'},
+    {flag:'🇲🇾',name:'Malaysia',code:'+60',fmt:'12-345 6789'},
+    {flag:'🇳🇬',name:'Nigeria',code:'+234',fmt:'802 123 4567'},
+    {flag:'🇹🇷',name:'Turkey',code:'+90',fmt:'532 123 4567'},
+    {flag:'🇪🇬',name:'Egypt',code:'+20',fmt:'100 123 4567'},
+    {flag:'🇵🇭',name:'Philippines',code:'+63',fmt:'917 123 4567'},
+    {flag:'🇮🇩',name:'Indonesia',code:'+62',fmt:'812-3456-789'},
+    {flag:'🇧🇷',name:'Brazil',code:'+55',fmt:'11 91234-5678'},
+    {flag:'🇴🇲',name:'Oman',code:'+968',fmt:'9123 4567'},
+    {flag:'🇶🇦',name:'Qatar',code:'+974',fmt:'3312 3456'},
+    {flag:'🇧🇭',name:'Bahrain',code:'+973',fmt:'3600 1234'},
+    {flag:'🇰🇼',name:'Kuwait',code:'+965',fmt:'5012 3456'},
+    {flag:'🇯🇴',name:'Jordan',code:'+962',fmt:'7 9012 3456'},
+    {flag:'🇱🇰',name:'Sri Lanka',code:'+94',fmt:'71 234 5678'},
+    {flag:'🇳🇵',name:'Nepal',code:'+977',fmt:'984-1234567'},
+    {flag:'🇿🇦',name:'South Africa',code:'+27',fmt:'71 123 4567'},
+    {flag:'🇰🇪',name:'Kenya',code:'+254',fmt:'712 345678'},
+    {flag:'🇮🇶',name:'Iraq',code:'+964',fmt:'790 123 4567'}
+  ];
+  var eSelectedCC=E_COUNTRIES[0];
+  function eBuildCCList(list){
+    var ul=document.getElementById('eCcList');if(!ul)return;
+    ul.innerHTML='';
+    list.forEach(function(c){
+      var div=document.createElement('div');
+      div.className='e-cc-item'+(c===eSelectedCC?' selected':'');
+      div.innerHTML='<span class="e-cc-item-flag">'+c.flag+'</span><span class="e-cc-item-name">'+c.name+'</span><span class="e-cc-item-code">'+c.code+'</span>';
+      div.onclick=function(e){e.stopPropagation();eSelectCC(c);};
+      ul.appendChild(div);
+    });
+  }
+  function eSelectCC(c){
+    eSelectedCC=c;
+    document.getElementById('eCcFlag').textContent=c.flag;
+    document.getElementById('eCcCode').textContent=c.code;
+    document.getElementById('e-phone').placeholder=c.fmt||'Phone number';
+    document.getElementById('e-phone').value='';
+    document.getElementById('eCcDropdown').classList.remove('open');
+    eBuildCCList(E_COUNTRIES);
+  }
+  function eToggleCC(e){
+    e.stopPropagation();
+    var dd=document.getElementById('eCcDropdown');
+    var open=dd.classList.toggle('open');
+    if(open){eBuildCCList(E_COUNTRIES);dd.querySelector('.e-cc-item.selected')?.scrollIntoView({block:'nearest'});}
+  }
+  function eFilterCC(q){
+    var f=q.toLowerCase();
+    eBuildCCList(E_COUNTRIES.filter(function(c){return c.name.toLowerCase().includes(f)||c.code.includes(f);}));
+  }
+  document.addEventListener('click',function(e){
+    var wrap=document.getElementById('eCcWrap');
+    if(wrap&&!wrap.contains(e.target)){document.getElementById('eCcDropdown').classList.remove('open');}
+  });
+  window.addEventListener('DOMContentLoaded',function(){eBuildCCList(E_COUNTRIES);});
 </script>
 </body>
 </html>
