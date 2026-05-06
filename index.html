@@ -545,6 +545,44 @@ img{display:block;max-width:100%}
 .lead-label{display:block;font-size:12px;font-weight:500;color:var(--text3);margin-bottom:5px}
 .lead-input-wrap{position:relative}
 .lead-input-icon{position:absolute;left:13px;top:50%;transform:translateY(-50%);pointer-events:none}
+/* Country code in lead form phone */
+.lc-phone-row{display:flex;gap:6px;align-items:stretch}
+.lc-cc-wrap{position:relative;flex-shrink:0}
+.lc-cc-btn{
+  display:flex;align-items:center;gap:5px;
+  background:var(--bg4);border:1.5px solid var(--border);
+  border-radius:10px;padding:0 10px;height:100%;
+  color:var(--text);font-size:13px;font-weight:600;font-family:inherit;
+  cursor:pointer;white-space:nowrap;min-width:68px;
+  transition:border-color 0.2s;
+}
+.lc-cc-btn:hover,.lc-cc-btn:focus{border-color:var(--g1);outline:none}
+.lc-cc-arrow{font-size:9px;color:var(--text3);margin-left:1px}
+.lc-cc-dropdown{
+  display:none;flex-direction:column;
+  position:absolute;top:calc(100% + 6px);left:0;
+  background:var(--bg4);border:1.5px solid var(--border);
+  border-radius:10px;z-index:999;min-width:210px;overflow:hidden;
+  box-shadow:0 8px 24px rgba(0,0,0,0.3);
+}
+.lc-cc-dropdown.open{display:flex}
+.lc-cc-search{
+  background:transparent;border:none;border-bottom:1px solid var(--border);
+  padding:9px 12px;color:var(--text);font-size:13px;font-family:inherit;outline:none;
+}
+.lc-cc-search::placeholder{color:var(--text3)}
+.lc-cc-list{max-height:190px;overflow-y:auto;overscroll-behavior:contain}
+.lc-cc-list::-webkit-scrollbar{width:4px}
+.lc-cc-list::-webkit-scrollbar-thumb{background:var(--border);border-radius:4px}
+.lc-cc-item{
+  display:flex;align-items:center;gap:8px;padding:8px 12px;
+  cursor:pointer;font-size:13px;color:var(--text2);transition:background 0.15s;
+}
+.lc-cc-item:hover{background:var(--bg3);color:var(--text)}
+.lc-cc-item.selected{background:rgba(34,197,94,.08);color:var(--g1)}
+.lc-cc-item-flag{font-size:15px;width:20px;text-align:center;flex-shrink:0}
+.lc-cc-item-name{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.lc-cc-item-code{font-weight:600;color:var(--text3);font-size:12px;flex-shrink:0}
 .lead-input{
   width:100%;background:var(--bg4);border:1.5px solid var(--border);
   border-radius:10px;padding:12px 12px 12px 42px;
@@ -1293,9 +1331,19 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 0 24
             </div>
             <div class="lead-field-wrap">
               <label class="lead-label" for="lc-phone">WhatsApp Number</label>
-              <div class="lead-input-wrap">
-                <svg class="lead-input-icon" width="16" height="16" viewBox="0 0 20 20" fill="none"><path d="M4 2h3.5l1.5 4-2 1.5a11 11 0 004.5 4.5L13 10l4 1.5V15a2 2 0 01-2 2C7.163 17 3 12.837 3 7.5A2 2 0 014 5.5" stroke="#3a5e41" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                <input type="tel" id="lc-phone" class="lead-input" placeholder="WhatsApp Number (e.g. 03001234567)" autocomplete="tel" oninput="lcClearState('lc-phone','lc-phone-err')">
+              <div class="lc-phone-row">
+                <div class="lc-cc-wrap" id="lcCcWrap">
+                  <button type="button" class="lc-cc-btn" id="lcCcBtn" onclick="lcToggleCC(event)">
+                    <span id="lcCcFlag">🇵🇰</span>
+                    <span id="lcCcCode">+92</span>
+                    <span class="lc-cc-arrow">▾</span>
+                  </button>
+                  <div class="lc-cc-dropdown" id="lcCcDropdown">
+                    <input class="lc-cc-search" type="text" placeholder="Search country…" oninput="lcFilterCC(this.value)" onclick="event.stopPropagation()">
+                    <div class="lc-cc-list" id="lcCcList"></div>
+                  </div>
+                </div>
+                <input type="tel" id="lc-phone" class="lead-input" placeholder="300 1234567" autocomplete="tel" oninput="lcClearState('lc-phone','lc-phone-err')" style="padding-left:14px;flex:1;min-width:0;">
               </div>
               <div class="lc-err-msg" id="lc-phone-err"></div>
             </div>
@@ -1940,6 +1988,8 @@ function goToEnroll(){
   var emailEl=document.getElementById('lc-email');
   var name=nameEl.value.trim();
   var phone=phoneEl.value.trim();
+  var lcDialCode=document.getElementById('lcCcCode')?document.getElementById('lcCcCode').textContent.trim():'+92';
+  var fullPhone=phone?(lcDialCode+phone.replace(/^0+/,'')):phone;
   var email=emailEl.value.trim();
   var ok=true;
 
@@ -1948,8 +1998,8 @@ function goToEnroll(){
   else lcSetValid('lc-name','lc-name-err');
 
   // Phone
-  var rawPhone=phone.replace(/[\s\-\(\)\+]/g,'');
-  if(!rawPhone||!/^\d{10,13}$/.test(rawPhone)){lcSetError('lc-phone','lc-phone-err','Enter a valid phone number (10–13 digits)');ok=false}
+  var rawPhone=fullPhone.replace(/[\s\-\(\)\+]/g,'');
+  if(!rawPhone||rawPhone.length<7){lcSetError('lc-phone','lc-phone-err','Enter a valid phone number');ok=false}
   else lcSetValid('lc-phone','lc-phone-err');
 
   // Email — format check
@@ -1978,34 +2028,87 @@ function goToEnroll(){
 
   var btn=document.getElementById('leadBtnText');
   if(btn){btn.textContent='Redirecting…';}
-  submitLead(name,phone,email,'Lead Capture');
-  var params=new URLSearchParams({name:name,phone:phone,email:email});
+  submitLead(name,fullPhone,email,'Lead Capture');
+  var params=new URLSearchParams({name:name,phone:fullPhone,email:email});
   setTimeout(function(){window.location.href='enroll.html?'+params.toString();},600);
 }
 
 /* ── Lead submission ── */
 function submitLead(name,phone,email,source){
   var payload={name:name,phone:phone,email:email,source:source,timestamp:new Date().toISOString()};
-  var SHEET_URL='https://script.google.com/macros/s/AKfycbwPKuJlo5_uF_M__tvl1ZR3OSrgAGGqvRKkBhhlf4BEuX3SevAdqOE6ZxaxdNVmND0/exec';
-  try{fetch(SHEET_URL,{method:'POST',headers:{'Content-Type':'text/plain'},body:JSON.stringify(payload)})}catch(e){}
-  var HS_PORTAL='246014293';
-  var HS_FORM='5b76cd83-2f33-426d-afe1-60da1d224f30';
-  try{
-    fetch('https://api.hsforms.com/submissions/v3/integration/submit/'+HS_PORTAL+'/'+HS_FORM,{
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({
-        fields:[
-          {name:'firstname',value:name},
-          {name:'phone',value:phone},
-          {name:'email',value:email||'noemail@placeholder.com'},
-          {name:'website',value:source}
-        ],
-        context:{pageUri:window.location.href,pageName:document.title}
-      })
-    });
-  }catch(e){}
+  var SHEET_URL='https://script.google.com/macros/s/AKfycbxjsYHJRJ3QOXrOzoEa6kKwz_zH8LjJyjPWzfx4k3k1Dj71UWDaMAcZsi7FzABfASI/exec';
+  try{fetch(SHEET_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload),mode:'no-cors'})}catch(e){}
 }
+
+// ── Lead Capture Country Code ──
+var LC_COUNTRIES=[
+  {flag:'🇵🇰',name:'Pakistan',code:'+92',fmt:'300 1234567'},
+  {flag:'🇺🇸',name:'United States',code:'+1',fmt:'201 555 0123'},
+  {flag:'🇬🇧',name:'United Kingdom',code:'+44',fmt:'7911 123456'},
+  {flag:'🇦🇪',name:'UAE',code:'+971',fmt:'50 123 4567'},
+  {flag:'🇸🇦',name:'Saudi Arabia',code:'+966',fmt:'50 123 4567'},
+  {flag:'🇮🇳',name:'India',code:'+91',fmt:'98765 43210'},
+  {flag:'🇧🇩',name:'Bangladesh',code:'+880',fmt:'1812 345678'},
+  {flag:'🇨🇦',name:'Canada',code:'+1',fmt:'204 555 0123'},
+  {flag:'🇦🇺',name:'Australia',code:'+61',fmt:'412 345 678'},
+  {flag:'🇩🇪',name:'Germany',code:'+49',fmt:'1512 3456789'},
+  {flag:'🇫🇷',name:'France',code:'+33',fmt:'6 12 34 56 78'},
+  {flag:'🇸🇬',name:'Singapore',code:'+65',fmt:'8123 4567'},
+  {flag:'🇲🇾',name:'Malaysia',code:'+60',fmt:'12-345 6789'},
+  {flag:'🇳🇬',name:'Nigeria',code:'+234',fmt:'802 123 4567'},
+  {flag:'🇹🇷',name:'Turkey',code:'+90',fmt:'532 123 4567'},
+  {flag:'🇪🇬',name:'Egypt',code:'+20',fmt:'100 123 4567'},
+  {flag:'🇵🇭',name:'Philippines',code:'+63',fmt:'917 123 4567'},
+  {flag:'🇮🇩',name:'Indonesia',code:'+62',fmt:'812-3456-789'},
+  {flag:'🇧🇷',name:'Brazil',code:'+55',fmt:'11 91234-5678'},
+  {flag:'🇴🇲',name:'Oman',code:'+968',fmt:'9123 4567'},
+  {flag:'🇶🇦',name:'Qatar',code:'+974',fmt:'3312 3456'},
+  {flag:'🇧🇭',name:'Bahrain',code:'+973',fmt:'3600 1234'},
+  {flag:'🇰🇼',name:'Kuwait',code:'+965',fmt:'5012 3456'},
+  {flag:'🇯🇴',name:'Jordan',code:'+962',fmt:'7 9012 3456'},
+  {flag:'🇱🇰',name:'Sri Lanka',code:'+94',fmt:'71 234 5678'},
+  {flag:'🇳🇵',name:'Nepal',code:'+977',fmt:'984-1234567'},
+  {flag:'🇿🇦',name:'South Africa',code:'+27',fmt:'71 123 4567'},
+  {flag:'🇰🇪',name:'Kenya',code:'+254',fmt:'712 345678'},
+  {flag:'🇳🇱',name:'Netherlands',code:'+31',fmt:'6 12345678'},
+  {flag:'🇮🇶',name:'Iraq',code:'+964',fmt:'790 123 4567'}
+];
+var lcSelectedCC=LC_COUNTRIES[0];
+function lcBuildCCList(list){
+  var ul=document.getElementById('lcCcList');if(!ul)return;
+  ul.innerHTML='';
+  list.forEach(function(c){
+    var div=document.createElement('div');
+    div.className='lc-cc-item'+(c===lcSelectedCC?' selected':'');
+    div.innerHTML='<span class="lc-cc-item-flag">'+c.flag+'</span><span class="lc-cc-item-name">'+c.name+'</span><span class="lc-cc-item-code">'+c.code+'</span>';
+    div.onclick=function(e){e.stopPropagation();lcSelectCC(c);};
+    ul.appendChild(div);
+  });
+}
+function lcSelectCC(c){
+  lcSelectedCC=c;
+  document.getElementById('lcCcFlag').textContent=c.flag;
+  document.getElementById('lcCcCode').textContent=c.code;
+  document.getElementById('lc-phone').placeholder=c.fmt||'Phone number';
+  document.getElementById('lc-phone').value='';
+  document.getElementById('lcCcDropdown').classList.remove('open');
+  lcBuildCCList(LC_COUNTRIES);
+}
+function lcToggleCC(e){
+  e.stopPropagation();
+  var dd=document.getElementById('lcCcDropdown');
+  var open=dd.classList.toggle('open');
+  if(open){lcBuildCCList(LC_COUNTRIES);dd.querySelector('.lc-cc-item.selected')?.scrollIntoView({block:'nearest'});}
+}
+function lcFilterCC(q){
+  var f=q.toLowerCase();
+  lcBuildCCList(LC_COUNTRIES.filter(function(c){return c.name.toLowerCase().includes(f)||c.code.includes(f);}));
+}
+document.addEventListener('click',function(e){
+  var wrap=document.getElementById('lcCcWrap');
+  if(wrap&&!wrap.contains(e.target)){document.getElementById('lcCcDropdown').classList.remove('open');}
+});
+lcBuildCCList(LC_COUNTRIES);
 </script>
 </body>
 </html>
