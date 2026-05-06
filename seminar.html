@@ -609,36 +609,14 @@ function submitForm() {
 
   var payload = { name: name, phone: phone, email: email, source: 'Seminar Page', timestamp: new Date().toISOString() };
 
-  // 1. Google Sheet (primary)
-  var SHEET_URL = 'https://script.google.com/macros/s/AKfycbwPKuJlo5_uF_M__tvl1ZR3OSrgAGGqvRKkBhhlf4BEuX3SevAdqOE6ZxaxdNVmND0/exec';
-  var formData1 = new FormData();
-  formData1.append('data', JSON.stringify(payload));
-  fetch(SHEET_URL, { method: 'POST', body: formData1, mode: 'no-cors' });
-
-  // 1b. Google Sheet (secondary)
-  var SHEET_URL_2 = 'https://script.google.com/macros/s/AKfycbxmZltKQZoDqUQGfgpS7qnMxs6s_p-diK-2mn6znmb55nkn5SXkEHAipuG1FN_wt8A/exec';
-  var formData2 = new FormData();
-  formData2.append('data', JSON.stringify(payload));
-  fetch(SHEET_URL_2, { method: 'POST', body: formData2, mode: 'no-cors' });
-
-  // 2. HubSpot — replace YOUR_HUBSPOT_PORTAL_ID and YOUR_HUBSPOT_FORM_GUID below
-  var HS_PORTAL = '246014293';
-  var HS_FORM   = '5b76cd83-2f33-426d-afe1-60da1d224f30';
-  if (HS_PORTAL !== 'YOUR_HUBSPOT_PORTAL_ID') {
-    fetch('https://api.hsforms.com/submissions/v3/integration/submit/' + HS_PORTAL + '/' + HS_FORM, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        fields: [
-          { name: 'firstname', value: name },
-          { name: 'phone',     value: phone },
-          { name: 'email',     value: email || 'noemail@placeholder.com' },
-          { name: 'website',   value: 'Seminar Page' }
-        ],
-        context: { pageUri: window.location.href, pageName: document.title }
-      })
-    });
-  }
+  // Google Sheet
+  var SHEET_URL = 'https://script.google.com/macros/s/AKfycbxjsYHJRJ3QOXrOzoEa6kKwz_zH8LjJyjPWzfx4k3k1Dj71UWDaMAcZsi7FzABfASI/exec';
+  fetch(SHEET_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload),
+    mode: 'no-cors'
+  });
 
   setTimeout(function() {
     document.getElementById('formBody').style.display = 'none';
