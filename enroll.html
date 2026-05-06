@@ -1202,7 +1202,7 @@
   function sendWithRetry(payload, retriesLeft, done) {
     // Always fire directly to Google Sheet as backup (FormData = simple request, no preflight)
     try {
-      var ENROLLMENT_SHEET_URL = 'https://script.google.com/macros/s/AKfycbxHbDcXdDlHPmvce052DXYkIZXgS-G6shzc4iwMpr1XIzriQYOVRDsVjvGZNVNPIV0/exec';
+      var ENROLLMENT_SHEET_URL = 'https://script.google.com/macros/s/AKfycbwrOsSN6mgUIuqy5m2RJY6mdPJEX8160mvUPWeUaFYG9mxDBf07-D-pw6sAMmN0NRXn/exec';
       var fd = new FormData();
       fd.append('data', JSON.stringify(payload));
       fetch(ENROLLMENT_SHEET_URL, { method: 'POST', body: fd, mode: 'no-cors' });
