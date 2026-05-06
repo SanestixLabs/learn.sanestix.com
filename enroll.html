@@ -1200,12 +1200,13 @@
   }
 
   function sendWithRetry(payload, retriesLeft, done) {
-    // Always fire directly to Google Sheet as backup (FormData = simple request, no preflight)
+    // Fire directly to Google Sheet via GET request (most reliable with Apps Script)
     try {
-      var ENROLLMENT_SHEET_URL = 'https://script.google.com/macros/s/AKfycbwrOsSN6mgUIuqy5m2RJY6mdPJEX8160mvUPWeUaFYG9mxDBf07-D-pw6sAMmN0NRXn/exec';
-      var fd = new FormData();
-      fd.append('data', JSON.stringify(payload));
-      fetch(ENROLLMENT_SHEET_URL, { method: 'POST', body: fd, mode: 'no-cors' });
+      var ENROLLMENT_SHEET_URL = 'https://script.google.com/macros/s/AKfycbzFPTOSxJAsWSXV___H2dz7HYG41ZSm3KeqkI4_v-pKWVHPo1yJ3ctnuE6PnnJ4nrOJ/exec';
+      fetch(ENROLLMENT_SHEET_URL + '?data=' + encodeURIComponent(JSON.stringify(payload)), {
+        method: 'GET',
+        mode: 'no-cors'
+      });
     } catch(e) {}
 
     fetch(N8N_WEBHOOK, {
