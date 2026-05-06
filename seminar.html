@@ -331,6 +331,45 @@ a { color: inherit; text-decoration: none; }
   margin-top: 10px;
 }
 
+/* Country code selector — seminar modal */
+.s-phone-row{display:flex;gap:8px;align-items:stretch}
+.s-cc-wrap{position:relative;flex-shrink:0}
+.s-cc-btn{
+  display:flex;align-items:center;gap:6px;
+  background:#1a1a1a;border:1px solid rgba(255,255,255,0.1);
+  border-radius:8px;padding:0 12px;height:100%;
+  color:#fff;font-size:13px;font-weight:600;font-family:'Inter',sans-serif;
+  cursor:pointer;white-space:nowrap;min-width:72px;
+  transition:border-color 0.2s;
+}
+.s-cc-btn:hover,.s-cc-btn:focus{border-color:var(--green);outline:none}
+.s-cc-arrow{font-size:9px;color:#666;margin-left:2px}
+.s-cc-dropdown{
+  display:none;flex-direction:column;
+  position:absolute;top:calc(100% + 6px);left:0;
+  background:#1a1a1a;border:1px solid rgba(255,255,255,0.12);
+  border-radius:10px;z-index:999;min-width:220px;overflow:hidden;
+  box-shadow:0 8px 24px rgba(0,0,0,0.5);
+}
+.s-cc-dropdown.open{display:flex}
+.s-cc-search{
+  background:transparent;border:none;border-bottom:1px solid rgba(255,255,255,0.08);
+  padding:10px 14px;color:#fff;font-size:13px;font-family:'Inter',sans-serif;outline:none;
+}
+.s-cc-search::placeholder{color:#555}
+.s-cc-list{max-height:200px;overflow-y:auto;overscroll-behavior:contain}
+.s-cc-list::-webkit-scrollbar{width:4px}
+.s-cc-list::-webkit-scrollbar-thumb{background:#333;border-radius:4px}
+.s-cc-item{
+  display:flex;align-items:center;gap:8px;padding:9px 14px;
+  cursor:pointer;font-size:13px;color:#aaa;transition:background 0.15s;
+}
+.s-cc-item:hover{background:rgba(255,255,255,0.05);color:#fff}
+.s-cc-item.selected{background:rgba(0,230,118,0.08);color:var(--green)}
+.s-cc-item-flag{font-size:15px;width:20px;text-align:center;flex-shrink:0}
+.s-cc-item-name{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.s-cc-item-code{font-weight:600;color:#666;font-size:12px;flex-shrink:0}
+
 /* Success */
 .success-state { display: none; text-align: center; }
 .success-icon {
@@ -513,7 +552,20 @@ footer a:hover { color: #888; }
           <svg width="11" height="11" viewBox="0 0 16 16" fill="none" style="vertical-align:middle;margin-right:4px"><path d="M3 2h2.5L7 5.5 5.5 7A9 9 0 009 10.5L10.5 9 14 10.5V13A1.5 1.5 0 0112.5 14.5C6.7 14.5 1.5 9.3 1.5 3.5A1.5 1.5 0 013 2z" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
           WhatsApp Number
         </label>
-        <input type="tel" id="s-phone" placeholder="+92 300 0000000" autocomplete="tel">
+        <div class="s-phone-row">
+          <div class="s-cc-wrap" id="sCcWrap">
+            <button type="button" class="s-cc-btn" id="sCcBtn" onclick="sSeminarToggleCC(event)">
+              <span id="sCcFlag">🇵🇰</span>
+              <span id="sCcCode">+92</span>
+              <span class="s-cc-arrow">▾</span>
+            </button>
+            <div class="s-cc-dropdown" id="sCcDropdown">
+              <input class="s-cc-search" type="text" placeholder="Search country…" oninput="sSeminarFilterCC(this.value)" onclick="event.stopPropagation()">
+              <div class="s-cc-list" id="sCcList"></div>
+            </div>
+          </div>
+          <input type="tel" id="s-phone" placeholder="300 0000000" autocomplete="tel" style="flex:1;min-width:0;">
+        </div>
       </div>
       <div class="field">
         <label for="s-email">
@@ -555,7 +607,81 @@ footer a:hover { color: #888; }
 </div>
 
 <script>
-// ── Countdown Timer ──
+// ── Seminar Country Code ──
+var S_COUNTRIES=[
+  {flag:'🇵🇰',name:'Pakistan',code:'+92',fmt:'300 0000000'},
+  {flag:'🇺🇸',name:'United States',code:'+1',fmt:'201 555 0123'},
+  {flag:'🇬🇧',name:'United Kingdom',code:'+44',fmt:'7911 123456'},
+  {flag:'🇦🇪',name:'UAE',code:'+971',fmt:'50 123 4567'},
+  {flag:'🇸🇦',name:'Saudi Arabia',code:'+966',fmt:'50 123 4567'},
+  {flag:'🇮🇳',name:'India',code:'+91',fmt:'98765 43210'},
+  {flag:'🇧🇩',name:'Bangladesh',code:'+880',fmt:'1812 345678'},
+  {flag:'🇨🇦',name:'Canada',code:'+1',fmt:'204 555 0123'},
+  {flag:'🇦🇺',name:'Australia',code:'+61',fmt:'412 345 678'},
+  {flag:'🇩🇪',name:'Germany',code:'+49',fmt:'1512 3456789'},
+  {flag:'🇫🇷',name:'France',code:'+33',fmt:'6 12 34 56 78'},
+  {flag:'🇳🇱',name:'Netherlands',code:'+31',fmt:'6 12345678'},
+  {flag:'🇸🇬',name:'Singapore',code:'+65',fmt:'8123 4567'},
+  {flag:'🇲🇾',name:'Malaysia',code:'+60',fmt:'12-345 6789'},
+  {flag:'🇳🇬',name:'Nigeria',code:'+234',fmt:'802 123 4567'},
+  {flag:'🇰🇪',name:'Kenya',code:'+254',fmt:'712 345678'},
+  {flag:'🇹🇷',name:'Turkey',code:'+90',fmt:'532 123 4567'},
+  {flag:'🇪🇬',name:'Egypt',code:'+20',fmt:'100 123 4567'},
+  {flag:'🇿🇦',name:'South Africa',code:'+27',fmt:'71 123 4567'},
+  {flag:'🇵🇭',name:'Philippines',code:'+63',fmt:'917 123 4567'},
+  {flag:'🇮🇩',name:'Indonesia',code:'+62',fmt:'812-3456-789'},
+  {flag:'🇧🇷',name:'Brazil',code:'+55',fmt:'11 91234-5678'},
+  {flag:'🇴🇲',name:'Oman',code:'+968',fmt:'9123 4567'},
+  {flag:'🇶🇦',name:'Qatar',code:'+974',fmt:'3312 3456'},
+  {flag:'🇧🇭',name:'Bahrain',code:'+973',fmt:'3600 1234'},
+  {flag:'🇰🇼',name:'Kuwait',code:'+965',fmt:'5012 3456'},
+  {flag:'🇯🇴',name:'Jordan',code:'+962',fmt:'7 9012 3456'},
+  {flag:'🇮🇶',name:'Iraq',code:'+964',fmt:'790 123 4567'},
+  {flag:'🇱🇰',name:'Sri Lanka',code:'+94',fmt:'71 234 5678'},
+  {flag:'🇳🇵',name:'Nepal',code:'+977',fmt:'984-1234567'}
+];
+var sSeminarSelectedCC=S_COUNTRIES[0];
+function sSeminarBuildList(list){
+  var ul=document.getElementById('sCcList');
+  ul.innerHTML='';
+  list.forEach(function(c,i){
+    var div=document.createElement('div');
+    div.className='s-cc-item'+(c===sSeminarSelectedCC?' selected':'');
+    div.innerHTML='<span class="s-cc-item-flag">'+c.flag+'</span><span class="s-cc-item-name">'+c.name+'</span><span class="s-cc-item-code">'+c.code+'</span>';
+    div.onclick=function(e){e.stopPropagation();sSeminarSelectCC(c);};
+    ul.appendChild(div);
+  });
+}
+function sSeminarSelectCC(c){
+  sSeminarSelectedCC=c;
+  document.getElementById('sCcFlag').textContent=c.flag;
+  document.getElementById('sCcCode').textContent=c.code;
+  document.getElementById('s-phone').placeholder=c.fmt||'Phone number';
+  document.getElementById('s-phone').value='';
+  document.getElementById('sCcDropdown').classList.remove('open');
+  document.getElementById('sCcBtn').setAttribute('aria-expanded','false');
+  sSeminarBuildList(S_COUNTRIES);
+}
+function sSeminarToggleCC(e){
+  e.stopPropagation();
+  var dd=document.getElementById('sCcDropdown');
+  var open=dd.classList.toggle('open');
+  document.getElementById('sCcBtn').setAttribute('aria-expanded',open?'true':'false');
+  if(open){sSeminarBuildList(S_COUNTRIES);document.getElementById('sCcList').querySelector('.selected')?.scrollIntoView({block:'nearest'});}
+}
+function sSeminarFilterCC(q){
+  var f=q.toLowerCase();
+  sSeminarBuildList(S_COUNTRIES.filter(function(c){return c.name.toLowerCase().includes(f)||c.code.includes(f);}));
+}
+document.addEventListener('click',function(e){
+  var wrap=document.getElementById('sCcWrap');
+  if(wrap&&!wrap.contains(e.target)){
+    document.getElementById('sCcDropdown').classList.remove('open');
+    document.getElementById('sCcBtn').setAttribute('aria-expanded','false');
+  }
+});
+sSeminarBuildList(S_COUNTRIES);
+
 // Set target: 1 day 23h 51m from page load (as shown in reference)
 var target = new Date().getTime() + (1 * 86400 + 23 * 3600 + 51 * 60) * 1000;
 
@@ -598,10 +724,12 @@ function closeOnBg(e) {
 
 function submitForm() {
   var name  = document.getElementById('s-name').value.trim();
-  var phone = document.getElementById('s-phone').value.trim();
+  var phoneRaw = document.getElementById('s-phone').value.trim();
+  var dialCode = document.getElementById('sCcCode').textContent.trim();
+  var phone = phoneRaw ? dialCode + phoneRaw.replace(/^0+/, '') : '';
   var email = document.getElementById('s-email').value.trim();
   if (!name)  { document.getElementById('s-name').focus(); return; }
-  if (!phone) { document.getElementById('s-phone').focus(); return; }
+  if (!phoneRaw) { document.getElementById('s-phone').focus(); return; }
 
   var btn = document.getElementById('submitBtn');
   btn.disabled = true;
