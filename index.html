@@ -854,11 +854,12 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 0 24
 .sticky-cta-bar .btn-primary{
   flex:1;font-family:var(--font-head);font-weight:700;color:#030f05;
   background:linear-gradient(135deg,var(--g1) 0%,#16a34a 100%);
-  font-size:14px;border-radius:10px;min-height:48px;border:none;cursor:pointer;
+  font-size:clamp(11px,3.5vw,14px);border-radius:10px;min-height:48px;border:none;cursor:pointer;
   transition:all .2s cubic-bezier(.4,0,.2,1);
   box-shadow:0 2px 12px rgba(34,197,94,.3);
   letter-spacing:.01em;text-decoration:none;
   display:flex;align-items:center;justify-content:center;
+  white-space:nowrap;padding:0 12px;
 }
 .sticky-cta-bar .btn-primary:hover{
   background:linear-gradient(135deg,#4ade80 0%,var(--g1) 100%);
