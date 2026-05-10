@@ -1295,13 +1295,7 @@
     };
     var qs = '?data=' + encodeURIComponent(JSON.stringify(sheetPayload));
 
-    // Primary sheet write: image beacon (bypasses CORS/redirect issues with Apps Script)
-    try {
-      var beacon = new Image();
-      beacon.src = ENROLLMENT_SHEET_URL + qs;
-    } catch(e) {}
-
-    // Secondary sheet write: fetch no-cors as backup
+    // Single sheet write via fetch — beacon removed to prevent double-entry
     try {
       fetch(ENROLLMENT_SHEET_URL + qs, { method: 'GET', mode: 'no-cors', cache: 'no-store' });
     } catch(e) {}
