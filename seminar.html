@@ -816,12 +816,7 @@ function submitForm() {
   var SEMINAR_SHEET_URL = 'https://script.google.com/macros/s/AKfycbyoZCKdGk-13FHvrvS1WkqKwlzASvK6emURX_URWEtgaJIGJCl9YzW9GNrHnsb-ank/exec';
   var qs = '?data=' + encodeURIComponent(JSON.stringify(payload));
 
-  // Primary: image beacon — most reliable way to hit Apps Script cross-origin
-  // Apps Script executes on GET regardless of response type
-  var beacon = new Image();
-  beacon.src = SEMINAR_SHEET_URL + qs;
-
-  // Secondary: fetch with no-cors as belt-and-suspenders backup
+  // Single submission via fetch — image beacon removed to prevent double-entry
   try {
     fetch(SEMINAR_SHEET_URL + qs, { method: 'GET', mode: 'no-cors', cache: 'no-store' });
   } catch(e) {}
